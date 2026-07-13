@@ -1,0 +1,29 @@
+@use './colorVariables.module.scss' as *;
+@use './fonts.modules.scss' as *;
+
+html,
+body {
+  background-color: $QS-LIGHT;
+  margin: 0;
+  font-family: $font-principal;
+  box-sizing: border-box; // Reset inicial
+}
+
+*, *::before, *::after {
+  box-sizing: inherit; // Herencia controlada
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #000000; 
+}
+::-webkit-scrollbar-thumb {
+  background: #2a3143; /* Dark blue S2M */
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffcc00; /* Gold S2M */
+}

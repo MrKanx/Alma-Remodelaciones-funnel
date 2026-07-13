@@ -1,0 +1,77 @@
+// STUDENTS2MADRID / Premium Education Colors
+$S2M-DARK-BLUE:   #0F172A; // Trust, Professionalism (Tailwind slate-900)
+$S2M-GOLD:        #D4AF37; // Exclusivity, Success (Soft Gold)
+$S2M-WHITE:       #FFFFFF; // Clarity
+$S2M-GRAY-LIGHT:  #F8FAFC; // Modern Gray Light (Tailwind slate-50)
+$S2M-GRAY-DARK:   #334155; // Modern Gray Dark (Tailwind slate-700)
+$S2M-ACCENT:      #2563EB; // Accent Blue (Tailwind blue-600)
+
+// Mapeo a las variables del sistema (manteniendo los nombres para no romper UI legacy de ser necesario)
+$QS-NAVY:    $S2M-DARK-BLUE;  // Brand Principal (Azul oscuro)
+$QS-BLUE:    $S2M-ACCENT;     // Secundario (Azul acento)
+$QS-GOLD:    $S2M-GOLD;       // Acento (Dorado)
+$QS-RED:     $S2M-GOLD;       // CTAs y urgencia (Dorado para CTA principal)
+$QS-DARK:    $S2M-WHITE;      // Texto claro (modo oscuro)
+$QS-LIGHT:   $S2M-DARK-BLUE;  // Fondo oscuro base
+$QS-SURFACE: #1E293B;         // Superficies/cards oscuras
+
+// Urgency / inmediatez
+$QS-URGENT:        #B45309; // Amber-700
+$QS-URGENT-DARK:   #78350F; // Amber-900
+$QS-URGENT-LIGHT:  #F59E0B; // Amber-500
+$QS-URGENT-BG:     rgba(#B45309, 0.15);
+
+// Aliases legacy Aluvicopp (mantienen compatibilidad)
+$ALU-NAVY:    $QS-NAVY;
+$ALU-BLUE:    $QS-BLUE;
+$ALU-SILVER:  #8E9CB2;
+$ALU-RED:     $QS-RED;
+$ALU-DARK:    $QS-DARK;
+$ALU-LIGHT:   $QS-LIGHT;
+$ALU-SURFACE: $QS-SURFACE;
+$ALU-URGENT:        $QS-URGENT;
+$ALU-URGENT-DARK:   $QS-URGENT-DARK;
+$ALU-URGENT-LIGHT:  $QS-URGENT-LIGHT;
+$ALU-URGENT-BG:     $QS-URGENT-BG;
+
+// Aliases legacy Bakano (mantienen compatibilidad — no usar para código nuevo)
+$BAKANO-PINK:   $QS-NAVY;
+$BAKANO-DARK:   $QS-DARK;
+$BAKANO-LIGHT:  $QS-LIGHT;
+$BAKANO-PURPLE: $QS-BLUE;
+$BAKANO-GREEN:  #8E9CB2;
+$BAKANO-PRIMARY: $QS-NAVY;
+
+// Aliases legacy Ale Barreto (mantienen compatibilidad)
+$AB-WOOD:     #8E9CB2;
+$AB-EARTH:    $QS-BLUE;
+$AB-FOREST:   $QS-NAVY;
+$AB-SAGE:     #8E9CB2;
+$AB-CREAM:    $QS-LIGHT;
+$AB-WHITE:    #ffffff;
+$AB-URGENT:        $QS-URGENT;
+$AB-URGENT-DARK:   $QS-URGENT-DARK;
+$AB-URGENT-LIGHT:  $QS-URGENT-LIGHT;
+$AB-URGENT-BG:     $QS-URGENT-BG;
+
+// OS Aliases (para mantener compatibilidad con código existente)
+$OS-RED:   $QS-RED;
+$OS-NAVY:  $QS-NAVY;
+$OS-BLUE:  $QS-BLUE;
+$OS-DARK:  $QS-DARK;
+
+// Colores base
+$white: #ffffff;
+$text-light: #f5f5f5;
+$overlay-wood: rgba($QS-NAVY, 0.1);
+
+// Colores adicionales para UI
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
