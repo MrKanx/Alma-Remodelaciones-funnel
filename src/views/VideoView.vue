@@ -53,7 +53,8 @@ const submitCapture = async () => {
   startTimer()
 }
 
-const COUNTDOWN_SECONDS = 120
+const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+const COUNTDOWN_SECONDS = isLocalhost ? 3 : 120
 const secondsLeft = ref(COUNTDOWN_SECONDS)
 const ctaUnlocked = ref(false)
 let timer: ReturnType<typeof setInterval> | null = null
@@ -113,7 +114,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   <div class="vv-page">
 
     <header class="vv-topbar">
-      <span class="vv-topbar__logo-text">STUDENTS<span class="vv-topbar__logo-accent">2MADRID</span></span>
+      <span class="vv-topbar__logo-text">DISFA<span class="vv-topbar__logo-accent">MOSA</span></span>
     </header>
 
     <main class="vv-main">
@@ -128,12 +129,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
       <section class="vv-headline">
         <h1 class="vv-h1">
-          Descubre por qué cientos de estudiantes
-          <span class="vv-accent">eligen a STUDENTS2MADRID</span>
+          Descubre por qué cientos de proyectos
+          <span class="vv-accent">eligen a DISFAMOSA</span>
         </h1>
         <p class="vv-subtitle">
-          Ve el video completo y descubre cómo asegurar tu futuro académico,
-          ahorrar tiempo en trámites y llegar a Madrid con total confianza.
+          Ve el video completo y descubre cómo asegurar el éxito de tu obra,
+          ahorrar meses de retrasos y disfrutar de tus espacios con total tranquilidad.
         </p>
       </section>
 
@@ -183,7 +184,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} STUDENTS2MADRID. Todos los derechos reservados.</p>
+      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
       <p class="vv-footer__dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
@@ -200,7 +201,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
             <h2 id="capture-title" class="capture-modal__title">
               Antes de ver el video, <span>confirma tus datos</span>
             </h2>
-            <p class="capture-modal__sub">Para personalizar tu asesoría internacional</p>
+            <p class="capture-modal__sub">Para personalizar el diseño de tu proyecto</p>
           </div>
           <form class="capture-modal__form" @submit.prevent="submitCapture" novalidate>
             <div class="capture-row">
@@ -275,7 +276,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   }
 
   &__logo-accent {
-    color: colors.$S2M-GOLD;
+    color: colors.$DIS-GOLD;
   }
 }
 
@@ -310,7 +311,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     transition: background 0.2s;
 
     &--active {
-      background: colors.$S2M-GOLD;
+      background: colors.$DIS-GOLD;
     }
   }
 
@@ -339,7 +340,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 }
 
 .vv-accent {
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
 }
 
 .vv-subtitle {
@@ -416,7 +417,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     font-family: fonts.$font-secondary;
 
     strong {
-      color: colors.$S2M-GOLD;
+      color: colors.$DIS-GOLD;
       font-weight: 700;
       letter-spacing: 0.05em;
     }
@@ -428,7 +429,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  background: colors.$S2M-GOLD;
+  background: colors.$DIS-GOLD;
   color: #000000;
   border: none;
   border-radius: 12px;
@@ -442,12 +443,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   width: 100%;
   max-width: 500px;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 4px 20px rgba(colors.$S2M-GOLD, 0.3);
+  box-shadow: 0 4px 20px rgba(colors.$DIS-GOLD, 0.3);
 
   &:hover {
     background: #FFD25B;
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(colors.$S2M-GOLD, 0.45);
+    box-shadow: 0 8px 28px rgba(colors.$DIS-GOLD, 0.45);
   }
 
   &:active {
@@ -486,7 +487,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
   i {
     font-size: 0.75rem;
-    color: colors.$S2M-GOLD;
+    color: colors.$DIS-GOLD;
   }
 }
 
@@ -508,7 +509,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       text-decoration: none;
 
       &:hover {
-        color: colors.$S2M-GOLD;
+        color: colors.$DIS-GOLD;
       }
     }
   }
@@ -530,7 +531,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       font-weight: bold;
       
       &:hover {
-        color: colors.$S2M-GOLD;
+        color: colors.$DIS-GOLD;
       }
     }
   }
@@ -583,7 +584,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     letter-spacing: -0.02em;
 
     span {
-      color: colors.$S2M-GOLD;
+      color: colors.$DIS-GOLD;
     }
   }
 
@@ -640,7 +641,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     }
 
     &:focus {
-      border-color: colors.$S2M-GOLD;
+      border-color: colors.$DIS-GOLD;
       background: #1a1a1a;
     }
   }
@@ -660,7 +661,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: colors.$S2M-GOLD;
+  background: colors.$DIS-GOLD;
   color: #000000;
   border: none;
   border-radius: 11px;
@@ -673,7 +674,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   width: 100%;
   margin-top: 0.5rem;
   transition: background 0.2s, transform 0.15s;
-  box-shadow: 0 4px 16px rgba(colors.$S2M-GOLD, 0.3);
+  box-shadow: 0 4px 16px rgba(colors.$DIS-GOLD, 0.3);
 
   &:hover:not(:disabled) {
     background: #FFD25B;

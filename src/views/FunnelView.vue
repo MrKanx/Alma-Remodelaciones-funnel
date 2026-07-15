@@ -29,18 +29,18 @@ onMounted(() => {
       <!-- HEADER -->
       <header class="funnel__header">
         <div class="funnel__logo-wrap">
-          <span class="funnel__logo-text">STUDENTS<span class="funnel__logo-accent">2MADRID</span></span>
+          <span class="funnel__logo-text">DISFA<span class="funnel__logo-accent">MOSA</span></span>
         </div>
       </header>
 
       <!-- HERO -->
       <section class="funnel__hero">
         <h1 class="funnel__headline">
-          Toma el control absoluto de tu futuro académico en Europa con el <span class="funnel__headline-accent">Método Rumbo a España</span>
+          ¿Cansado de la improvisación en tu obra? Descubre por qué el verdadero lujo está en la <span class="funnel__headline-accent">precisión milimétrica</span>
         </h1>
         
         <p class="funnel__hero-sub">
-          Descubre el paso a paso exacto para evitar el rechazo de tu visado, meses de parálisis burocrática y miles de euros perdidos. Tu única preocupación debe ser disfrutar de tu experiencia en Madrid.
+          Si estás construyendo o remodelando la casa de tus sueños, o si eres un arquitecto cansado de que los proveedores arruinen tus proyectos, descubre cómo desterrar la improvisación para siempre.
         </p>
 
         <div class="funnel__content-grid">
@@ -67,12 +67,12 @@ onMounted(() => {
           
           <div class="funnel__bullets-column">
             <div class="funnel__bullets-box">
-              <p class="funnel__bullets-title">Nuestros 3 pilares inquebrantables:</p>
+              <p class="funnel__bullets-title">Arquitectura Modular de Alta Fidelidad:</p>
               <ul class="funnel__bullets">
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Auditoría Documental:</strong> Revisión milimétrica de tus requisitos y seguro médico para evitar rechazos inmediatos en extranjería.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Ruta Crítica Anticipada:</strong> Coordinamos tus citas de TIE y empadronamiento desde que estás en tu país, no cuando llegas a España.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Blindaje Total:</strong> Organización de tu cuenta bancaria Santander y tarjeta de transporte, listas desde tu primer día.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Cero Sorpresas:</strong> Evita a los tramitadores informales que te cuestan meses de retraso y departamentos vacíos.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Auditoría Técnica Espacial:</strong> Levantamiento milimétrico cruzado con planos eléctricos y sanitarios para optimizar hasta un 30% el espacio.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Ingeniería de Materiales:</strong> Selección técnica para cada zona, cantos sellados a máquina y herrajes de alta durabilidad.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Ejecución Confiable:</strong> Coordinación directa con directores de obra para encajar a la perfección con pintura, pisos y acabados.</li>
+                <li><i class="fa-solid fa-circle-check"></i> <strong>Cero Improvisación:</strong> Lo que se dibuja en el plano es exactamente lo que se instala, sin excusas ni retrasos.</li>
               </ul>
             </div>
           </div>
@@ -82,22 +82,22 @@ onMounted(() => {
 
       <!-- STATS SECTION -->
       <section class="funnel__stats">
-        <p class="funnel__stats-eyebrow">RESULTADOS REALES DE ESTUDIANTES REALES</p>
+        <p class="funnel__stats-eyebrow">RESPALDO DE EXCELENCIA</p>
         <div class="funnel__stats-grid">
           <div class="funnel__stats-card">
-            <div class="funnel__stats-icon"><i class="fa-solid fa-passport"></i></div>
-            <h3 class="funnel__stats-number">+500</h3>
-            <p class="funnel__stats-text">visados estudiantiles aprobados con éxito garantizado</p>
+            <div class="funnel__stats-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <h3 class="funnel__stats-number">30</h3>
+            <p class="funnel__stats-text">años de trayectoria familiar en el mercado de mobiliario modular</p>
           </div>
           <div class="funnel__stats-card">
-            <div class="funnel__stats-icon"><i class="fa-solid fa-university"></i></div>
-            <h3 class="funnel__stats-number">+100</h3>
-            <p class="funnel__stats-text">universidades y escuelas de negocios en convenio en Madrid</p>
+            <div class="funnel__stats-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+            <h3 class="funnel__stats-number">100%</h3>
+            <p class="funnel__stats-text">de precisión garantizada entre el plano técnico y la instalación real</p>
           </div>
           <div class="funnel__stats-card">
-            <div class="funnel__stats-icon"><i class="fa-solid fa-earth-americas"></i></div>
-            <h3 class="funnel__stats-number">7</h3>
-            <p class="funnel__stats-text">países de Latinoamérica desde donde viajan nuestros estudiantes</p>
+            <div class="funnel__stats-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="funnel__stats-number">0</h3>
+            <p class="funnel__stats-text">excusas: reducimos a cero los errores de montaje entregando en plazos exactos</p>
           </div>
         </div>
       </section>
@@ -111,11 +111,11 @@ onMounted(() => {
             </div>
           </div>
           <div class="funnel__authority-content">
-            <p class="funnel__authority-eyebrow">Directora y Especialista en Extranjería</p>
-            <h2 id="authority-heading" class="funnel__authority-name">Bianca Pimentel</h2>
-            <p class="funnel__authority-role">Fundadora del Método Rumbo a España — STUDENTS2MADRID</p>
+            <p class="funnel__authority-eyebrow">Director de Proyectos</p>
+            <h2 id="authority-heading" class="funnel__authority-name">Manuel Mantilla Plaza</h2>
+            <p class="funnel__authority-role">Especialista en Arquitectura Modular — DISFAMOSA</p>
             <p class="funnel__authority-bio">
-              Con años de experiencia comprobada ayudando a familias y estudiantes latinoamericanos, transformando la incertidumbre de la migración en un proceso seguro. Mi meta no es simplemente llenarte un formulario; es que tú ya estés instalado, estudiando y disfrutando de tu nueva vida en España exactamente como lo tenías pensado. <strong>Un proceso legal bien guiado no es un gasto, es la mejor inversión para asegurar tu tranquilidad.</strong>
+              "Mi familia y yo llevamos 30 años de trayectoria. El verdadero problema que sufren propietarios y arquitectos no es la falta de materiales; es la alarmante falta de responsabilidad. Decidimos estructurar nuestra experiencia en una metodología estricta: Arquitectura Modular. Un modelo diseñado para blindar tu inversión y garantizar que lo que se dibuja sea lo que se instala."
             </p>
           </div>
         </div>
@@ -124,14 +124,14 @@ onMounted(() => {
       <!-- FINAL CTA -->
       <section class="funnel__final-cta">
         <div class="funnel__logo-wrap funnel__logo-wrap--large">
-          <span class="funnel__logo-text">STUDENTS<span class="funnel__logo-accent">2MADRID</span>.</span>
+          <span class="funnel__logo-text">DISFA<span class="funnel__logo-accent">MOSA</span>.</span>
         </div>
         <h2 class="funnel__final-title">
-          ¿Listo para profesionalizar tu<br>
-          <span class="funnel__final-accent">transición internacional?</span>
+          ¿Listo para desterrar la<br>
+          <span class="funnel__final-accent">improvisación de tu obra?</span>
         </h2>
         <p class="funnel__final-sub">
-          Accede al entrenamiento gratuito donde te explicamos paso a paso nuestro Método Rumbo a España para blindar tu futuro académico y evitar rechazos.<br><br>
+          Accede al entrenamiento gratuito y descubre cómo protegemos tu inversión con ejecución limpia, milimétrica y perfecta.<br><br>
         </p>
         <button class="funnel__cta funnel__cta--pulse" @click="openModal">
           <i class="fa-solid fa-video"></i>
@@ -155,7 +155,7 @@ onMounted(() => {
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="funnel__footer-copy">© {{ new Date().getFullYear() }} STUDENTS2MADRID. Todos los derechos reservados.</p>
+      <p class="funnel__footer-copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
       <p class="funnel__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
@@ -198,7 +198,7 @@ onMounted(() => {
 }
 
 .funnel__logo-accent {
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
 }
 
 .funnel__hero {
@@ -217,7 +217,7 @@ onMounted(() => {
 }
 
 .funnel__headline-accent {
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
 }
 
 .funnel__hero-sub {
@@ -260,11 +260,11 @@ onMounted(() => {
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 25px 50px rgba(colors.$S2M-GOLD, 0.15);
+    box-shadow: 0 25px 50px rgba(colors.$DIS-GOLD, 0.15);
 
     .funnel__play-btn {
       transform: scale(1.1);
-      background: colors.$S2M-GOLD;
+      background: colors.$DIS-GOLD;
       color: #000;
     }
   }
@@ -293,8 +293,8 @@ onMounted(() => {
   border-radius: 50%;
   background: rgba(255,255,255,0.1);
   backdrop-filter: blur(4px);
-  border: 2px solid colors.$S2M-GOLD;
-  color: colors.$S2M-GOLD;
+  border: 2px solid colors.$DIS-GOLD;
+  color: colors.$DIS-GOLD;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
@@ -319,7 +319,7 @@ onMounted(() => {
 .funnel__cta {
   margin-top: 2rem;
   width: 100%;
-  background: colors.$S2M-GOLD;
+  background: colors.$DIS-GOLD;
   color: #000000;
   font-family: fonts.$font-accent;
   font-size: 1.1rem;
@@ -333,12 +333,12 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  box-shadow: 0 10px 20px rgba(colors.$S2M-GOLD, 0.2);
+  box-shadow: 0 10px 20px rgba(colors.$DIS-GOLD, 0.2);
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 30px rgba(colors.$S2M-GOLD, 0.4);
+    box-shadow: 0 15px 30px rgba(colors.$DIS-GOLD, 0.4);
     background: #FFD25B;
   }
 }
@@ -349,19 +349,19 @@ onMounted(() => {
   max-width: 450px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: 0 0 25px rgba(colors.$S2M-GOLD, 0.4);
+  box-shadow: 0 0 25px rgba(colors.$DIS-GOLD, 0.4);
   animation: pulse 2s infinite;
 
   &:hover {
     animation: none;
-    box-shadow: 0 0 35px rgba(colors.$S2M-GOLD, 0.6);
+    box-shadow: 0 0 35px rgba(colors.$DIS-GOLD, 0.6);
   }
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 15px rgba(colors.$S2M-GOLD, 0.3); }
-  50% { transform: scale(1.02); box-shadow: 0 0 35px rgba(colors.$S2M-GOLD, 0.5); }
-  100% { transform: scale(1); box-shadow: 0 0 15px rgba(colors.$S2M-GOLD, 0.3); }
+  0% { transform: scale(1); box-shadow: 0 0 15px rgba(colors.$DIS-GOLD, 0.3); }
+  50% { transform: scale(1.02); box-shadow: 0 0 35px rgba(colors.$DIS-GOLD, 0.5); }
+  100% { transform: scale(1); box-shadow: 0 0 15px rgba(colors.$DIS-GOLD, 0.3); }
 }
 
 .funnel__guarantee {
@@ -375,7 +375,7 @@ onMounted(() => {
   gap: 6px;
   
   i {
-    color: colors.$S2M-GOLD;
+    color: colors.$DIS-GOLD;
   }
 }
 
@@ -414,7 +414,7 @@ onMounted(() => {
     gap: 12px;
 
     i {
-      color: colors.$S2M-GOLD;
+      color: colors.$DIS-GOLD;
       font-size: 1.2rem;
       margin-top: 3px;
       flex-shrink: 0;
@@ -436,7 +436,7 @@ onMounted(() => {
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
   text-transform: uppercase;
   margin-bottom: 2rem;
 }
@@ -461,7 +461,7 @@ onMounted(() => {
 
   &:hover {
     transform: translateY(-5px);
-    border-color: rgba(colors.$S2M-GOLD, 0.3);
+    border-color: rgba(colors.$DIS-GOLD, 0.3);
   }
 }
 
@@ -469,7 +469,7 @@ onMounted(() => {
   width: 50px;
   height: 50px;
   margin: 0 auto 1rem;
-  background: rgba(colors.$S2M-GOLD, 0.1);
+  background: rgba(colors.$DIS-GOLD, 0.1);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -477,7 +477,7 @@ onMounted(() => {
 
   i {
     font-size: 1.5rem;
-    color: colors.$S2M-GOLD;
+    color: colors.$DIS-GOLD;
   }
 }
 
@@ -528,7 +528,7 @@ onMounted(() => {
   justify-content: center;
 
   i {
-    color: colors.$S2M-GOLD;
+    color: colors.$DIS-GOLD;
     font-size: 2.5rem;
   }
 }
@@ -537,7 +537,7 @@ onMounted(() => {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
   letter-spacing: 0.05em;
   margin: 0 0 0.4rem;
 }
@@ -572,7 +572,7 @@ onMounted(() => {
   margin-bottom: 4rem;
   text-align: center;
   padding: 4rem 2rem;
-  background: radial-gradient(circle at center, rgba(colors.$S2M-GOLD, 0.05) 0%, transparent 60%);
+  background: radial-gradient(circle at center, rgba(colors.$DIS-GOLD, 0.05) 0%, transparent 60%);
 }
 
 .funnel__logo-wrap--large {
@@ -594,7 +594,7 @@ onMounted(() => {
 }
 
 .funnel__final-accent {
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
 }
 
 .funnel__final-sub {
@@ -627,7 +627,7 @@ onMounted(() => {
     text-decoration: none;
 
     &:hover {
-      color: colors.$S2M-GOLD;
+      color: colors.$DIS-GOLD;
     }
   }
 }
@@ -649,7 +649,7 @@ onMounted(() => {
     font-weight: bold;
     
     &:hover {
-      color: colors.$S2M-GOLD;
+      color: colors.$DIS-GOLD;
     }
   }
 }

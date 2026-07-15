@@ -16,8 +16,8 @@ const submitting = ref(false)
 const touched = ref(false)
 
 const form = ref({
-  nivel: '',
-  viaje: '',
+  perfil: '',
+  etapa: '',
   presupuesto: '',
   reto: '',
   consent: false,
@@ -26,14 +26,15 @@ const form = ref({
 const wordCount = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
 
 const isValid = () =>
-  !!form.value.nivel &&
-  !!form.value.viaje &&
+  !!form.value.perfil &&
+  !!form.value.etapa &&
   !!form.value.presupuesto &&
   wordCount(form.value.reto) >= 5 &&
   form.value.consent
 
 const qualifies = () => {
-  if (form.value.presupuesto === 'no') return false
+  if (form.value.presupuesto === 'precio') return false
+  if (form.value.perfil === 'curioso') return false
   return true
 }
 
@@ -46,47 +47,47 @@ const handleSubmit = async () => {
   const califica = qualifies()
   const scheduleEventId = generateEventId('schedule')
 
-  const nivelLabel: Record<string, string> = {
-    secundaria: 'Secundaria / Colegio',
-    bachiller: 'Bachiller',
-    universitario: 'Estudiante Universitario',
-    profesional: 'Profesional Graduado',
+  const perfilLabel: Record<string, string> = {
+    propietario: 'Propietario (construyendo/remodelando)',
+    arquitecto: 'Arquitecto / Interiorista',
+    constructor: 'Constructor de proyectos en serie',
+    curioso: 'Solo busco precios económicos / gangas',
   }
-  const viajeLabel: Record<string, string> = {
-    meses3: 'Próximos 3 meses',
-    meses6: 'En 6 meses',
-    ano1: 'En 1 año',
-    explorando: 'Aún explorando opciones',
+  const etapaLabel: Record<string, string> = {
+    planos: 'En planos o diseño arquitectónico',
+    construccion: 'En obra gris / construcción actual',
+    acabados: 'En acabados (listo para modulares)',
+    remodelacion: 'Remodelación de espacios habitados',
   }
   const presupuestoLabel: Record<string, string> = {
-    si: 'Sí, dispongo del presupuesto',
-    financiamiento: 'Necesito financiamiento / beca',
-    no: 'No cuento con presupuesto',
+    calidad: 'Busco calidad y precisión (con presupuesto)',
+    intermedio: 'Balance entre calidad y costo',
+    precio: 'Priorizo buscar el precio más barato',
   }
 
   const etiquetas = [
-    'funnel-STUDENTS2MADRID',
+    'funnel-DISFAMOSA',
     'step-2-cualificacion',
-    califica ? 'califica-STUDENTS2MADRID' : 'no-califica-STUDENTS2MADRID',
-    `nivel-${form.value.nivel}`,
-    `viaje-${form.value.viaje}`,
+    califica ? 'califica-DISFAMOSA' : 'no-califica-DISFAMOSA',
+    `perfil-${form.value.perfil}`,
+    `etapa-${form.value.etapa}`,
     `presupuesto-${form.value.presupuesto}`,
   ]
 
   const notas = `
 ━━━━━━━━━━━━━━━━━━━━━━━━
-STUDENTS2MADRID — Cualificación
+DISFAMOSA — Cualificación
 ━━━━━━━━━━━━━━━━━━━━━━━━
 👤 ${contact.nombre} ${contact.apellido}
 📧 ${contact.email}
 📱 ${contact.telefono}
 ━━━━━━━━━━━━━━━━━━━━━━━━
-🎓 Nivel: ${nivelLabel[form.value.nivel] ?? form.value.nivel}
-✈️ Viaje: ${viajeLabel[form.value.viaje] ?? form.value.viaje}
-💰 Presupuesto: ${presupuestoLabel[form.value.presupuesto] ?? form.value.presupuesto}
-💡 Desafío/Miedo: ${form.value.reto}
+🎓 Perfil: ${perfilLabel[form.value.perfil] ?? form.value.perfil}
+🏗️ Etapa Obra: ${etapaLabel[form.value.etapa] ?? form.value.etapa}
+💰 Enfoque: ${presupuestoLabel[form.value.presupuesto] ?? form.value.presupuesto}
+💡 Desafío/Mala experiencia: ${form.value.reto}
 ━━━━━━━━━━━━━━━━━━━━━━━━
-${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta presupuesto'}
+${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Busca barato/gangas'}
   `.trim()
 
   const pageEntry = Number(sessionStorage.getItem('alu_page_entry')) || Date.now()
@@ -101,8 +102,8 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Falta presupuesto'}
     telefono: contact.telefono,
     phone: contact.telefono,
     paso: '2-cualificacion',
-    nivel: form.value.nivel,
-    viaje: form.value.viaje,
+    perfil: form.value.perfil,
+    etapa: form.value.etapa,
     presupuesto: form.value.presupuesto,
     reto: form.value.reto,
     cualifica: califica ? 'true' : 'false',
@@ -154,7 +155,7 @@ onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 watch(() => props.open, (v) => {
   if (v) {
     touched.value = false
-    form.value = { nivel: '', viaje: '', presupuesto: '', reto: '', consent: false }
+    form.value = { perfil: '', etapa: '', presupuesto: '', reto: '', consent: false }
   }
   document.body.style.overflow = v ? 'hidden' : ''
 })
@@ -173,75 +174,75 @@ watch(() => props.open, (v) => {
 
           <div class="cal-header">
             <div class="cal-header-icon" aria-hidden="true">
-              <i class="fa-solid fa-plane"></i>
+              <i class="fa-solid fa-hammer"></i>
             </div>
             <h2 id="cal-title" class="cal-title">
               Antes de agendar, cuéntanos sobre
-              <span class="cal-accent">tu viaje</span>
+              <span class="cal-accent">tu proyecto</span>
             </h2>
-            <p class="cal-subtitle">4 preguntas para preparar tu asesoría — 60 segundos.</p>
+            <p class="cal-subtitle">4 preguntas para preparar tu diagnóstico — 60 segundos.</p>
           </div>
 
           <form class="cal-form" @submit.prevent="handleSubmit" novalidate>
 
-            <!-- Q1 — Nivel -->
-            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.nivel }">
+            <!-- Q1 — Perfil -->
+            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.perfil }">
               <legend class="cal-legend">
                 <span class="cal-q-num">01</span>
-                ¿Cuál es tu nivel de estudios actual?
+                ¿Cuál es tu perfil respecto a la obra?
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'secundaria', label: 'Secundaria / Colegio' },
-                  { value: 'bachiller', label: 'Bachiller' },
-                  { value: 'universitario', label: 'Estudiante Universitario' },
-                  { value: 'profesional', label: 'Profesional Graduado' },
-                ]" :key="opt.value" class="cal-option" :class="{ selected: form.nivel === opt.value }">
-                  <input type="radio" :value="opt.value" v-model="form.nivel" hidden />
+                  { value: 'propietario', label: 'Propietario (construyendo o remodelando)' },
+                  { value: 'arquitecto', label: 'Arquitecto / Interiorista' },
+                  { value: 'constructor', label: 'Constructor de proyectos en serie' },
+                  { value: 'curioso', label: 'Solo busco precios económicos / gangas' },
+                ]" :key="opt.value" class="cal-option" :class="{ selected: form.perfil === opt.value }">
+                  <input type="radio" :value="opt.value" v-model="form.perfil" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
                   <span class="cal-option__label">{{ opt.label }}</span>
                 </label>
               </div>
-              <span v-if="touched && !form.nivel" class="cal-error">Selecciona una opción</span>
+              <span v-if="touched && !form.perfil" class="cal-error">Selecciona una opción</span>
             </fieldset>
 
-            <!-- Q2 — Viaje -->
-            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.viaje }">
+            <!-- Q2 — Etapa -->
+            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.etapa }">
               <legend class="cal-legend">
                 <span class="cal-q-num">02</span>
-                ¿Para cuándo planeas tu viaje a España?
+                ¿En qué etapa de desarrollo está tu proyecto?
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'meses3', label: 'Próximos 3 meses' },
-                  { value: 'meses6', label: 'En 6 meses' },
-                  { value: 'ano1', label: 'En 1 año' },
-                  { value: 'explorando', label: 'Aún explorando opciones' },
-                ]" :key="opt.value" class="cal-option" :class="{ selected: form.viaje === opt.value }">
-                  <input type="radio" :value="opt.value" v-model="form.viaje" hidden />
+                  { value: 'planos', label: 'En planos o diseño arquitectónico' },
+                  { value: 'construccion', label: 'En obra gris / construcción actual' },
+                  { value: 'acabados', label: 'En etapa de acabados' },
+                  { value: 'remodelacion', label: 'Remodelación de un espacio habitado' },
+                ]" :key="opt.value" class="cal-option" :class="{ selected: form.etapa === opt.value }">
+                  <input type="radio" :value="opt.value" v-model="form.etapa" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
                   <span class="cal-option__label">{{ opt.label }}</span>
                 </label>
               </div>
-              <span v-if="touched && !form.viaje" class="cal-error">Selecciona una opción</span>
+              <span v-if="touched && !form.etapa" class="cal-error">Selecciona una opción</span>
             </fieldset>
 
             <!-- Q3 — Presupuesto -->
-            <fieldset class="cal-fieldset cal-fieldset--budget" :class="{ 'has-error': touched && !form.presupuesto, 'has-investment': form.presupuesto && form.presupuesto !== 'no' }">
+            <fieldset class="cal-fieldset cal-fieldset--budget" :class="{ 'has-error': touched && !form.presupuesto, 'has-investment': form.presupuesto && form.presupuesto !== 'precio' }">
               <legend class="cal-legend cal-legend--budget">
                 <span class="cal-q-num cal-q-num--budget">03</span>
-                <span>¿Cuentas con el presupuesto necesario para tu proceso?</span>
-                <i class="fa-solid fa-wallet cal-legend-chart" aria-hidden="true"></i>
+                <span>¿Qué priorizas al contratar mobiliario modular?</span>
+                <i class="fa-solid fa-gem cal-legend-chart" aria-hidden="true"></i>
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'si', label: 'Sí, dispongo del presupuesto', premium: true },
-                  { value: 'financiamiento', label: 'Necesito financiamiento / beca', premium: false },
-                  { value: 'no', label: 'No cuento con presupuesto', premium: false },
+                  { value: 'calidad', label: 'Calidad, durabilidad y precisión técnica', premium: true },
+                  { value: 'intermedio', label: 'Un balance equitativo entre calidad y costo', premium: false },
+                  { value: 'precio', label: 'Busco la opción más barata del mercado', premium: false },
                 ]" :key="opt.value" class="cal-option" :class="{
                   selected: form.presupuesto === opt.value,
                   'cal-option--premium': opt.premium && form.presupuesto === opt.value,
-                  'cal-option--low': opt.value === 'no' && form.presupuesto === 'no',
+                  'cal-option--low': opt.value === 'precio' && form.presupuesto === 'precio',
                   'cal-option--premium-hover': opt.premium && form.presupuesto !== opt.value,
                 }">
                   <input type="radio" :value="opt.value" v-model="form.presupuesto" hidden />
@@ -257,12 +258,12 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset" :class="{ 'has-error': touched && wordCount(form.reto) < 5 }">
               <legend class="cal-legend">
                 <span class="cal-q-num">04</span>
-                ¿Cuál es tu principal desafío o miedo respecto a tu viaje?
+                ¿Cuál es tu principal temor o mala experiencia previa con otros proveedores?
               </legend>
               <textarea
                 v-model="form.reto"
                 class="cal-textarea"
-                placeholder="Ej: Tengo miedo a que rechacen mi visa y perder mi oportunidad de estudiar en la universidad..."
+                placeholder="Ej: Tengo miedo de que se retrasen en la entrega, que las puertas de los gabinetes no cuadren o que el material se infle con la humedad..."
                 rows="4"
                 aria-describedby="q4-hint"
               ></textarea>
@@ -279,7 +280,7 @@ watch(() => props.open, (v) => {
               <input type="checkbox" v-model="form.consent" />
               <span class="cal-consent__box" aria-hidden="true" />
               <span class="cal-consent__text">
-                Acepto que STUDENTS2MADRID me contacte para brindarme mi asesoría gratuita.
+                Acepto que DISFAMOSA evalúe mis respuestas para agendar un Diagnóstico Técnico.
               </span>
             </label>
             <span v-if="touched && !form.consent" class="cal-error">Debes aceptar para continuar</span>
@@ -354,7 +355,7 @@ watch(() => props.open, (v) => {
   font-size: 0.9rem;
   transition: background 0.2s, color 0.2s;
   z-index: 1;
-  &:hover { background: #222222; color: colors.$S2M-GOLD; }
+  &:hover { background: #222222; color: colors.$DIS-GOLD; }
 }
 
 .cal-header {
@@ -367,12 +368,12 @@ watch(() => props.open, (v) => {
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  background: colors.$S2M-DARK-BLUE;
+  background: colors.$DIS-DARK-BLUE;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem;
-  i { color: colors.$S2M-GOLD; font-size: 1.4rem; }
+  i { color: colors.$DIS-GOLD; font-size: 1.4rem; }
 }
 
 .cal-title {
@@ -384,7 +385,7 @@ watch(() => props.open, (v) => {
   letter-spacing: -0.02em;
 }
 
-.cal-accent { color: colors.$S2M-GOLD; }
+.cal-accent { color: colors.$DIS-GOLD; }
 
 .cal-subtitle {
   font-size: 0.86rem;
@@ -404,7 +405,7 @@ watch(() => props.open, (v) => {
   padding: 0;
   margin: 0;
 
-  &.has-error .cal-options { border-color: colors.$S2M-GOLD; border-radius: 10px; }
+  &.has-error .cal-options { border-color: colors.$DIS-GOLD; border-radius: 10px; }
 
   &--budget {
     border: 1.5px solid transparent;
@@ -414,8 +415,8 @@ watch(() => props.open, (v) => {
     transition: all 0.25s ease;
 
     &.has-investment {
-      border-color: rgba(colors.$S2M-DARK-BLUE, 0.4);
-      background: rgba(colors.$S2M-DARK-BLUE, 0.1);
+      border-color: rgba(colors.$DIS-DARK-BLUE, 0.4);
+      background: rgba(colors.$DIS-DARK-BLUE, 0.1);
     }
   }
 }
@@ -436,7 +437,7 @@ watch(() => props.open, (v) => {
 }
 
 .cal-legend-chart {
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
   font-size: 0.8rem;
   margin-left: auto;
   animation: chart-pulse 2s ease-in-out infinite;
@@ -458,14 +459,14 @@ watch(() => props.open, (v) => {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background: colors.$S2M-DARK-BLUE;
+  background: colors.$DIS-DARK-BLUE;
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 800;
   flex-shrink: 0;
 
   &--budget {
-    background: colors.$S2M-GOLD;
+    background: colors.$DIS-GOLD;
     color: #000;
   }
 }
@@ -494,8 +495,8 @@ watch(() => props.open, (v) => {
   }
 
   &.selected {
-    border-color: colors.$S2M-GOLD;
-    background: rgba(colors.$S2M-GOLD, 0.08);
+    border-color: colors.$DIS-GOLD;
+    background: rgba(colors.$DIS-GOLD, 0.08);
   }
 
   &__radio {
@@ -508,15 +509,15 @@ watch(() => props.open, (v) => {
     transition: all 0.2s ease;
 
     .cal-option.selected & {
-      border-color: colors.$S2M-GOLD;
-      background: rgba(colors.$S2M-GOLD, 0.1);
+      border-color: colors.$DIS-GOLD;
+      background: rgba(colors.$DIS-GOLD, 0.1);
       &::after {
         content: '';
         position: absolute;
         inset: 4px;
         border-radius: 50%;
-        background: colors.$S2M-GOLD;
-        box-shadow: 0 0 8px colors.$S2M-GOLD;
+        background: colors.$DIS-GOLD;
+        box-shadow: 0 0 8px colors.$DIS-GOLD;
       }
     }
   }
@@ -546,7 +547,7 @@ watch(() => props.open, (v) => {
   box-sizing: border-box;
   &::placeholder { color: rgba(255, 255, 255, 0.35); }
   &:focus { 
-    border-color: colors.$S2M-GOLD; 
+    border-color: colors.$DIS-GOLD; 
     background: #1a1a1a; 
   }
 }
@@ -561,7 +562,7 @@ watch(() => props.open, (v) => {
 .cal-error {
   display: block;
   font-size: 0.78rem;
-  color: colors.$OS-RED; /* Maybe S2M-RED later */
+  color: colors.$OS-RED; /* Maybe DIS-RED later */
   margin-top: 0.35rem;
 }
 
@@ -587,8 +588,8 @@ watch(() => props.open, (v) => {
     justify-content: center;
 
     input:checked ~ & {
-      background: colors.$S2M-GOLD;
-      border-color: colors.$S2M-GOLD;
+      background: colors.$DIS-GOLD;
+      border-color: colors.$DIS-GOLD;
       &::after { content: '✓'; color: #000; font-size: 0.8rem; font-weight: 900; }
     }
   }
@@ -605,7 +606,7 @@ watch(() => props.open, (v) => {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: colors.$S2M-GOLD;
+  background: colors.$DIS-GOLD;
   color: #000000;
   border: none;
   border-radius: 12px;
@@ -617,7 +618,7 @@ watch(() => props.open, (v) => {
   cursor: pointer;
   width: 100%;
   transition: background 0.2s ease, transform 0.15s ease;
-  box-shadow: 0 4px 16px rgba(colors.$S2M-GOLD, 0.3);
+  box-shadow: 0 4px 16px rgba(colors.$DIS-GOLD, 0.3);
   &:hover:not(:disabled) { background: #FFD25B; transform: translateY(-1px); }
   &:disabled { opacity: 0.65; cursor: not-allowed; }
 }

@@ -88,7 +88,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           <span class="booking__title-accent">asesoría premium</span>
         </h1>
         <p class="booking__subtitle">
-          Una sesión de 30 minutos con el equipo de STUDENTS2MADRID para trazar la ruta de tu viaje a España. Evaluaremos tus opciones y crearemos un plan seguro.
+          Una sesión de 30 minutos con el equipo de DISFAMOSA para trazar la ruta de tu viaje a España. Evaluaremos tus opciones y crearemos un plan seguro.
         </p>
       </section>
 
@@ -96,7 +96,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <iframe
           :src="calendarUrl"
           :style="{ height: iframeHeight + 'px' }"
-          title="Agenda tu asesoría con STUDENTS2MADRID"
+          title="Agenda tu asesoría con DISFAMOSA"
           class="calendar__iframe"
           frameborder="0"
           scrolling="no"
@@ -111,7 +111,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} STUDENTS2MADRID. Todos los derechos reservados.</p>
+      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
       <p class="booking__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
@@ -152,7 +152,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
 }
 
 .booking__logo-accent {
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
 }
 
 .booking__main {
@@ -176,21 +176,21 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
     justify-content: center; font-family: fonts.$font-interface; font-size: 0.85rem;
     font-weight: 800; border: 2px solid #333; color: #EEEEEE; transition: all 0.3s ease;
 
-    .stepper__step--done & { background: colors.$S2M-GOLD; border-color: colors.$S2M-GOLD; color: #000000; }
-    .stepper__step--active & { background: colors.$S2M-DARK-BLUE; border-color: colors.$S2M-DARK-BLUE; color: #ffffff; }
+    .stepper__step--done & { background: colors.$DIS-GOLD; border-color: colors.$DIS-GOLD; color: #000000; }
+    .stepper__step--active & { background: colors.$DIS-DARK-BLUE; border-color: colors.$DIS-DARK-BLUE; color: #ffffff; }
   }
 
   &__label {
     font-family: fonts.$font-interface; font-size: 0.72rem; font-weight: 600;
     letter-spacing: 0.04em; color: #EEEEEE;
-    .stepper__step--done & { color: colors.$S2M-GOLD; }
-    .stepper__step--active & { color: colors.$S2M-DARK-BLUE; }
+    .stepper__step--done & { color: colors.$DIS-GOLD; }
+    .stepper__step--active & { color: colors.$DIS-DARK-BLUE; }
   }
 
   &__line {
     width: 60px; height: 2px; background: #333; border-radius: 2px;
     margin: 0 0.5rem; margin-bottom: 1.1rem;
-    &--done { background: colors.$S2M-GOLD; }
+    &--done { background: colors.$DIS-GOLD; }
   }
 }
 
@@ -198,8 +198,8 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(colors.$S2M-GOLD, 0.14);
-  border: 1px solid rgba(colors.$S2M-GOLD, 0.35);
+  background: rgba(colors.$DIS-GOLD, 0.14);
+  border: 1px solid rgba(colors.$DIS-GOLD, 0.35);
   border-radius: 999px;
   padding: 0.4rem 0.95rem;
   font-family: fonts.$font-interface;
@@ -212,7 +212,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
 
   i {
     font-size: 0.78rem;
-    color: colors.$S2M-GOLD;
+    color: colors.$DIS-GOLD;
   }
 }
 
@@ -222,7 +222,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   @include fonts.heading-font(800);
   font-size: clamp(1.7rem, 4vw, 2.4rem);
   color: #ffffff; margin: 0 0 0.6rem; letter-spacing: -0.025em; line-height: 1.2;
-  &-accent { color: colors.$S2M-GOLD; }
+  &-accent { color: colors.$DIS-GOLD; }
 }
 
 .booking__subtitle {
@@ -240,7 +240,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   padding: 1.5rem; border-top: 1px solid #222222;
   display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center;
 
-  &-links { display: flex; gap: 1.5rem; a { font-size: 0.76rem; color: #a0aec0; text-decoration: none; &:hover { color: colors.$S2M-GOLD; } } }
+  &-links { display: flex; gap: 1.5rem; a { font-size: 0.76rem; color: #a0aec0; text-decoration: none; &:hover { color: colors.$DIS-GOLD; } } }
   &-copy { font-size: 0.72rem; color: #a0aec0; margin: 0; }
   
   &-dev {
@@ -254,7 +254,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
       font-weight: bold;
       
       &:hover {
-        color: colors.$S2M-GOLD;
+        color: colors.$DIS-GOLD;
       }
     }
   }

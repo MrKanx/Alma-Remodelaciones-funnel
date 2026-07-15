@@ -31,14 +31,14 @@ const router = createRouter({
       name: 'funnel',
       component: FunnelView,
       meta: {
-        title: 'STUDENTS2MADRID | Estudia en Madrid sin dejar tu futuro al azar',
+        title: 'DISFAMOSA | Arquitectura Modular de Alta Fidelidad',
         description:
-          'Transformamos tu sueño de estudiar en Madrid en un camino seguro, organizado y sin incertidumbre. Asesoría estratégica gratuita.',
-        canonical: 'https://students2madrid.com/',
-        ogTitle: 'STUDENTS2MADRID | Estudia en Madrid sin dejar tu futuro al azar',
+          'Descubre cómo desterrar la improvisación de tu obra para siempre con precisión milimétrica y ejecución impecable.',
+        canonical: 'https://disfamosa.com/',
+        ogTitle: 'DISFAMOSA | Arquitectura Modular de Alta Fidelidad',
         ogDescription:
-          'Te acompañamos desde la preparación documental hasta tu llegada a España con una metodología estratégica diseñada para reducir errores.',
-        ogUrl: 'https://students2madrid.com/',
+          'Transforma la dinámica en la que vives y disfrutas tu hogar con muebles diseñados y fabricados con responsabilidad.',
+        ogUrl: 'https://disfamosa.com/',
       } satisfies RouteMeta,
     },
     {
@@ -46,12 +46,12 @@ const router = createRouter({
       name: 'video',
       component: VideoView,
       meta: {
-        title: 'Mira el video | NOVAERA — Paso 1 de 2',
-        description: 'Descubre cómo una infraestructura de alto valor aumenta tu autoridad comercial.',
-        canonical: 'https://novaera.ec/ver-video',
-        ogTitle: 'Mira el video | NOVAERA',
-        ogDescription: 'Ve el video y agenda tu diagnóstico comercial gratuito.',
-        ogUrl: 'https://novaera.ec/ver-video',
+        title: 'Mira el video | DISFAMOSA — Paso 1 de 2',
+        description: 'Descubre cómo una infraestructura modular de alto valor aumenta tu calidad de vida.',
+        canonical: 'https://disfamosa.com/ver-video',
+        ogTitle: 'Mira el video | DISFAMOSA',
+        ogDescription: 'Ve el video y agenda tu diagnóstico de espacios gratuito.',
+        ogUrl: 'https://disfamosa.com/ver-video',
       } satisfies RouteMeta,
     },
     {
@@ -59,12 +59,12 @@ const router = createRouter({
       name: 'booking',
       component: BookingView,
       meta: {
-        title: 'Agenda tu Diagnóstico | NOVAERA — Paso 2 de 2',
-        description: 'Selecciona el día y hora para tu Diagnóstico de Infraestructura Comercial gratuito.',
-        canonical: 'https://novaera.ec/agendar',
-        ogTitle: 'Agenda tu Diagnóstico | NOVAERA',
-        ogDescription: 'Elige tu horario y reserva tu Diagnóstico Comercial.',
-        ogUrl: 'https://novaera.ec/agendar',
+        title: 'Agenda tu Diagnóstico | DISFAMOSA — Paso 2 de 2',
+        description: 'Selecciona el día y hora para tu Diagnóstico de Planificación de Espacios gratuito.',
+        canonical: 'https://disfamosa.com/agendar',
+        ogTitle: 'Agenda tu Diagnóstico | DISFAMOSA',
+        ogDescription: 'Elige tu horario y reserva tu Diagnóstico de Espacios.',
+        ogUrl: 'https://disfamosa.com/agendar',
       } satisfies RouteMeta,
     },
     {
@@ -72,12 +72,12 @@ const router = createRouter({
       name: 'booked',
       component: BookedView,
       meta: {
-        title: 'Diagnóstico Confirmado | NOVAERA',
-        description: 'Tu diagnóstico comercial con NOVAERA está confirmado. Revisa tu correo.',
-        canonical: 'https://novaera.ec/cita-confirmada',
-        ogTitle: 'Diagnóstico Confirmado | NOVAERA',
+        title: 'Diagnóstico Confirmado | DISFAMOSA',
+        description: 'Tu diagnóstico de espacios con DISFAMOSA está confirmado. Revisa tu correo.',
+        canonical: 'https://disfamosa.com/cita-confirmada',
+        ogTitle: 'Diagnóstico Confirmado | DISFAMOSA',
         ogDescription: 'Tu diagnóstico está reservado. Te contactaremos pronto.',
-        ogUrl: 'https://novaera.ec/cita-confirmada',
+        ogUrl: 'https://disfamosa.com/cita-confirmada',
       } satisfies RouteMeta,
     },
     {
@@ -85,12 +85,12 @@ const router = createRouter({
       name: 'no-space',
       component: NoSpaceView,
       meta: {
-        title: 'Sin Cupos Disponibles | NOVAERA',
-        description: 'En este momento los cupos para diagnóstico comercial de NOVAERA están completos.',
-        canonical: 'https://novaera.ec/sin-espacio',
-        ogTitle: 'Sin Cupos Disponibles | NOVAERA',
+        title: 'Sin Cupos Disponibles | DISFAMOSA',
+        description: 'En este momento los cupos para diagnóstico de DISFAMOSA están completos.',
+        canonical: 'https://disfamosa.com/sin-espacio',
+        ogTitle: 'Sin Cupos Disponibles | DISFAMOSA',
         ogDescription: 'Los cupos de diagnóstico están completos. Te avisaremos cuando haya disponibilidad.',
-        ogUrl: 'https://novaera.ec/sin-espacio',
+        ogUrl: 'https://disfamosa.com/sin-espacio',
       } satisfies RouteMeta,
     },
     {
@@ -98,12 +98,12 @@ const router = createRouter({
       name: 'privacy-policy',
       component: PrivacyPolicyView,
       meta: {
-        title: 'Política de Privacidad | NOVAERA',
-        description: 'Política de privacidad de NOVAERA. Información sobre el tratamiento de datos personales.',
-        canonical: 'https://novaera.ec/politicas-privacidad',
-        ogTitle: 'Política de Privacidad | NOVAERA',
-        ogDescription: 'Política de privacidad de NOVAERA.',
-        ogUrl: 'https://novaera.ec/politicas-privacidad',
+        title: 'Política de Privacidad | DISFAMOSA',
+        description: 'Política de privacidad de DISFAMOSA. Información sobre el tratamiento de datos personales.',
+        canonical: 'https://disfamosa.com/politicas-privacidad',
+        ogTitle: 'Política de Privacidad | DISFAMOSA',
+        ogDescription: 'Política de privacidad de DISFAMOSA.',
+        ogUrl: 'https://disfamosa.com/politicas-privacidad',
       } satisfies RouteMeta,
     },
     {
@@ -111,12 +111,12 @@ const router = createRouter({
       name: 'legal-notice',
       component: LegalNoticeView,
       meta: {
-        title: 'Aviso Legal | NOVAERA',
-        description: 'Aviso legal de NOVAERA. Términos y condiciones de uso del sitio web.',
-        canonical: 'https://novaera.ec/aviso-legal',
-        ogTitle: 'Aviso Legal | NOVAERA',
-        ogDescription: 'Aviso legal de NOVAERA.',
-        ogUrl: 'https://novaera.ec/aviso-legal',
+        title: 'Aviso Legal | DISFAMOSA',
+        description: 'Aviso legal de DISFAMOSA. Términos y condiciones de uso del sitio web.',
+        canonical: 'https://disfamosa.com/aviso-legal',
+        ogTitle: 'Aviso Legal | DISFAMOSA',
+        ogDescription: 'Aviso legal de DISFAMOSA.',
+        ogUrl: 'https://disfamosa.com/aviso-legal',
       } satisfies RouteMeta,
     },
   ],
@@ -143,7 +143,7 @@ const setCanonical = (href: string) => {
 
 router.afterEach((to) => {
   const meta = to.meta
-  document.title = meta.title ?? 'NOVAERA'
+  document.title = meta.title ?? 'DISFAMOSA'
   setMeta('description', meta.description ?? '')
   setOgMeta('og:title', meta.ogTitle ?? meta.title ?? '')
   setOgMeta('og:description', meta.ogDescription ?? meta.description ?? '')
@@ -176,6 +176,7 @@ const PUBLIC_ROUTES = ['privacy-policy', 'legal-notice']
 
 router.beforeEach((to, from, next) => {
   const routeName = to.name as string
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return next()
   if (PUBLIC_ROUTES.includes(routeName)) return next()
 
   const bookedFresh = isFresh('os_booked_at', BOOKED_TTL_MS)

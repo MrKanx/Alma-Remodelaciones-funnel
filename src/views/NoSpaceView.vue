@@ -29,7 +29,7 @@ onMounted(() => {
   <div class="nospace">
 
     <header class="nospace__topbar">
-      <img src="@/assets/logos/logo.png" class="nospace__logo-img" alt="NOVAERA Logo" />
+      <img src="@/assets/logos/logo.png" class="nospace__logo-img" alt="DISFAMOSA Logo" />
     </header>
 
     <main class="nospace__main">
@@ -54,7 +54,7 @@ onMounted(() => {
         <p class="nospace__body">
           Nuestro equipo de ingenieros senior tiene la capacidad limitada para mantener la calidad
           de ejecución que nos distingue. En este momento los <strong>5 cupos mensuales</strong>
-          de NOVAERA están completos.
+          de DISFAMOSA están completos.
         </p>
 
         <p class="nospace__body">
@@ -74,7 +74,7 @@ onMounted(() => {
 
       <p class="nospace__footer-note">
         <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-        NOVAERA trabaja exclusivamente con corporaciones multinacionales e industrias
+        DISFAMOSA trabaja exclusivamente con corporaciones multinacionales e industrias
         consolidadas. No atendemos proyectos residenciales ni solicitudes enfocadas en competir por precio.
       </p>
 
@@ -85,7 +85,7 @@ onMounted(() => {
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="nospace__footer-copy">© {{ new Date().getFullYear() }} NOVAERA. Todos los derechos reservados.</p>
+      <p class="nospace__footer-copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
     </footer>
 
   </div>

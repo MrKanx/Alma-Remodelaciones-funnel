@@ -44,7 +44,7 @@ const nextSteps = [
   {
     icon: 'fa-brands fa-whatsapp',
     title: 'Te contactamos por WhatsApp',
-    body: 'El equipo de STUDENTS2MADRID te escribirá para confirmar la cita y enviarte el enlace.',
+    body: 'El equipo de DISFAMOSA te escribirá para confirmar la cita y enviarte el enlace.',
   },
   {
     icon: 'fa-solid fa-file-invoice',
@@ -82,7 +82,7 @@ const nextSteps = [
             </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión de asesoría con STUDENTS2MADRID está confirmada. Revisa tu correo
+            Tu sesión de asesoría con DISFAMOSA está confirmada. Revisa tu correo
             o WhatsApp para todos los detalles. Si necesitas reagendar, escríbenos.
           </p>
         </template>
@@ -97,7 +97,7 @@ const nextSteps = [
             </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión con el equipo de STUDENTS2MADRID ha sido agendada correctamente.
+            Tu sesión con el equipo de DISFAMOSA ha sido agendada correctamente.
             En breve recibirás todos los detalles para conectarte.
           </p>
         </template>
@@ -124,7 +124,7 @@ const nextSteps = [
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booked__footer-copy">© {{ new Date().getFullYear() }} STUDENTS2MADRID. Todos los derechos reservados.</p>
+      <p class="booked__footer-copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
       <p class="booked__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
@@ -165,7 +165,7 @@ const nextSteps = [
 }
 
 .booked__logo-accent {
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
 }
 
 .booked__main {
@@ -189,7 +189,7 @@ const nextSteps = [
 
 .booked__hero-icon {
   font-size: 3.5rem;
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
   margin-bottom: 1rem;
   line-height: 1;
 }
@@ -198,9 +198,9 @@ const nextSteps = [
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(colors.$S2M-GOLD, 0.14);
-  color: colors.$S2M-GOLD;
-  border: 1px solid rgba(colors.$S2M-GOLD, 0.3);
+  background: rgba(colors.$DIS-GOLD, 0.14);
+  color: colors.$DIS-GOLD;
+  border: 1px solid rgba(colors.$DIS-GOLD, 0.3);
   border-radius: 999px;
   padding: 0.4rem 0.95rem;
   margin: 0 0 0.85rem;
@@ -237,7 +237,7 @@ const nextSteps = [
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: colors.$S2M-GOLD;
+  color: colors.$DIS-GOLD;
   margin: 0 0 1.25rem;
   text-align: center;
 }
@@ -276,14 +276,14 @@ const nextSteps = [
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: colors.$S2M-DARK-BLUE;
+  background: colors.$DIS-DARK-BLUE;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.85rem;
 
   i {
-    color: colors.$S2M-GOLD;
+    color: colors.$DIS-GOLD;
     font-size: 1.2rem;
   }
 }
@@ -321,7 +321,7 @@ const nextSteps = [
       text-decoration: none;
 
       &:hover {
-        color: colors.$S2M-GOLD;
+        color: colors.$DIS-GOLD;
       }
     }
   }
@@ -343,7 +343,7 @@ const nextSteps = [
       font-weight: bold;
       
       &:hover {
-        color: colors.$S2M-GOLD;
+        color: colors.$DIS-GOLD;
       }
     }
   }

@@ -1,25 +1,25 @@
-// STUDENTS2MADRID / Premium Education Colors
-$S2M-DARK-BLUE:   #0F172A; // Trust, Professionalism (Tailwind slate-900)
-$S2M-GOLD:        #D4AF37; // Exclusivity, Success (Soft Gold)
-$S2M-WHITE:       #FFFFFF; // Clarity
-$S2M-GRAY-LIGHT:  #F8FAFC; // Modern Gray Light (Tailwind slate-50)
-$S2M-GRAY-DARK:   #334155; // Modern Gray Dark (Tailwind slate-700)
-$S2M-ACCENT:      #2563EB; // Accent Blue (Tailwind blue-600)
+// DISFAMOSA / Premium Architecture Colors
+$DIS-DARK-BLUE:   #111111; // Charcoal / Onyx (Trust, Sophistication)
+$DIS-GOLD:        #C69C6D; // Wood / Oak / Bronze (Premium Accent)
+$DIS-WHITE:       #FFFFFF; // Clarity
+$DIS-GRAY-LIGHT:  #F5F5F5; // Light Concrete
+$DIS-GRAY-DARK:   #2C2C2C; // Dark Steel
+$DIS-ACCENT:      #5C6B73; // Slate / Blue-gray (Secondary Accent)
 
 // Mapeo a las variables del sistema (manteniendo los nombres para no romper UI legacy de ser necesario)
-$QS-NAVY:    $S2M-DARK-BLUE;  // Brand Principal (Azul oscuro)
-$QS-BLUE:    $S2M-ACCENT;     // Secundario (Azul acento)
-$QS-GOLD:    $S2M-GOLD;       // Acento (Dorado)
-$QS-RED:     $S2M-GOLD;       // CTAs y urgencia (Dorado para CTA principal)
-$QS-DARK:    $S2M-WHITE;      // Texto claro (modo oscuro)
-$QS-LIGHT:   $S2M-DARK-BLUE;  // Fondo oscuro base
-$QS-SURFACE: #1E293B;         // Superficies/cards oscuras
+$QS-NAVY:    $DIS-DARK-BLUE;  // Brand Principal (Azul oscuro)
+$QS-BLUE:    $DIS-ACCENT;     // Secundario (Azul acento)
+$QS-GOLD:    $DIS-GOLD;       // Acento (Dorado)
+$QS-RED:     $DIS-GOLD;       // CTAs y urgencia (Dorado para CTA principal)
+$QS-DARK:    $DIS-WHITE;      // Texto claro (modo oscuro)
+$QS-LIGHT:   $DIS-DARK-BLUE;  // Fondo oscuro base
+$QS-SURFACE: #1A1A1A;         // Superficies/cards oscuras
 
-// Urgency / inmediatez
-$QS-URGENT:        #B45309; // Amber-700
-$QS-URGENT-DARK:   #78350F; // Amber-900
-$QS-URGENT-LIGHT:  #F59E0B; // Amber-500
-$QS-URGENT-BG:     rgba(#B45309, 0.15);
+// Urgency / Inmediatez
+$QS-URGENT:        #C05A35; // Terracotta
+$QS-URGENT-DARK:   #8A3F23; // Deep Terracotta
+$QS-URGENT-LIGHT:  #E27D56; // Light Terracotta
+$QS-URGENT-BG:     rgba(#C05A35, 0.12);
 
 // Aliases legacy Aluvicopp (mantienen compatibilidad)
 $ALU-NAVY:    $QS-NAVY;

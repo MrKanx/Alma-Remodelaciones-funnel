@@ -62,21 +62,21 @@ const form = ref({
 })
 
 const URGENCY_LABEL: Record<Exclude<Urgency, ''>, string> = {
-  inmediato: 'Lo antes posible',
-  proximos: 'En los próximos 1–3 meses',
-  planificando: 'En 3–6 meses',
-  explorando: 'Solo estoy explorando opciones',
+  inmediato: 'En construcción / Remodelación actual',
+  proximos: 'Planos listos, por iniciar',
+  planificando: 'En etapa de diseño arquitectónico',
+  explorando: 'Solo estoy explorando ideas',
 }
 
 const urgencyOpts: { value: Exclude<Urgency, ''>; label: string; sub: string; hot?: boolean }[] = [
-  { value: 'inmediato',   label: 'Lo antes posible', sub: 'Urgencia alta — quiero iniciar pronto', hot: true },
-  { value: 'proximos',    label: 'En los próximos 1–3 meses',      sub: 'Planificación cercana' },
-  { value: 'planificando',label: 'En 3–6 meses',                   sub: 'Sin prisa' },
-  { value: 'explorando',  label: 'Solo estoy explorando',          sub: 'Sin urgencia particular' },
+  { value: 'inmediato',   label: 'En construcción / Remodelación actual', sub: 'Urgencia alta — obra en curso', hot: true },
+  { value: 'proximos',    label: 'Planos listos, por iniciar',      sub: 'Planificación cercana' },
+  { value: 'planificando',label: 'En etapa de diseño arquitectónico',                   sub: 'Sin prisa' },
+  { value: 'explorando',  label: 'Solo estoy explorando ideas',          sub: 'Sin urgencia particular' },
 ]
 
 function calcTags(urgency: Urgency): string[] {
-  const base = ['STUDENTS2MADRID', 'funnel-registro']
+  const base = ['DISFAMOSA', 'funnel-registro']
   if (urgency === 'inmediato')    return [...base, 'urgente', 'contrato-inmediato']
   if (urgency === 'proximos')     return [...base, 'urgencia-media']
   if (urgency === 'planificando') return [...base, 'planificando']
@@ -89,13 +89,13 @@ function buildNote(f: typeof form.value, country: string, pageDuration: number):
   const secs = pageDuration % 60
   return [
     '━━━━━━━━━━━━━━━━━━━━━━━━',
-    'STUDENTS2MADRID — Registro Inicial',
+    'DISFAMOSA — Registro Inicial',
     '━━━━━━━━━━━━━━━━━━━━━━━━',
     `👤 ${f.nombre} ${f.apellido}`,
     `📧 ${f.email}`,
     `📱 ${f.phone}`,
-    `🎓 Programa/Interés: ${f.empresa}`,
-    `⏱ Viaje: ${f.urgencia ? URGENCY_LABEL[f.urgencia] : '—'}`,
+    `🏗️ Tipo de Proyecto: ${f.empresa}`,
+    `⏱ Etapa Obra: ${f.urgencia ? URGENCY_LABEL[f.urgencia] : '—'}`,
     `🌎 País: ${country}`,
     `⏳ Tiempo en página: ${mins}m ${secs}s`,
     '━━━━━━━━━━━━━━━━━━━━━━━━',
@@ -147,8 +147,8 @@ const validators: Record<string, (v: string) => string | null> = {
   apellido: v => v.trim().length < 2 ? 'Ingresa tu apellido' : null,
   email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Email inválido',
   phone: () => phoneValid.value ? null : 'Número inválido para el país seleccionado',
-  empresa: v => v.trim().length < 2 ? 'Ingresa tu programa de interés' : null,
-  urgencia: v => !v ? 'Selecciona cuándo planeas viajar' : null,
+  empresa: v => v.trim().length < 2 ? 'Ingresa tu tipo de proyecto' : null,
+  urgencia: v => !v ? 'Selecciona en qué etapa está tu obra' : null,
 }
 
 const validate = () => {
@@ -223,13 +223,13 @@ const handleSubmit = async () => {
     notas: buildNote(form.value, selectedCountry.value.name, pageDur),
     nota: buildNote(form.value, selectedCountry.value.name, pageDur),
     pageDuration: pageDur,
-    source: 'STUDENTS2MADRID-web',
+    source: 'DISFAMOSA-web',
     timestamp: new Date().toISOString(),
     event_id: leadEventId,
     ...getStoredFbParams(),
   }
 
-  console.info('[STUDENTS2MADRID Registro]', payload)
+  console.info('[DISFAMOSA Registro]', payload)
 
   const webhookUrl = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/fEMLLNjtxgizyNARamWS/webhook-trigger/7bXLoKVZdu1Ndir59NZ0'
   await fetch(webhookUrl, {
@@ -309,9 +309,9 @@ watch(dropdownOpen, open => {
           </button>
 
           <div class="rmodal__header">
-            <p class="rmodal__eyebrow">ESTUDIOS EN ESPAÑA</p>
+            <p class="rmodal__eyebrow">ARQUITECTURA MODULAR</p>
             <h2 id="rmodal-title" class="rmodal__title">Accede al entrenamiento<br><span class="rmodal__title-accent">gratuito</span></h2>
-            <p class="rmodal__subtitle">Descubre el Método Rumbo a España para blindar tu futuro académico.</p>
+            <p class="rmodal__subtitle">Descubre cómo desterrar la improvisación de tu obra para siempre.</p>
           </div>
 
           <form class="rmodal__form" @submit.prevent="handleSubmit" novalidate>
@@ -410,12 +410,12 @@ watch(dropdownOpen, open => {
 
             <!-- Empresa / Interés -->
             <div class="rmodal__field" :class="{ 'has-error': touched.empresa && errors.empresa }">
-              <label for="r-empresa">Programa o carrera de interés</label>
+              <label for="r-empresa">¿Qué tipo de proyecto tienes?</label>
               <input
                 id="r-empresa"
                 v-model="form.empresa"
                 type="text"
-                placeholder="Ej: Máster en Marketing"
+                placeholder="Ej: Cocina, Baños, Casa Completa"
                 autocomplete="organization"
                 @blur="onBlur('empresa')"
               />
@@ -425,8 +425,8 @@ watch(dropdownOpen, open => {
             <!-- Urgencia -->
             <div class="rmodal__field rmodal__field--urgency" :class="{ 'has-error': touched.urgencia && errors.urgencia }">
               <label class="rmodal__urgency-label">
-                <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
-                ¿Cuándo planeas viajar a España?
+                <i class="fa-solid fa-hammer" aria-hidden="true"></i>
+                ¿En qué etapa está tu obra?
               </label>
               <div class="rmodal__urgency-opts" role="radiogroup">
                 <label
