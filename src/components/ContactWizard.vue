@@ -3,8 +3,8 @@ import { ref, computed } from 'vue'
 import { getStoredFbParams } from '@/utils/fbclid'
 
 // ── Webhooks ─────────────────────────────────────────────────────────────────
-const WH_CONTACT = import.meta.env.VITE_WEBHOOK_REGISTRO
-const WH_QUALIFY = import.meta.env.VITE_WEBHOOK_CALIFICACION
+const WH_CONTACT = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/fEMLLNjtxgizyNARamWS/webhook-trigger/7bXLoKVZdu1Ndir59NZ0'
+const WH_QUALIFY = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/fEMLLNjtxgizyNARamWS/webhook-trigger/S2uzKeLAiW2owmXyUi17'
 
 defineEmits<{ close: [] }>()
 
@@ -181,7 +181,8 @@ async function submitS2() {
           message: s2.value.message.trim(),
           tags,
           // Resumen legible para notas
-          notes,
+          notas: notes,
+          nota: notes,
         }),
       })
     }
