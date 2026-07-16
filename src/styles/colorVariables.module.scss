@@ -1,25 +1,25 @@
-// DISFAMOSA / Premium Architecture Colors
-$DIS-DARK-BLUE:   #111111; // Charcoal / Onyx (Trust, Sophistication)
-$DIS-GOLD:        #C69C6D; // Wood / Oak / Bronze (Premium Accent)
-$DIS-WHITE:       #FFFFFF; // Clarity
-$DIS-GRAY-LIGHT:  #F5F5F5; // Light Concrete
-$DIS-GRAY-DARK:   #2C2C2C; // Dark Steel
-$DIS-ACCENT:      #5C6B73; // Slate / Blue-gray (Secondary Accent)
+// DISFAMOSA / Students2Madrid Colors
+$DIS-DARK-BLUE:   #2a3143; // Dark blue S2M (Trust, Academic)
+$DIS-GOLD:        #ffcc00; // Gold S2M (Premium Accent, Spain vibe)
+$DIS-WHITE:       #ffffff; // Clarity
+$DIS-GRAY-LIGHT:  #f5f5f5; // Light Concrete
+$DIS-GRAY-DARK:   #1c212d; // Darker Blue S2M
+$DIS-ACCENT:      #d90429; // Spanish Red (Secondary Accent / CTA)
 
 // Mapeo a las variables del sistema (manteniendo los nombres para no romper UI legacy de ser necesario)
 $QS-NAVY:    $DIS-DARK-BLUE;  // Brand Principal (Azul oscuro)
-$QS-BLUE:    $DIS-ACCENT;     // Secundario (Azul acento)
-$QS-GOLD:    $DIS-GOLD;       // Acento (Dorado)
-$QS-RED:     $DIS-GOLD;       // CTAs y urgencia (Dorado para CTA principal)
+$QS-BLUE:    $DIS-GRAY-DARK;  // Secundario (Azul oscuro)
+$QS-GOLD:    $DIS-GOLD;       // Acento (Dorado/Amarillo)
+$QS-RED:     $DIS-ACCENT;     // CTAs y urgencia (Rojo)
 $QS-DARK:    $DIS-WHITE;      // Texto claro (modo oscuro)
 $QS-LIGHT:   $DIS-DARK-BLUE;  // Fondo oscuro base
-$QS-SURFACE: #1A1A1A;         // Superficies/cards oscuras
+$QS-SURFACE: #1f2533;         // Superficies/cards oscuras
 
 // Urgency / Inmediatez
-$QS-URGENT:        #C05A35; // Terracotta
-$QS-URGENT-DARK:   #8A3F23; // Deep Terracotta
-$QS-URGENT-LIGHT:  #E27D56; // Light Terracotta
-$QS-URGENT-BG:     rgba(#C05A35, 0.12);
+$QS-URGENT:        #d90429; // Spanish Red
+$QS-URGENT-DARK:   #a8001d; // Deep Red
+$QS-URGENT-LIGHT:  #ff4d6d; // Light Red
+$QS-URGENT-BG:     rgba(#d90429, 0.12);
 
 // Aliases legacy Aluvicopp (mantienen compatibilidad)
 $ALU-NAVY:    $QS-NAVY;

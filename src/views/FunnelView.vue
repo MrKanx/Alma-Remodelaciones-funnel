@@ -334,12 +334,12 @@ onMounted(() => {
   justify-content: center;
   gap: 12px;
   box-shadow: 0 10px 20px rgba(colors.$DIS-GOLD, 0.2);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 30px rgba(colors.$DIS-GOLD, 0.4);
-    background: #FFD25B;
+    background-color: #FFD25B;
   }
 }
 
@@ -355,6 +355,7 @@ onMounted(() => {
   &:hover {
     animation: none;
     box-shadow: 0 0 35px rgba(colors.$DIS-GOLD, 0.6);
+    background: linear-gradient(90deg, #FFD25B 0%, #FFE082 100%);
   }
 }
 

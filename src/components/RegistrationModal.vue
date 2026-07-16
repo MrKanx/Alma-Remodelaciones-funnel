@@ -231,7 +231,7 @@ const handleSubmit = async () => {
 
   console.info('[DISFAMOSA Registro]', payload)
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/fEMLLNjtxgizyNARamWS/webhook-trigger/7bXLoKVZdu1Ndir59NZ0'
+  const webhookUrl = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/4XqSfm1KK7VoNl7vvnml/webhook-trigger/aYewbjwRqsC0Bnzm4s3Z'
   await fetch(webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -484,7 +484,7 @@ $border: rgba(colors.$OS-NAVY, 0.1);
 $input-bg: #111111;
 $text-muted: #7a8ea5;
 $text-body: #3a4f6a;
-$accent: colors.$OS-RED;
+$accent: colors.$QS-GOLD;
 
 .rmodal-overlay {
   position: fixed;
@@ -852,7 +852,7 @@ $accent: colors.$OS-RED;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  i { color: colors.$ALU-URGENT; font-size: 0.78rem; }
+  i { color: $accent; font-size: 0.78rem; }
 }
 
 .rmodal__urgency-opts {

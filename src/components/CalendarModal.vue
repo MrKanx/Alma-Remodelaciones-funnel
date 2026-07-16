@@ -118,7 +118,7 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Busca barato/gangas'}
 
   trackStage('cualificacion_completada', payload)
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/fEMLLNjtxgizyNARamWS/webhook-trigger/S2uzKeLAiW2owmXyUi17'
+  const webhookUrl = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/4XqSfm1KK7VoNl7vvnml/webhook-trigger/0mcuSsqfhNdeEuc6tH89'
   await fetch(webhookUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

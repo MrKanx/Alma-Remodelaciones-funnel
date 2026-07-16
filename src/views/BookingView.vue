@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const iframeHeight = ref(1100)
 
-const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/Bk2FzPW98H2pxZHzjtEW'
+const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/jNp2KzOZW13tacMG3v1U'
 
 const calendarUrl = computed(() => {
   try {
@@ -100,7 +100,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           class="calendar__iframe"
           frameborder="0"
           scrolling="no"
-          id="TYL0Rvtn67dd6KB1pImA_1783968011120"
+          id="jNp2KzOZW13tacMG3v1U_1784216658225"
         ></iframe>
       </div>
 
