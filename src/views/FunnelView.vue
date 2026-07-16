@@ -51,14 +51,14 @@ onMounted(() => {
                 <button class="funnel__play-btn" aria-label="Reproducir video">
                   <i class="fa-solid fa-play"></i>
                 </button>
-                <span class="funnel__vsl-msg">Haz clic para ver el video gratis</span>
+                <span class="funnel__vsl-msg">Haz clic para descubrir nuestro método</span>
               </div>
-              <img src="https://fast.wistia.com/embed/medias/xr33vaq36h/swatch" class="funnel__vsl-thumb" alt="Video de entrenamiento" />
+              <img src="https://fast.wistia.com/embed/medias/3lvjwmipu8/swatch" class="funnel__vsl-thumb" alt="Video de entrenamiento" />
             </div>
 
             <button class="funnel__cta" @click="openModal">
               <i class="fa-solid fa-video"></i>
-              VER ENTRENAMIENTO GRATIS
+              VER VIDEO DEL MÉTODO
             </button>
             <p class="funnel__guarantee">
               <i class="fa-solid fa-lock"></i> 100% gratuito · Sin compromiso · Cupos limitados
@@ -131,11 +131,11 @@ onMounted(() => {
           <span class="funnel__final-accent">improvisación de tu obra?</span>
         </h2>
         <p class="funnel__final-sub">
-          Accede al entrenamiento gratuito y descubre cómo protegemos tu inversión con ejecución limpia, milimétrica y perfecta.<br><br>
+          Accede al video y descubre cómo protegemos tu inversión con ejecución limpia, milimétrica y perfecta.<br><br>
         </p>
         <button class="funnel__cta funnel__cta--pulse" @click="openModal">
           <i class="fa-solid fa-video"></i>
-          ¡QUIERO VER EL ENTRENAMIENTO!
+          ¡QUIERO VER EL VIDEO!
         </button>
         <p class="funnel__guarantee">
           <i class="fa-solid fa-lock"></i> 100% gratuito · Sin compromiso

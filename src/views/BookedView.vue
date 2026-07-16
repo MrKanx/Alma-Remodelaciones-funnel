@@ -58,7 +58,7 @@ const nextSteps = [
   <div class="booked">
 
     <header class="booked__topbar">
-      <span class="booked__logo-text">STUDENTS<span class="booked__logo-accent">2MADRID</span></span>
+      <span class="booked__logo-text">DISFA<span class="booked__logo-accent">MOSA</span></span>
     </header>
 
     <main class="booked__main">

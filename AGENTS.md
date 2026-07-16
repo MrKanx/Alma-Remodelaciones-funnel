@@ -22,7 +22,7 @@
 - `public/_redirects` rewrites all routes to `index.html` for SPA hosting.
 - The dev server allows the ngrok host `38828430451a.ngrok-free.app`.
 - Font Awesome is loaded from the CDN in `index.html`; use `<i class="fa-solid fa-...">`, not emojis.
-- Wistia uses media id `bivr0yu5qp`.
+- Wistia uses media id `3lvjwmipu8`.
 
 ## Funnel Rules
 

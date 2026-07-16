@@ -66,7 +66,7 @@ src/
 ```
 
 ## Videos
-- **Wistia media-id `bivr0yu5qp`** — VSL Quick Solutions
+- **Wistia media-id `3lvjwmipu8`** — VSL Quick Solutions
 
 ## Funnel — Contenido Quick Solutions
 - **Headline**: "Profesionaliza tu cadena de suministro y elimina las paradas no programadas con ingeniería de datos"

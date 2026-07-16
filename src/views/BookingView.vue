@@ -57,7 +57,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   <div class="booking">
 
     <header class="booking__topbar">
-      <span class="booking__logo-text">STUDENTS<span class="booking__logo-accent">2MADRID</span></span>
+      <span class="booking__logo-text">DISFA<span class="booking__logo-accent">MOSA</span></span>
     </header>
 
     <main class="booking__main">

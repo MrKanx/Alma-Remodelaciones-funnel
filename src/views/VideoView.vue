@@ -100,7 +100,7 @@ onMounted(() => {
     document.head.appendChild(script1)
     
     const script2 = document.createElement('script')
-    script2.src = 'https://fast.wistia.com/embed/xr33vaq36h.js'
+    script2.src = 'https://fast.wistia.com/embed/3lvjwmipu8.js'
     script2.type = 'module'
     script2.async = true
     document.head.appendChild(script2)
@@ -140,7 +140,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
       <div class="vv-video-wrapper">
         <div class="vv-video-ratio">
-          <wistia-player media-id="xr33vaq36h" aspect="1.7777777777777777"></wistia-player>
+          <wistia-player media-id="3lvjwmipu8" aspect="1.7777777777777777"></wistia-player>
         </div>
       </div>
 
@@ -370,7 +370,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     height: 100%;
 
     &:not(:defined) {
-      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/xr33vaq36h/swatch');
+      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/3lvjwmipu8/swatch');
       display: block;
       filter: blur(5px);
       padding-top: 56.25%;
