@@ -31,14 +31,14 @@ const router = createRouter({
       name: 'funnel',
       component: FunnelView,
       meta: {
-        title: 'DISFAMOSA | Arquitectura Modular de Alta Fidelidad',
+        title: 'Alma Remodelaciones | Arquitectura Modular de Alta Fidelidad',
         description:
           'Descubre cómo desterrar la improvisación de tu obra para siempre con precisión milimétrica y ejecución impecable.',
-        canonical: 'https://disfamosa.com/',
-        ogTitle: 'DISFAMOSA | Arquitectura Modular de Alta Fidelidad',
+        canonical: 'https://Alma Remodelaciones.com/',
+        ogTitle: 'Alma Remodelaciones | Arquitectura Modular de Alta Fidelidad',
         ogDescription:
           'Transforma la dinámica en la que vives y disfrutas tu hogar con muebles diseñados y fabricados con responsabilidad.',
-        ogUrl: 'https://disfamosa.com/',
+        ogUrl: 'https://Alma Remodelaciones.com/',
       } satisfies RouteMeta,
     },
     {
@@ -46,12 +46,12 @@ const router = createRouter({
       name: 'video',
       component: VideoView,
       meta: {
-        title: 'Mira el video | DISFAMOSA — Paso 1 de 2',
+        title: 'Mira el video | Alma Remodelaciones — Paso 1 de 2',
         description: 'Descubre cómo una infraestructura modular de alto valor aumenta tu calidad de vida.',
-        canonical: 'https://disfamosa.com/ver-video',
-        ogTitle: 'Mira el video | DISFAMOSA',
+        canonical: 'https://Alma Remodelaciones.com/ver-video',
+        ogTitle: 'Mira el video | Alma Remodelaciones',
         ogDescription: 'Ve el video y agenda tu diagnóstico de espacios gratuito.',
-        ogUrl: 'https://disfamosa.com/ver-video',
+        ogUrl: 'https://Alma Remodelaciones.com/ver-video',
       } satisfies RouteMeta,
     },
     {
@@ -59,12 +59,12 @@ const router = createRouter({
       name: 'booking',
       component: BookingView,
       meta: {
-        title: 'Agenda tu Diagnóstico | DISFAMOSA — Paso 2 de 2',
+        title: 'Agenda tu Diagnóstico | Alma Remodelaciones — Paso 2 de 2',
         description: 'Selecciona el día y hora para tu Diagnóstico de Planificación de Espacios gratuito.',
-        canonical: 'https://disfamosa.com/agendar',
-        ogTitle: 'Agenda tu Diagnóstico | DISFAMOSA',
+        canonical: 'https://Alma Remodelaciones.com/agendar',
+        ogTitle: 'Agenda tu Diagnóstico | Alma Remodelaciones',
         ogDescription: 'Elige tu horario y reserva tu Diagnóstico de Espacios.',
-        ogUrl: 'https://disfamosa.com/agendar',
+        ogUrl: 'https://Alma Remodelaciones.com/agendar',
       } satisfies RouteMeta,
     },
     {
@@ -72,12 +72,12 @@ const router = createRouter({
       name: 'booked',
       component: BookedView,
       meta: {
-        title: 'Diagnóstico Confirmado | DISFAMOSA',
-        description: 'Tu diagnóstico de espacios con DISFAMOSA está confirmado. Revisa tu correo.',
-        canonical: 'https://disfamosa.com/cita-confirmada',
-        ogTitle: 'Diagnóstico Confirmado | DISFAMOSA',
+        title: 'Diagnóstico Confirmado | Alma Remodelaciones',
+        description: 'Tu diagnóstico de espacios con Alma Remodelaciones está confirmado. Revisa tu correo.',
+        canonical: 'https://Alma Remodelaciones.com/cita-confirmada',
+        ogTitle: 'Diagnóstico Confirmado | Alma Remodelaciones',
         ogDescription: 'Tu diagnóstico está reservado. Te contactaremos pronto.',
-        ogUrl: 'https://disfamosa.com/cita-confirmada',
+        ogUrl: 'https://Alma Remodelaciones.com/cita-confirmada',
       } satisfies RouteMeta,
     },
     {
@@ -85,12 +85,12 @@ const router = createRouter({
       name: 'no-space',
       component: NoSpaceView,
       meta: {
-        title: 'Sin Cupos Disponibles | DISFAMOSA',
-        description: 'En este momento los cupos para diagnóstico de DISFAMOSA están completos.',
-        canonical: 'https://disfamosa.com/sin-espacio',
-        ogTitle: 'Sin Cupos Disponibles | DISFAMOSA',
+        title: 'Sin Cupos Disponibles | Alma Remodelaciones',
+        description: 'En este momento los cupos para diagnóstico de Alma Remodelaciones están completos.',
+        canonical: 'https://Alma Remodelaciones.com/sin-espacio',
+        ogTitle: 'Sin Cupos Disponibles | Alma Remodelaciones',
         ogDescription: 'Los cupos de diagnóstico están completos. Te avisaremos cuando haya disponibilidad.',
-        ogUrl: 'https://disfamosa.com/sin-espacio',
+        ogUrl: 'https://Alma Remodelaciones.com/sin-espacio',
       } satisfies RouteMeta,
     },
     {
@@ -98,12 +98,12 @@ const router = createRouter({
       name: 'privacy-policy',
       component: PrivacyPolicyView,
       meta: {
-        title: 'Política de Privacidad | DISFAMOSA',
-        description: 'Política de privacidad de DISFAMOSA. Información sobre el tratamiento de datos personales.',
-        canonical: 'https://disfamosa.com/politicas-privacidad',
-        ogTitle: 'Política de Privacidad | DISFAMOSA',
-        ogDescription: 'Política de privacidad de DISFAMOSA.',
-        ogUrl: 'https://disfamosa.com/politicas-privacidad',
+        title: 'Política de Privacidad | Alma Remodelaciones',
+        description: 'Política de privacidad de Alma Remodelaciones. Información sobre el tratamiento de datos personales.',
+        canonical: 'https://Alma Remodelaciones.com/politicas-privacidad',
+        ogTitle: 'Política de Privacidad | Alma Remodelaciones',
+        ogDescription: 'Política de privacidad de Alma Remodelaciones.',
+        ogUrl: 'https://Alma Remodelaciones.com/politicas-privacidad',
       } satisfies RouteMeta,
     },
     {
@@ -111,12 +111,12 @@ const router = createRouter({
       name: 'legal-notice',
       component: LegalNoticeView,
       meta: {
-        title: 'Aviso Legal | DISFAMOSA',
-        description: 'Aviso legal de DISFAMOSA. Términos y condiciones de uso del sitio web.',
-        canonical: 'https://disfamosa.com/aviso-legal',
-        ogTitle: 'Aviso Legal | DISFAMOSA',
-        ogDescription: 'Aviso legal de DISFAMOSA.',
-        ogUrl: 'https://disfamosa.com/aviso-legal',
+        title: 'Aviso Legal | Alma Remodelaciones',
+        description: 'Aviso legal de Alma Remodelaciones. Términos y condiciones de uso del sitio web.',
+        canonical: 'https://Alma Remodelaciones.com/aviso-legal',
+        ogTitle: 'Aviso Legal | Alma Remodelaciones',
+        ogDescription: 'Aviso legal de Alma Remodelaciones.',
+        ogUrl: 'https://Alma Remodelaciones.com/aviso-legal',
       } satisfies RouteMeta,
     },
   ],
@@ -143,7 +143,7 @@ const setCanonical = (href: string) => {
 
 router.afterEach((to) => {
   const meta = to.meta
-  document.title = meta.title ?? 'DISFAMOSA'
+  document.title = meta.title ?? 'Alma Remodelaciones'
   setMeta('description', meta.description ?? '')
   setOgMeta('og:title', meta.ogTitle ?? meta.title ?? '')
   setOgMeta('og:description', meta.ogDescription ?? meta.description ?? '')

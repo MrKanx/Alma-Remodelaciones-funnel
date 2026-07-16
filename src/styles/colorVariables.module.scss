@@ -1,25 +1,30 @@
-// DISFAMOSA / Students2Madrid Colors
-$DIS-DARK-BLUE:   #2a3143; // Dark blue S2M (Trust, Academic)
-$DIS-GOLD:        #ffcc00; // Gold S2M (Premium Accent, Spain vibe)
+// Alma Remodelaciones Premium Colors (Architectural Palette)
+$DIS-DARK-BLUE:   #171717; // Deep Charcoal (Concrete/Steel vibe)
+$DIS-GOLD:        #E06A41; // Warm Copper / Terracotta (Architectural Accent)
 $DIS-WHITE:       #ffffff; // Clarity
-$DIS-GRAY-LIGHT:  #f5f5f5; // Light Concrete
-$DIS-GRAY-DARK:   #1c212d; // Darker Blue S2M
-$DIS-ACCENT:      #d90429; // Spanish Red (Secondary Accent / CTA)
+$DIS-GRAY-LIGHT:  #f5f5f5; // Off-white
+$DIS-GRAY-DARK:   #262626; // Lighter Charcoal
+$DIS-ACCENT:      #ef4444; // Bright Red for errors/urgency
+
+// Fondos para UI moderna (Dark mode sleek)
+$BG-BASE:         #0a0a0a; // Casi negro
+$BG-SURFACE:      rgba(38, 38, 38, 0.4); // Para Glassmorphism
+$BG-BORDER:       rgba(224, 106, 65, 0.15); // Borde cobre sutil
 
 // Mapeo a las variables del sistema (manteniendo los nombres para no romper UI legacy de ser necesario)
-$QS-NAVY:    $DIS-DARK-BLUE;  // Brand Principal (Azul oscuro)
-$QS-BLUE:    $DIS-GRAY-DARK;  // Secundario (Azul oscuro)
-$QS-GOLD:    $DIS-GOLD;       // Acento (Dorado/Amarillo)
-$QS-RED:     $DIS-ACCENT;     // CTAs y urgencia (Rojo)
-$QS-DARK:    $DIS-WHITE;      // Texto claro (modo oscuro)
+$QS-NAVY:    $DIS-DARK-BLUE;  // Brand Principal
+$QS-BLUE:    $DIS-GRAY-DARK;  // Secundario
+$QS-GOLD:    $DIS-GOLD;       // Acento (Cobre)
+$QS-RED:     $DIS-ACCENT;     // CTAs y urgencia
+$QS-DARK:    $DIS-WHITE;      // Texto claro
 $QS-LIGHT:   $DIS-DARK-BLUE;  // Fondo oscuro base
-$QS-SURFACE: #1f2533;         // Superficies/cards oscuras
+$QS-SURFACE: #262626;         // Superficies oscuras
 
 // Urgency / Inmediatez
-$QS-URGENT:        #d90429; // Spanish Red
-$QS-URGENT-DARK:   #a8001d; // Deep Red
-$QS-URGENT-LIGHT:  #ff4d6d; // Light Red
-$QS-URGENT-BG:     rgba(#d90429, 0.12);
+$QS-URGENT:        #ef4444; 
+$QS-URGENT-DARK:   #b91c1c; 
+$QS-URGENT-LIGHT:  #f87171; 
+$QS-URGENT-BG:     rgba(#ef4444, 0.12);
 
 // Aliases legacy Aluvicopp (mantienen compatibilidad)
 $ALU-NAVY:    $QS-NAVY;

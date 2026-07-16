@@ -100,7 +100,7 @@ onMounted(() => {
     document.head.appendChild(script1)
     
     const script2 = document.createElement('script')
-    script2.src = 'https://fast.wistia.com/embed/3lvjwmipu8.js'
+    script2.src = 'https://fast.wistia.com/embed/nl8brnqhfz.js'
     script2.type = 'module'
     script2.async = true
     document.head.appendChild(script2)
@@ -114,7 +114,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   <div class="vv-page">
 
     <header class="vv-topbar">
-      <span class="vv-topbar__logo-text">DISFA<span class="vv-topbar__logo-accent">MOSA</span></span>
+      <span class="vv-topbar__logo-text">Alma <span class="vv-topbar__logo-accent">Remodelaciones</span></span>
     </header>
 
     <main class="vv-main">
@@ -130,17 +130,17 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
       <section class="vv-headline">
         <h1 class="vv-h1">
           Descubre por qué cientos de proyectos
-          <span class="vv-accent">eligen a DISFAMOSA</span>
+          <span class="vv-accent">eligen a Alma Remodelaciones</span>
         </h1>
         <p class="vv-subtitle">
-          Ve el video completo y descubre cómo asegurar el éxito de tu obra,
+          Accede a la presentación completa y descubre cómo asegurar el éxito de tu obra,
           ahorrar meses de retrasos y disfrutar de tus espacios con total tranquilidad.
         </p>
       </section>
 
       <div class="vv-video-wrapper">
         <div class="vv-video-ratio">
-          <wistia-player media-id="3lvjwmipu8" aspect="1.7777777777777777"></wistia-player>
+          <wistia-player media-id="nl8brnqhfz" aspect="1.7777777777777777"></wistia-player>
         </div>
       </div>
 
@@ -149,7 +149,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
           <div class="vv-cta-locked__message">
             <i class="fa-solid fa-lock vv-cta-locked__icon" aria-hidden="true"></i>
             <p class="vv-cta-locked__text">
-              El botón se habilita en <strong>{{ formattedTime() }}</strong> — el video tiene la clave para tu proceso
+              El botón se habilita en <strong>{{ formattedTime() }}</strong> — la presentación tiene la clave para tu proceso
             </p>
           </div>
           <button 
@@ -184,7 +184,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
+      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
       <p class="vv-footer__dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 
@@ -199,7 +199,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         <div class="capture-modal">
           <div class="capture-modal__header">
             <h2 id="capture-title" class="capture-modal__title">
-              Antes de ver el video, <span>confirma tus datos</span>
+              Antes de acceder a la presentación, <span>confirma tus datos</span>
             </h2>
             <p class="capture-modal__sub">Para personalizar el diseño de tu proyecto</p>
           </div>
@@ -229,7 +229,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
             <button type="submit" class="capture-submit" :disabled="captureSubmitting">
               <span v-if="!captureSubmitting">
                 <i class="fa-solid fa-play" aria-hidden="true"></i>
-                Ver el video
+                Acceder a la presentación
               </span>
               <span v-else>
                 <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
@@ -249,22 +249,25 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
 .vv-page {
   min-height: 100vh;
-  background: #000000;
+  background-color: colors.$BG-BASE;
+  background-image: radial-gradient(circle at top right, rgba(224, 106, 65, 0.05) 0%, transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(23, 23, 23, 0.8) 0%, transparent 40%);
   color: #ffffff;
   display: flex;
   flex-direction: column;
 }
 
 .vv-topbar {
-  background: #000000;
-  border-bottom: 1px solid #222222;
+  background: rgba(10, 15, 29, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
   padding: 0.9rem 1.5rem;
   display: flex;
   justify-content: center;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 
   &__logo-text {
     font-family: fonts.$font-principal;
@@ -297,8 +300,9 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: #111111;
-    border: 1px solid #333333;
+    background: colors.$BG-SURFACE;
+    backdrop-filter: blur(8px);
+    border: 1px solid colors.$BG-BORDER;
     border-radius: 999px;
     padding: 0.4rem 1rem;
   }
@@ -332,7 +336,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 .vv-h1 {
   font-family: fonts.$font-principal;
   font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.6rem, 5vw, 3rem);
   color: #ffffff;
   line-height: 1.2;
   margin: 0 0 1rem;
@@ -344,7 +348,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 }
 
 .vv-subtitle {
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
   color: #a0aec0;
   line-height: 1.5;
   margin: 0 auto;
@@ -360,9 +364,10 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   aspect-ratio: 16 / 9;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  border: 1px solid #333333;
-  background: #111;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+  border: 1px solid colors.$BG-BORDER;
+  background: colors.$BG-SURFACE;
+  backdrop-filter: blur(10px);
 
   wistia-player {
     display: block;
@@ -370,7 +375,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     height: 100%;
 
     &:not(:defined) {
-      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/3lvjwmipu8/swatch');
+      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/nl8brnqhfz/swatch');
       display: block;
       filter: blur(5px);
       padding-top: 56.25%;
@@ -400,8 +405,9 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     gap: 0.6rem;
     width: 100%;
     padding: 1rem 1.5rem;
-    background: #111111;
-    border: 1px solid #2a2a2a;
+    background: colors.$BG-SURFACE;
+    backdrop-filter: blur(8px);
+    border: 1px solid colors.$BG-BORDER;
     border-radius: 12px;
   }
 
@@ -446,7 +452,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   box-shadow: 0 4px 20px rgba(colors.$DIS-GOLD, 0.3);
 
   &:hover {
-    background: #FFD25B;
+    background: #FB923C;
     transform: translateY(-2px);
     box-shadow: 0 8px 28px rgba(colors.$DIS-GOLD, 0.45);
   }
@@ -456,17 +462,18 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   }
 
   &--disabled {
-    background: linear-gradient(to right, rgba(212, 154, 30, 0.3) var(--fill, 0%), #111111 var(--fill, 0%)) !important;
+    background: linear-gradient(to right, rgba(224, 106, 65, 0.3) var(--fill, 0%), colors.$BG-SURFACE var(--fill, 0%)) !important;
     color: #888888 !important;
-    border: 1px solid #333333 !important;
+    border: 1px solid colors.$BG-BORDER !important;
     box-shadow: none !important;
     cursor: not-allowed !important;
     transform: none !important;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(8px);
 
     &:hover {
-      background: linear-gradient(to right, rgba(212, 154, 30, 0.3) var(--fill, 0%), #111111 var(--fill, 0%)) !important;
+      background: linear-gradient(to right, rgba(224, 106, 65, 0.3) var(--fill, 0%), colors.$BG-SURFACE var(--fill, 0%)) !important;
       transform: none !important;
       box-shadow: none !important;
     }
@@ -493,11 +500,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
 .vv-footer {
   padding: 1.5rem;
-  border-top: 1px solid #222222;
+  border-top: 1px solid rgba(255,255,255,0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+  background: colors.$BG-BASE;
 
   &__links {
     display: flex;
@@ -561,18 +569,20 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 }
 
 .capture-modal {
-  background: #000000;
+  background: colors.$BG-BASE;
   border-radius: 20px;
   width: 100%;
   max-width: 460px;
   overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
-  border: 1px solid #333333;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+  border: 1px solid colors.$BG-BORDER;
 
   &__header {
     padding: 2rem 2rem 1.25rem;
     text-align: center;
-    border-bottom: 1px solid #222222;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: colors.$BG-SURFACE;
+    backdrop-filter: blur(8px);
   }
 
   &__title {
@@ -626,13 +636,13 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   }
 
   input {
-    border: 1.5px solid #333333;
+    border: 1.5px solid colors.$BG-BORDER;
     border-radius: 9px;
     padding: 0.8rem 1rem;
     font-family: fonts.$font-secondary;
     font-size: 0.9rem;
     color: #FFFFFF;
-    background: #111111;
+    background: colors.$BG-SURFACE;
     outline: none;
     transition: all 0.2s ease;
 
@@ -642,7 +652,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
     &:focus {
       border-color: colors.$DIS-GOLD;
-      background: #1a1a1a;
+      background: rgba(30, 41, 59, 0.7);
     }
   }
 
@@ -677,7 +687,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   box-shadow: 0 4px 16px rgba(colors.$DIS-GOLD, 0.3);
 
   &:hover:not(:disabled) {
-    background: #FFD25B;
+    background: #FB923C;
     transform: translateY(-2px);
   }
 

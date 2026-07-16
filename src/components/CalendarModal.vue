@@ -60,15 +60,15 @@ const handleSubmit = async () => {
     remodelacion: 'Remodelación de espacios habitados',
   }
   const presupuestoLabel: Record<string, string> = {
-    calidad: 'Busco calidad y precisión (con presupuesto)',
-    intermedio: 'Balance entre calidad y costo',
-    precio: 'Priorizo buscar el precio más barato',
+    calidad: 'Más de $15,000 (Renovación integral premium)',
+    intermedio: 'Entre $10,000 y $15,000 (Renovación estándar)',
+    precio: 'Menos de $10,000 / Busco lo más barato',
   }
 
   const etiquetas = [
-    'funnel-DISFAMOSA',
+    'funnel-Alma Remodelaciones',
     'step-2-cualificacion',
-    califica ? 'califica-DISFAMOSA' : 'no-califica-DISFAMOSA',
+    califica ? 'califica-Alma Remodelaciones' : 'no-califica-Alma Remodelaciones',
     `perfil-${form.value.perfil}`,
     `etapa-${form.value.etapa}`,
     `presupuesto-${form.value.presupuesto}`,
@@ -76,7 +76,7 @@ const handleSubmit = async () => {
 
   const notas = `
 ━━━━━━━━━━━━━━━━━━━━━━━━
-DISFAMOSA — Cualificación
+Alma Remodelaciones — Cualificación
 ━━━━━━━━━━━━━━━━━━━━━━━━
 👤 ${contact.nombre} ${contact.apellido}
 📧 ${contact.email}
@@ -178,9 +178,9 @@ watch(() => props.open, (v) => {
             </div>
             <h2 id="cal-title" class="cal-title">
               Antes de agendar, cuéntanos sobre
-              <span class="cal-accent">tu proyecto</span>
+              <span class="cal-accent">tu propiedad</span>
             </h2>
-            <p class="cal-subtitle">4 preguntas para preparar tu diagnóstico — 60 segundos.</p>
+            <p class="cal-subtitle">4 preguntas rápidas para preparar tu diagnóstico técnico.</p>
           </div>
 
           <form class="cal-form" @submit.prevent="handleSubmit" novalidate>
@@ -189,14 +189,14 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.perfil }">
               <legend class="cal-legend">
                 <span class="cal-q-num">01</span>
-                ¿Cuál es tu perfil respecto a la obra?
+                ¿Qué tipo de propiedad deseas remodelar?
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'propietario', label: 'Propietario (construyendo o remodelando)' },
-                  { value: 'arquitecto', label: 'Arquitecto / Interiorista' },
-                  { value: 'constructor', label: 'Constructor de proyectos en serie' },
-                  { value: 'curioso', label: 'Solo busco precios económicos / gangas' },
+                  { value: 'propietario', label: 'Propiedad Residencial (Casa / Departamento)' },
+                  { value: 'arquitecto', label: 'Espacio Comercial (Oficina / Local / Restaurante)' },
+                  { value: 'constructor', label: 'Soy arquitecto o diseñador buscando aliado' },
+                  { value: 'curioso', label: 'Solo busco información / remodelación pequeña' },
                 ]" :key="opt.value" class="cal-option" :class="{ selected: form.perfil === opt.value }">
                   <input type="radio" :value="opt.value" v-model="form.perfil" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
@@ -210,14 +210,14 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.etapa }">
               <legend class="cal-legend">
                 <span class="cal-q-num">02</span>
-                ¿En qué etapa de desarrollo está tu proyecto?
+                ¿En qué estado actual se encuentra tu propiedad?
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'planos', label: 'En planos o diseño arquitectónico' },
-                  { value: 'construccion', label: 'En obra gris / construcción actual' },
-                  { value: 'acabados', label: 'En etapa de acabados' },
-                  { value: 'remodelacion', label: 'Remodelación de un espacio habitado' },
+                  { value: 'planos', label: 'Apenas tengo planos o la idea inicial' },
+                  { value: 'construccion', label: 'En construcción u obra gris' },
+                  { value: 'acabados', label: 'Listo para entrar en etapa de acabados' },
+                  { value: 'remodelacion', label: 'Espacio construido que necesita remodelación' },
                 ]" :key="opt.value" class="cal-option" :class="{ selected: form.etapa === opt.value }">
                   <input type="radio" :value="opt.value" v-model="form.etapa" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
@@ -231,14 +231,14 @@ watch(() => props.open, (v) => {
             <fieldset class="cal-fieldset cal-fieldset--budget" :class="{ 'has-error': touched && !form.presupuesto, 'has-investment': form.presupuesto && form.presupuesto !== 'precio' }">
               <legend class="cal-legend cal-legend--budget">
                 <span class="cal-q-num cal-q-num--budget">03</span>
-                <span>¿Qué priorizas al contratar mobiliario modular?</span>
+                <span>¿Cuál es tu rango de inversión? (Nuestros proyectos integrales van desde los 10K-15K)</span>
                 <i class="fa-solid fa-gem cal-legend-chart" aria-hidden="true"></i>
               </legend>
               <div class="cal-options">
                 <label v-for="opt in [
-                  { value: 'calidad', label: 'Calidad, durabilidad y precisión técnica', premium: true },
-                  { value: 'intermedio', label: 'Un balance equitativo entre calidad y costo', premium: false },
-                  { value: 'precio', label: 'Busco la opción más barata del mercado', premium: false },
+                  { value: 'calidad', label: 'Más de $15,000 (Renovación integral premium)', premium: true },
+                  { value: 'intermedio', label: 'Entre $10,000 y $15,000 (Renovación estándar)', premium: false },
+                  { value: 'precio', label: 'Menos de $10,000 / Busco opciones muy económicas', premium: false },
                 ]" :key="opt.value" class="cal-option" :class="{
                   selected: form.presupuesto === opt.value,
                   'cal-option--premium': opt.premium && form.presupuesto === opt.value,
@@ -263,7 +263,7 @@ watch(() => props.open, (v) => {
               <textarea
                 v-model="form.reto"
                 class="cal-textarea"
-                placeholder="Ej: Tengo miedo de que se retrasen en la entrega, que las puertas de los gabinetes no cuadren o que el material se infle con la humedad..."
+                placeholder="Ej: Tengo miedo de lidiar con sobrecostos y retrasos, paredes mal cuadradas o que el presupuesto termine costando el doble..."
                 rows="4"
                 aria-describedby="q4-hint"
               ></textarea>
@@ -280,7 +280,7 @@ watch(() => props.open, (v) => {
               <input type="checkbox" v-model="form.consent" />
               <span class="cal-consent__box" aria-hidden="true" />
               <span class="cal-consent__text">
-                Acepto que DISFAMOSA evalúe mis respuestas para agendar un Diagnóstico Técnico.
+                Acepto que Alma Remodelaciones evalúe mis respuestas para agendar un Diagnóstico Técnico.
               </span>
             </label>
             <span v-if="touched && !form.consent" class="cal-error">Debes aceptar para continuar</span>
@@ -362,6 +362,10 @@ watch(() => props.open, (v) => {
   padding: 2rem 2rem 1.25rem;
   border-bottom: 1px solid #222222;
   text-align: center;
+
+  @media (max-width: 560px) {
+    padding: 2rem 1.25rem 1rem;
+  }
 }
 
 .cal-header-icon {
@@ -398,6 +402,10 @@ watch(() => props.open, (v) => {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @media (max-width: 560px) {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
 }
 
 .cal-fieldset {
@@ -433,6 +441,10 @@ watch(() => props.open, (v) => {
 
   &--budget {
     gap: 0.4rem;
+  }
+
+  @media (max-width: 560px) {
+    font-size: 0.8rem;
   }
 }
 
@@ -492,6 +504,11 @@ watch(() => props.open, (v) => {
     border-color: #555555; 
     background: #1e1e1e; 
     transform: translateY(-1px);
+  }
+
+  @media (max-width: 560px) {
+    padding: 0.75rem 0.85rem;
+    gap: 0.65rem;
   }
 
   &.selected {
@@ -619,7 +636,7 @@ watch(() => props.open, (v) => {
   width: 100%;
   transition: background 0.2s ease, transform 0.15s ease;
   box-shadow: 0 4px 16px rgba(colors.$DIS-GOLD, 0.3);
-  &:hover:not(:disabled) { background: #FFD25B; transform: translateY(-1px); }
+  &:hover:not(:disabled) { background: #FB923C; transform: translateY(-1px); }
   &:disabled { opacity: 0.65; cursor: not-allowed; }
 }
 </style>

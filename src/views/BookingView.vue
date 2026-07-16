@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const iframeHeight = ref(1100)
 
-const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/jNp2KzOZW13tacMG3v1U'
+const BASE_URL = 'https://api.leadconnectorhq.com/widget/booking/53o1B7O5eRvJcZ8pFXQh'
 
 const calendarUrl = computed(() => {
   try {
@@ -57,7 +57,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   <div class="booking">
 
     <header class="booking__topbar">
-      <span class="booking__logo-text">DISFA<span class="booking__logo-accent">MOSA</span></span>
+      <span class="booking__logo-text">Alma <span class="booking__logo-accent">Remodelaciones</span></span>
     </header>
 
     <main class="booking__main">
@@ -88,7 +88,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           <span class="booking__title-accent">asesoría premium</span>
         </h1>
         <p class="booking__subtitle">
-          Una sesión de 30 minutos con el equipo de DISFAMOSA para evaluar tu proyecto. Analizaremos tus espacios y crearemos un plan arquitectónico milimétrico y sin improvisaciones.
+          Una sesión de 30 minutos con el equipo de Alma Remodelaciones para evaluar tu proyecto. Analizaremos tus espacios y crearemos un plan arquitectónico milimétrico y sin improvisaciones.
         </p>
       </section>
 
@@ -96,11 +96,11 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <iframe
           :src="calendarUrl"
           :style="{ height: iframeHeight + 'px' }"
-          title="Agenda tu asesoría con DISFAMOSA"
+          title="Agenda tu asesoría con Alma Remodelaciones"
           class="calendar__iframe"
           frameborder="0"
           scrolling="no"
-          id="jNp2KzOZW13tacMG3v1U_1784216658225"
+          id="53o1B7O5eRvJcZ8pFXQh_1784238532806"
         ></iframe>
       </div>
 
@@ -111,7 +111,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
+      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
       <p class="booking__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 

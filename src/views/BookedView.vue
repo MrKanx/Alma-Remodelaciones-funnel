@@ -44,7 +44,7 @@ const nextSteps = [
   {
     icon: 'fa-brands fa-whatsapp',
     title: 'Te contactamos por WhatsApp',
-    body: 'El equipo de DISFAMOSA te escribirá para confirmar la cita y enviarte el enlace.',
+    body: 'El equipo de Alma Remodelaciones te escribirá para confirmar la cita y enviarte el enlace.',
   },
   {
     icon: 'fa-solid fa-file-invoice',
@@ -82,7 +82,7 @@ const nextSteps = [
             </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión de asesoría con DISFAMOSA está confirmada. Revisa tu correo
+            Tu sesión de asesoría con Alma Remodelaciones está confirmada. Revisa tu correo
             o WhatsApp para todos los detalles. Si necesitas reagendar, escríbenos.
           </p>
         </template>
@@ -97,7 +97,7 @@ const nextSteps = [
             </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión con el equipo de DISFAMOSA ha sido agendada correctamente.
+            Tu sesión con el equipo de Alma Remodelaciones ha sido agendada correctamente.
             En breve recibirás todos los detalles para conectarte.
           </p>
         </template>
@@ -124,7 +124,7 @@ const nextSteps = [
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booked__footer-copy">© {{ new Date().getFullYear() }} DISFAMOSA. Todos los derechos reservados.</p>
+      <p class="booked__footer-copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
       <p class="booked__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
     </footer>
 

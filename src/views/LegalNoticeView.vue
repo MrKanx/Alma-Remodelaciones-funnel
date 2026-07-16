@@ -18,7 +18,7 @@ onMounted(() => {
 
       <main class="legal-card__content">
         <p class="legal-card__text">
-          Este sitio web es operado por <strong>DISFAMOSA</strong>. Toda la información, contenidos y servicios disponibles en esta plataforma tienen un carácter estrictas y exclusivamente informativo y comercial.
+          Este sitio web es operado por <strong>Alma Remodelaciones</strong>. Toda la información, contenidos y servicios disponibles en esta plataforma tienen un carácter estrictas y exclusivamente informativo y comercial.
         </p>
         <p class="legal-card__text">
           El agendamiento o solicitud de un diagnóstico gratuito de infraestructura comercial no constituye ni garantiza el inicio de una relación de contratación de obra o servicios formal, la cual requerirá en todo caso la firma de un contrato físico o de un acuerdo de servicios explícito por ambas partes.

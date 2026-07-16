@@ -76,7 +76,7 @@ const urgencyOpts: { value: Exclude<Urgency, ''>; label: string; sub: string; ho
 ]
 
 function calcTags(urgency: Urgency): string[] {
-  const base = ['DISFAMOSA', 'funnel-registro']
+  const base = ['Alma Remodelaciones', 'funnel-registro']
   if (urgency === 'inmediato')    return [...base, 'urgente', 'contrato-inmediato']
   if (urgency === 'proximos')     return [...base, 'urgencia-media']
   if (urgency === 'planificando') return [...base, 'planificando']
@@ -89,7 +89,7 @@ function buildNote(f: typeof form.value, country: string, pageDuration: number):
   const secs = pageDuration % 60
   return [
     '━━━━━━━━━━━━━━━━━━━━━━━━',
-    'DISFAMOSA — Registro Inicial',
+    'Alma Remodelaciones — Registro Inicial',
     '━━━━━━━━━━━━━━━━━━━━━━━━',
     `👤 ${f.nombre} ${f.apellido}`,
     `📧 ${f.email}`,
@@ -223,13 +223,13 @@ const handleSubmit = async () => {
     notas: buildNote(form.value, selectedCountry.value.name, pageDur),
     nota: buildNote(form.value, selectedCountry.value.name, pageDur),
     pageDuration: pageDur,
-    source: 'DISFAMOSA-web',
+    source: 'Alma Remodelaciones-web',
     timestamp: new Date().toISOString(),
     event_id: leadEventId,
     ...getStoredFbParams(),
   }
 
-  console.info('[DISFAMOSA Registro]', payload)
+  console.info('[Alma Remodelaciones Registro]', payload)
 
   const webhookUrl = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/4XqSfm1KK7VoNl7vvnml/webhook-trigger/aYewbjwRqsC0Bnzm4s3Z'
   await fetch(webhookUrl, {
@@ -309,9 +309,9 @@ watch(dropdownOpen, open => {
           </button>
 
           <div class="rmodal__header">
-            <p class="rmodal__eyebrow">ARQUITECTURA MODULAR</p>
-            <h2 id="rmodal-title" class="rmodal__title">Accede al entrenamiento<br><span class="rmodal__title-accent">gratuito</span></h2>
-            <p class="rmodal__subtitle">Descubre cómo desterrar la improvisación de tu obra para siempre.</p>
+            <p class="rmodal__eyebrow">ALMA REMODELACIONES</p>
+            <h2 id="rmodal-title" class="rmodal__title">Accede a la presentación<br><span class="rmodal__title-accent">privada</span></h2>
+            <p class="rmodal__subtitle">Descubre el método exacto para una remodelación integral sin dolores de cabeza.</p>
           </div>
 
           <form class="rmodal__form" @submit.prevent="handleSubmit" novalidate>
@@ -410,12 +410,12 @@ watch(dropdownOpen, open => {
 
             <!-- Empresa / Interés -->
             <div class="rmodal__field" :class="{ 'has-error': touched.empresa && errors.empresa }">
-              <label for="r-empresa">¿Qué tipo de proyecto tienes?</label>
+              <label for="r-empresa">¿Qué espacio deseas transformar?</label>
               <input
                 id="r-empresa"
                 v-model="form.empresa"
                 type="text"
-                placeholder="Ej: Cocina, Baños, Casa Completa"
+                placeholder="Ej: Casa Completa, Local Comercial, Departamento"
                 autocomplete="organization"
                 @blur="onBlur('empresa')"
               />

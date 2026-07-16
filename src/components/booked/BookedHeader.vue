@@ -4,7 +4,7 @@ const LOGO = 'https://res.cloudinary.com/dpuody0df/image/upload/v1775587085/baka
 
 <template>
   <header class="booked-header">
-    <img src="@/assets/logos/logo.png" class="booked-header__logo-img" alt="DISFAMOSA Logo" />
+    <img src="@/assets/logos/logo.png" class="booked-header__logo-img" alt="Alma Remodelaciones Logo" />
   </header>
 </template>
 
