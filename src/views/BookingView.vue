@@ -88,7 +88,7 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           <span class="booking__title-accent">asesoría premium</span>
         </h1>
         <p class="booking__subtitle">
-          Una sesión de 30 minutos con el equipo de DISFAMOSA para trazar la ruta de tu viaje a España. Evaluaremos tus opciones y crearemos un plan seguro.
+          Una sesión de 30 minutos con el equipo de DISFAMOSA para evaluar tu proyecto. Analizaremos tus espacios y crearemos un plan arquitectónico milimétrico y sin improvisaciones.
         </p>
       </section>
 
