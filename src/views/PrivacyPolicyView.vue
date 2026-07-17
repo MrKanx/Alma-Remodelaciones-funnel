@@ -18,10 +18,14 @@ onMounted(() => {
 
       <main class="privacy-card__content">
         <p class="privacy-card__text">
-          En <strong>Alma Remodelaciones</strong>, valoramos su privacidad. Los datos personales que nos proporciona (como nombre, correo electrónico y número de teléfono) se recopilan con la única finalidad de gestionar sus solicitudes de contacto, programar su diagnóstico de infraestructura comercial y enviarle comunicaciones relacionadas con nuestros servicios.
+          En <strong>Alma Remodelaciones</strong>, valoramos su privacidad. Los datos personales que
+          nos proporciona (como nombre, correo electrónico y número de teléfono) se recopilan con la
+          única finalidad de gestionar sus solicitudes de contacto, programar su diagnóstico de
+          infraestructura comercial y enviarle comunicaciones relacionadas con nuestros servicios.
         </p>
         <p class="privacy-card__text">
-          Nos comprometemos a no vender, compartir ni transferir su información personal a terceros, excepto en los casos en que la ley así lo exija.
+          Nos comprometemos a no vender, compartir ni transferir su información personal a terceros,
+          excepto en los casos en que la ley así lo exija.
         </p>
       </main>
 
@@ -98,7 +102,7 @@ onMounted(() => {
     transition: color 0.2s;
 
     &:hover {
-      color: #F0B429;
+      color: #f0b429;
       text-decoration: underline;
     }
   }
@@ -123,7 +127,9 @@ onMounted(() => {
     font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
 
     &:hover {
       background: #222222;

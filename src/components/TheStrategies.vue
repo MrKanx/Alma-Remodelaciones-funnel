@@ -17,68 +17,72 @@ onMounted(() => {
   if (!sectionRef.value) return
 
   ctx = gsap.context(() => {
-    gsap.fromTo('.strategies__header',
+    gsap.fromTo(
+      '.strategies__header',
       { y: 50, opacity: 0 },
       {
         scrollTrigger: {
           trigger: sectionRef.value,
           start: 'top 80%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none reverse',
         },
         y: 0,
         opacity: 1,
         duration: 1,
-        ease: 'power3.out'
-      }
+        ease: 'power3.out',
+      },
     )
 
     // Animación del botón volando y dando vueltas
-    gsap.fromTo('.btn-header-contact',
+    gsap.fromTo(
+      '.btn-header-contact',
       { x: window.innerWidth, rotation: 720, opacity: 0 },
       {
         scrollTrigger: {
           trigger: sectionRef.value,
           start: 'top 75%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none reverse',
         },
         x: 0,
         rotation: 0,
         opacity: 1,
         duration: 1.5,
-        ease: 'back.out(1.2)'
-      }
+        ease: 'back.out(1.2)',
+      },
     )
 
-    gsap.fromTo('.step-card',
+    gsap.fromTo(
+      '.step-card',
       { y: 80, opacity: 0 },
       {
         scrollTrigger: {
           trigger: '.strategies__grid',
           start: 'top 85%', // Iniciar cuando el grid aparece en pantalla
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none reverse',
         },
         y: 0,
         opacity: 1,
         duration: 1.2,
         stagger: 0.2,
-        ease: 'power3.out'
-      }
+        ease: 'power3.out',
+      },
     )
 
-    gsap.fromTo('.cta-banner',
+    gsap.fromTo(
+      '.cta-banner',
       { y: 50, opacity: 0, scale: 0.95 },
       {
         scrollTrigger: {
           trigger: '.strategies__footer',
           start: 'top 90%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none reverse',
         },
         y: 0,
         opacity: 1,
         scale: 1,
         duration: 1,
-        ease: 'power3.out'
-      }
+        ease: 'power3.out',
+      },
     )
   }, sectionRef.value)
 
@@ -96,19 +100,19 @@ onUnmounted(() => {
 <template>
   <section class="strategies" ref="sectionRef">
     <div class="strategies__container">
-      
       <!-- Header Section -->
       <div class="strategies__header">
         <p class="strategies__subtitle">METODOLOGÍA 1M</p>
         <h2 class="strategies__title">
-          Ingeniería de Crecimiento al<br>
+          Ingeniería de Crecimiento al<br />
           Estilo <span>Silicon Valley</span>
         </h2>
         <p class="strategies__header-desc">
-          No operamos con fe ni esperanza. Aplicamos el marco de trabajo <strong>Lean Startup</strong> para encontrar
-          tu oferta ganadora rápida y económicamente, y luego escalar con precisión matemática hacia las 7 cifras anuales.
+          No operamos con fe ni esperanza. Aplicamos el marco de trabajo
+          <strong>Lean Startup</strong> para encontrar tu oferta ganadora rápida y económicamente, y
+          luego escalar con precisión matemática hacia las 7 cifras anuales.
         </p>
-        
+
         <div class="strategies__header-cta">
           <button class="btn-header-contact" @click="scrollToContact">
             <span>HABLAR CON UN ESTRATEGA</span>
@@ -119,13 +123,14 @@ onUnmounted(() => {
 
       <!-- Grid de Metodología (3 Pasos) -->
       <div class="strategies__grid">
-        
         <!-- Fase 1 -->
         <div class="step-card">
           <div class="step-card__number">01</div>
-          <h3 class="step-card__title">Diagnóstico<br>Data-Driven</h3>
+          <h3 class="step-card__title">Diagnóstico<br />Data-Driven</h3>
           <p class="step-card__desc">
-            Eliminamos las suposiciones y el "yo creo que funcionaría". Auditamos tus finanzas, histórico de ventas y fuga de capital para encontrar dónde estás perdiendo dinero ahora mismo.
+            Eliminamos las suposiciones y el "yo creo que funcionaría". Auditamos tus finanzas,
+            histórico de ventas y fuga de capital para encontrar dónde estás perdiendo dinero ahora
+            mismo.
           </p>
           <ul class="step-card__features">
             <li><i class="fa-solid fa-check"></i> Auditoría de Facturación</li>
@@ -137,9 +142,11 @@ onUnmounted(() => {
         <!-- Fase 2 -->
         <div class="step-card">
           <div class="step-card__number">02</div>
-          <h3 class="step-card__title">Lean Startup<br>Framework</h3>
+          <h3 class="step-card__title">Lean Startup<br />Framework</h3>
           <p class="step-card__desc">
-            Construir, Medir, Aprender. Lanzamos experimentos ágiles en Meta Ads (MVP) para validar ofertas con tus clientes reales sin quemar presupuesto. Encontramos el Product-Market Fit.
+            Construir, Medir, Aprender. Lanzamos experimentos ágiles en Meta Ads (MVP) para validar
+            ofertas con tus clientes reales sin quemar presupuesto. Encontramos el Product-Market
+            Fit.
           </p>
           <ul class="step-card__features">
             <li><i class="fa-solid fa-check"></i> Pruebas A/B Omnicanal</li>
@@ -151,9 +158,10 @@ onUnmounted(() => {
         <!-- Fase 3 -->
         <div class="step-card">
           <div class="step-card__number">03</div>
-          <h3 class="step-card__title">Escalamiento<br>Agresivo</h3>
+          <h3 class="step-card__title">Escalamiento<br />Agresivo</h3>
           <p class="step-card__desc">
-            Una vez que validamos el embudo y confirmamos el ROAS (Retorno de Inversión), inyectamos capital agresivamente. Construimos sistemas de adquisición predecibles hacia el $1M.
+            Una vez que validamos el embudo y confirmamos el ROAS (Retorno de Inversión), inyectamos
+            capital agresivamente. Construimos sistemas de adquisición predecibles hacia el $1M.
           </p>
           <ul class="step-card__features">
             <li><i class="fa-solid fa-check"></i> Sistemas Automatizados</li>
@@ -161,7 +169,6 @@ onUnmounted(() => {
             <li><i class="fa-solid fa-check"></i> Crecimiento Exponencial Seguro</li>
           </ul>
         </div>
-
       </div>
 
       <!-- CTA Section -->
@@ -169,7 +176,9 @@ onUnmounted(() => {
         <div class="cta-banner">
           <div class="cta-banner__content">
             <h3 class="cta-banner__title">¿Listo para escalar al siguiente nivel?</h3>
-            <p class="cta-banner__desc">Implementa el marco de trabajo Lean Startup en tu empresa hoy mismo.</p>
+            <p class="cta-banner__desc">
+              Implementa el marco de trabajo Lean Startup en tu empresa hoy mismo.
+            </p>
           </div>
           <button class="btn-primary-massive" @click="scrollToContact">
             <span>IMPLEMENTAR SISTEMA</span>
@@ -177,7 +186,6 @@ onUnmounted(() => {
           </button>
         </div>
       </div>
-
     </div>
   </section>
 </template>
@@ -200,7 +208,8 @@ onUnmounted(() => {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 30% 30%, rgba(colors.$BAKANO-PINK, 0.05) 0%, transparent 30%),
+    background:
+      radial-gradient(circle at 30% 30%, rgba(colors.$BAKANO-PINK, 0.05) 0%, transparent 30%),
       radial-gradient(circle at 70% 70%, rgba(colors.$BAKANO-PURPLE, 0.05) 0%, transparent 30%);
     pointer-events: none;
     z-index: 0;
@@ -433,7 +442,9 @@ onUnmounted(() => {
     padding: 3rem 4rem;
     width: 100%;
     max-width: 1000px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(colors.$BAKANO-PINK, 0.1);
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(colors.$BAKANO-PINK, 0.1);
     position: relative;
     overflow: hidden;
 
@@ -444,7 +455,11 @@ onUnmounted(() => {
       left: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle at 50% 10%, rgba(colors.$BAKANO-PINK, 0.15) 0%, transparent 60%);
+      background: radial-gradient(
+        circle at 50% 10%,
+        rgba(colors.$BAKANO-PINK, 0.15) 0%,
+        transparent 60%
+      );
       pointer-events: none;
     }
 

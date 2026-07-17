@@ -69,7 +69,6 @@ const openTool = (url: string) => {
 
 <template>
   <div class="tools-page">
-
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
     <section class="tools-hero" ref="heroRef">
       <div class="tools-hero__glow" aria-hidden="true" />
@@ -81,9 +80,7 @@ const openTool = (url: string) => {
           Ecosistema Bakano
         </p>
 
-        <h1 class="tools-hero__title" ref="titleRef">
-          HERRAMIENTAS
-        </h1>
+        <h1 class="tools-hero__title" ref="titleRef">HERRAMIENTAS</h1>
 
         <div class="tools-hero__line" aria-hidden="true" />
 
@@ -95,8 +92,15 @@ const openTool = (url: string) => {
 
       <div class="tools-hero__scroll-hint" aria-hidden="true">
         <span>Explorar</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M12 5v14M5 12l7 7 7-7" />
         </svg>
       </div>
     </section>
@@ -104,7 +108,6 @@ const openTool = (url: string) => {
     <!-- ── Grid de herramientas ───────────────────────────────────────────── -->
     <section class="tools-grid-section">
       <div class="tools-grid">
-
         <article
           v-for="tool in tools"
           :key="tool.id"
@@ -138,16 +141,35 @@ const openTool = (url: string) => {
           <!-- Footer / CTA -->
           <div class="tool-card__footer">
             <span class="tool-card__url">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
               </svg>
               {{ tool.urlLabel }}
             </span>
             <span class="tool-card__cta">
               Abrir plataforma
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </span>
           </div>
@@ -160,18 +182,25 @@ const openTool = (url: string) => {
         <div class="tool-card tool-card--soon" aria-hidden="true">
           <div class="tool-card__soon-inner">
             <div class="tool-card__soon-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="19" cy="12" r="1" />
+                <circle cx="5" cy="12" r="1" />
               </svg>
             </div>
             <p class="tool-card__soon-label">Próximamente</p>
             <p class="tool-card__soon-sub">Nuevas herramientas en desarrollo</p>
           </div>
         </div>
-
       </div>
     </section>
-
   </div>
 </template>
 
@@ -230,11 +259,7 @@ $dark2: #11091f;
       bottom: 0;
       left: -80px;
       right: auto;
-      background: radial-gradient(
-        circle,
-        rgba(colors.$BAKANO-PURPLE, 0.1) 0%,
-        transparent 65%
-      );
+      background: radial-gradient(circle, rgba(colors.$BAKANO-PURPLE, 0.1) 0%, transparent 65%);
     }
   }
 
@@ -517,7 +542,9 @@ $dark2: #11091f;
     opacity: 0;
     transform: scaleX(0);
     transform-origin: left;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
 
   // ── Placeholder ────────────────────────────────────────────────────────────
@@ -577,17 +604,35 @@ $dark2: #11091f;
 // ANIMATIONS
 // ─────────────────────────────────────────────────────────────────────────────
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.7); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.7);
+  }
 }
 
 @keyframes bounce-down {
-  0%, 100% { transform: translateY(0); opacity: 0.5; }
-  50% { transform: translateY(6px); opacity: 1; }
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tools-hero__eyebrow-dot { animation: none; }
-  .tools-hero__scroll-hint svg { animation: none; }
+  .tools-hero__eyebrow-dot {
+    animation: none;
+  }
+  .tools-hero__scroll-hint svg {
+    animation: none;
+  }
 }
 </style>

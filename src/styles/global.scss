@@ -9,7 +9,9 @@ body {
   box-sizing: border-box; // Reset inicial
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit; // Herencia controlada
 }
 
@@ -18,7 +20,7 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000; 
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
   background: #2a3143; /* Dark blue S2M */

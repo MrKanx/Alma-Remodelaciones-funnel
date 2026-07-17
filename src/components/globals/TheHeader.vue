@@ -26,7 +26,9 @@ const navLinks = [
 const toolsLink = { id: 'herramientas', num: '05', label: 'Herramientas', route: '/herramientas' }
 
 // ── Scroll / nav helpers ───────────────────────────────────────────────────────
-const handleScroll = () => { isScrolled.value = window.scrollY > 30 }
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 30
+}
 
 const scrollToSection = async (sectionId: string) => {
   if (route.name !== 'home') {
@@ -34,11 +36,19 @@ const scrollToSection = async (sectionId: string) => {
     await nextTick()
     setTimeout(() => {
       const el = document.getElementById(sectionId)
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' })
+      if (el)
+        window.scrollTo({
+          top: el.getBoundingClientRect().top + window.scrollY - 56,
+          behavior: 'smooth',
+        })
     }, 100)
   } else {
     const el = document.getElementById(sectionId)
-    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' })
+    if (el)
+      window.scrollTo({
+        top: el.getBoundingClientRect().top + window.scrollY - 56,
+        behavior: 'smooth',
+      })
   }
   closeMenu()
 }
@@ -73,7 +83,9 @@ const handleClickOutside = (e: MouseEvent) => {
 }
 
 // Teclado
-const handleKeydown = (e: KeyboardEvent) => { if (e.key === 'Escape') closeMenu() }
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') closeMenu()
+}
 
 // Bloqueo de scroll + animaciones GSAP al abrir el overlay
 watch(isMenuOpen, async (open) => {
@@ -117,7 +129,6 @@ onUnmounted(() => {
   <header class="header" :class="{ 'header--scrolled': isScrolled }">
     <div class="nav">
       <div class="nav__inner">
-
         <!-- ── Logo ─────────────────────────────────── -->
         <RouterLink to="/" class="nav__logo" aria-label="Ir al inicio">
           <img :src="bakanoLogo" alt="Bakano" class="nav__logo-img" />
@@ -130,22 +141,36 @@ onUnmounted(() => {
               :href="`#${link.section}`"
               class="nav__link"
               @click.prevent="scrollToSection(link.section)"
-            >{{ link.label }}</a>
+              >{{ link.label }}</a
+            >
           </li>
           <li>
             <RouterLink
               :to="toolsLink.route"
               class="nav__link nav__link--tools"
               @click="closeMenu"
-            >{{ toolsLink.label }}</RouterLink>
+              >{{ toolsLink.label }}</RouterLink
+            >
           </li>
         </ul>
 
         <!-- ── CTA desktop ───────────────────────────── -->
-        <button class="nav__cta" @click="scrollToSection('contacto')" aria-label="Ir al formulario de contacto">
+        <button
+          class="nav__cta"
+          @click="scrollToSection('contacto')"
+          aria-label="Ir al formulario de contacto"
+        >
           <span>Contáctanos</span>
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>
 
@@ -163,7 +188,6 @@ onUnmounted(() => {
           <span class="nav__hamburger-line" />
           <span class="nav__hamburger-line" />
         </button>
-
       </div>
     </div>
 
@@ -171,72 +195,83 @@ onUnmounted(() => {
          OVERLAY MÓVIL — full-screen, desliza desde la derecha
          ════════════════════════════════════════════════ -->
     <Teleport to="body">
-    <Transition name="overlay">
-      <div
-        v-show="isMenuOpen"
-        id="mobile-overlay"
-        ref="mobileMenuRef"
-        class="nav__overlay"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Menú de navegación"
-      >
-        <!-- Barra superior del overlay -->
-        <div class="nav__overlay-bar">
-          <img :src="bakanoLogo" alt="Bakano" class="nav__overlay-logo" />
-          <button
-            class="nav__overlay-close"
-            @click="closeMenu"
-            aria-label="Cerrar menú"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M18 6 6 18M6 6l12 12"/>
+      <Transition name="overlay">
+        <div
+          v-show="isMenuOpen"
+          id="mobile-overlay"
+          ref="mobileMenuRef"
+          class="nav__overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú de navegación"
+        >
+          <!-- Barra superior del overlay -->
+          <div class="nav__overlay-bar">
+            <img :src="bakanoLogo" alt="Bakano" class="nav__overlay-logo" />
+            <button class="nav__overlay-close" @click="closeMenu" aria-label="Cerrar menú">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Separador -->
+          <div class="nav__overlay-sep" aria-hidden="true" />
+
+          <!-- Links numerados -->
+          <nav class="nav__overlay-nav" aria-label="Navegación móvil">
+            <a
+              v-for="link in navLinks"
+              :key="link.id"
+              :href="`#${link.section}`"
+              class="nav__overlay-link"
+              @click.prevent="scrollToSection(link.section)"
+            >
+              <span class="nav__overlay-num" aria-hidden="true">{{ link.num }}</span>
+              <span class="nav__overlay-label">{{ link.label }}</span>
+            </a>
+
+            <!-- Herramientas — navega a página -->
+            <RouterLink
+              :to="toolsLink.route"
+              class="nav__overlay-link nav__overlay-link--tools"
+              @click="closeMenu"
+            >
+              <span class="nav__overlay-num" aria-hidden="true">{{ toolsLink.num }}</span>
+              <span class="nav__overlay-label">{{ toolsLink.label }}</span>
+              <span class="nav__overlay-badge" aria-hidden="true">Nuevo</span>
+            </RouterLink>
+          </nav>
+
+          <!-- CTA Formulario -->
+          <button class="nav__overlay-cta" @click="scrollToSection('contacto')">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
+            <span>Contáctanos</span>
           </button>
+
+          <!-- Decoración de fondo -->
+          <div class="nav__overlay-glow" aria-hidden="true" />
         </div>
-
-        <!-- Separador -->
-        <div class="nav__overlay-sep" aria-hidden="true" />
-
-        <!-- Links numerados -->
-        <nav class="nav__overlay-nav" aria-label="Navegación móvil">
-          <a
-            v-for="link in navLinks"
-            :key="link.id"
-            :href="`#${link.section}`"
-            class="nav__overlay-link"
-            @click.prevent="scrollToSection(link.section)"
-          >
-            <span class="nav__overlay-num" aria-hidden="true">{{ link.num }}</span>
-            <span class="nav__overlay-label">{{ link.label }}</span>
-          </a>
-
-          <!-- Herramientas — navega a página -->
-          <RouterLink
-            :to="toolsLink.route"
-            class="nav__overlay-link nav__overlay-link--tools"
-            @click="closeMenu"
-          >
-            <span class="nav__overlay-num" aria-hidden="true">{{ toolsLink.num }}</span>
-            <span class="nav__overlay-label">{{ toolsLink.label }}</span>
-            <span class="nav__overlay-badge" aria-hidden="true">Nuevo</span>
-          </RouterLink>
-        </nav>
-
-        <!-- CTA Formulario -->
-        <button class="nav__overlay-cta" @click="scrollToSection('contacto')">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          <span>Contáctanos</span>
-        </button>
-
-        <!-- Decoración de fondo -->
-        <div class="nav__overlay-glow" aria-hidden="true" />
-      </div>
-    </Transition>
+      </Transition>
     </Teleport>
-
   </header>
 </template>
 
@@ -260,7 +295,10 @@ $dark-bg: #0b0815;
   height: $header-h;
   // Transparente sobre el hero (que usa margin-top: -56px)
   background: transparent;
-  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    background 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 
   // Cuando el usuario ha hecho scroll
   &--scrolled {
@@ -383,7 +421,7 @@ $dark-bg: #0b0815;
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.70rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: colors.$white;
@@ -442,7 +480,10 @@ $dark-bg: #0b0815;
       height: 1.5px;
       background: rgba(255, 255, 255, 0.85);
       border-radius: 1px;
-      transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.2s ease, width 0.3s ease;
+      transition:
+        transform 0.3s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 0.2s ease,
+        width 0.3s ease;
 
       &:nth-child(1) {
         width: 22px;
@@ -497,10 +538,12 @@ $dark-bg: #0b0815;
       right: -60px;
       width: 320px;
       height: 320px;
-      background: radial-gradient(circle,
-          rgba(colors.$BAKANO-PINK, 0.09) 0%,
-          rgba(colors.$BAKANO-PURPLE, 0.05) 50%,
-          transparent 70%);
+      background: radial-gradient(
+        circle,
+        rgba(colors.$BAKANO-PINK, 0.09) 0%,
+        rgba(colors.$BAKANO-PURPLE, 0.05) 50%,
+        transparent 70%
+      );
       pointer-events: none;
       border-radius: 50%;
     }
@@ -533,7 +576,9 @@ $dark-bg: #0b0815;
     border-radius: 50%;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.7);
-    transition: background 0.2s ease, color 0.2s ease;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
 
     &:hover {
       background: rgba(255, 255, 255, 0.1);
@@ -649,7 +694,10 @@ $dark-bg: #0b0815;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     cursor: pointer;
-    transition: opacity 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    transition:
+      opacity 0.25s ease,
+      transform 0.2s ease,
+      box-shadow 0.25s ease;
 
     &:hover {
       opacity: 0.92;
@@ -683,7 +731,6 @@ $dark-bg: #0b0815;
 // Respeto a reduce-motion
 // ─────────────────────────────────────────────────────────────────────────────
 @media (prefers-reduced-motion: reduce) {
-
   .overlay-enter-active,
   .overlay-leave-active {
     transition: opacity 0.2s ease;

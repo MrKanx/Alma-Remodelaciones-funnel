@@ -52,12 +52,12 @@ export function captureFbParams(): void {
     fbclid,
     fbc: fbclid ? buildFbc(fbclid) : getCookie('_fbc'),
     fbp: getCookie('_fbp'),
-    utm_source:   params.get('utm_source')   ?? '',
-    utm_medium:   params.get('utm_medium')   ?? '',
+    utm_source: params.get('utm_source') ?? '',
+    utm_medium: params.get('utm_medium') ?? '',
     utm_campaign: params.get('utm_campaign') ?? '',
-    utm_content:  params.get('utm_content')  ?? '',
-    utm_term:     params.get('utm_term')     ?? '',
-    utm_id:       params.get('utm_id')       ?? '',
+    utm_content: params.get('utm_content') ?? '',
+    utm_term: params.get('utm_term') ?? '',
+    utm_id: params.get('utm_id') ?? '',
   }
 
   sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data))
@@ -70,10 +70,18 @@ export function getStoredFbParams(): FbParams {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY)
     if (raw) return JSON.parse(raw) as FbParams
-  } catch { /* ignorar */ }
+  } catch {
+    /* ignorar */
+  }
   return {
-    fbclid: '', fbc: '', fbp: '',
-    utm_source: '', utm_medium: '', utm_campaign: '',
-    utm_content: '', utm_term: '', utm_id: '',
+    fbclid: '',
+    fbc: '',
+    fbp: '',
+    utm_source: '',
+    utm_medium: '',
+    utm_campaign: '',
+    utm_content: '',
+    utm_term: '',
+    utm_id: '',
   }
 }

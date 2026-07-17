@@ -16,7 +16,7 @@ const closeModal = () => {
 
 onMounted(() => {
   sessionStorage.setItem('alu_page_entry', String(Date.now()))
-  
+
   // Clean up any other bg
   document.body.style.backgroundColor = '#0a0f1d'
 })
@@ -25,22 +25,26 @@ onMounted(() => {
 <template>
   <main class="funnel">
     <div class="funnel__container">
-      
       <!-- HEADER -->
       <header class="funnel__header">
         <div class="funnel__logo-wrap">
-          <span class="funnel__logo-text">Alma <span class="funnel__logo-accent">Remodelaciones</span></span>
+          <span class="funnel__logo-text"
+            >Alma <span class="funnel__logo-accent">Remodelaciones</span></span
+          >
         </div>
       </header>
 
       <!-- HERO -->
       <section class="funnel__hero">
         <h1 class="funnel__headline">
-          ¿Cansado de sobrecostos y retrasos en tu obra? Descubre el método exacto para una <span class="funnel__headline-accent">remodelación integral sin dolores de cabeza</span>
+          ¿Cansado de sobrecostos y retrasos en tu obra? Descubre el método exacto para una
+          <span class="funnel__headline-accent">remodelación integral sin dolores de cabeza</span>
         </h1>
-        
+
         <p class="funnel__hero-sub">
-          Si eres dueño de una propiedad residencial o comercial y buscas una renovación con acabados premium y ejecución estructurada, descubre cómo nuestro Método de Sincronización de Espacios Smart blinda tu inversión.
+          Si eres dueño de una propiedad residencial o comercial y buscas una renovación con
+          acabados premium y ejecución estructurada, descubre cómo nuestro Método de Sincronización
+          de Espacios Smart blinda tu inversión.
         </p>
 
         <div class="funnel__content-grid">
@@ -53,7 +57,11 @@ onMounted(() => {
                 </button>
                 <span class="funnel__vsl-msg">Haz clic para revelar el sistema exacto</span>
               </div>
-              <img src="https://fast.wistia.com/embed/medias/nl8brnqhfz/swatch" class="funnel__vsl-thumb" alt="Video de entrenamiento" />
+              <img
+                src="https://fast.wistia.com/embed/medias/nl8brnqhfz/swatch"
+                class="funnel__vsl-thumb"
+                alt="Video de entrenamiento"
+              />
             </div>
 
             <button class="funnel__cta" @click="openModal">
@@ -64,20 +72,35 @@ onMounted(() => {
               <i class="fa-solid fa-lock"></i> 100% gratuito · Sin compromiso · Cupos limitados
             </p>
           </div>
-          
+
           <div class="funnel__bullets-column">
             <div class="funnel__bullets-box">
               <p class="funnel__bullets-title">Método de Sincronización Smart:</p>
               <ul class="funnel__bullets">
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Levantamiento técnico y proyección inteligente:</strong> Análisis riguroso y un render de altísima calidad para visualizar el resultado antes de iniciar.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Diseño colaborativo y funcionalidad:</strong> Optimizamos cada m² calculando el flujo, ergonomía e iluminación para crear una máquina de confort.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Ejecución estructurada y transparente:</strong> Esquemas de pagos claros (50-25-25) y logística al milímetro para cumplir el cronograma estrictamente.</li>
-                <li><i class="fa-solid fa-circle-check"></i> <strong>Cero improvisación:</strong> Lo que ves en el render es exactamente al milímetro lo que se construye en la vida real.</li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i>
+                  <strong>Levantamiento técnico y proyección inteligente:</strong> Análisis riguroso
+                  y un render de altísima calidad para visualizar el resultado antes de iniciar.
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i>
+                  <strong>Diseño colaborativo y funcionalidad:</strong> Optimizamos cada m²
+                  calculando el flujo, ergonomía e iluminación para crear una máquina de confort.
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i>
+                  <strong>Ejecución estructurada y transparente:</strong> Esquemas de pagos claros
+                  (50-25-25) y logística al milímetro para cumplir el cronograma estrictamente.
+                </li>
+                <li>
+                  <i class="fa-solid fa-circle-check"></i> <strong>Cero improvisación:</strong> Lo
+                  que ves en el render es exactamente al milímetro lo que se construye en la vida
+                  real.
+                </li>
               </ul>
             </div>
           </div>
         </div>
-
       </section>
 
       <!-- STATS SECTION -->
@@ -87,17 +110,23 @@ onMounted(() => {
           <div class="funnel__stats-card">
             <div class="funnel__stats-icon"><i class="fa-solid fa-calendar-check"></i></div>
             <h3 class="funnel__stats-number">+8</h3>
-            <p class="funnel__stats-text">años de experiencia técnica transformando espacios con verdadera alma</p>
+            <p class="funnel__stats-text">
+              años de experiencia técnica transformando espacios con verdadera alma
+            </p>
           </div>
           <div class="funnel__stats-card">
             <div class="funnel__stats-icon"><i class="fa-solid fa-ruler-combined"></i></div>
             <h3 class="funnel__stats-number">100%</h3>
-            <p class="funnel__stats-text">de precisión garantizada entre el diseño renderizado y la obra real</p>
+            <p class="funnel__stats-text">
+              de precisión garantizada entre el diseño renderizado y la obra real
+            </p>
           </div>
           <div class="funnel__stats-card">
             <div class="funnel__stats-icon"><i class="fa-solid fa-shield-halved"></i></div>
             <h3 class="funnel__stats-number">0</h3>
-            <p class="funnel__stats-text">excusas: ejecución estructurada con total transparencia financiera</p>
+            <p class="funnel__stats-text">
+              excusas: ejecución estructurada con total transparencia financiera
+            </p>
           </div>
         </div>
       </section>
@@ -113,9 +142,15 @@ onMounted(() => {
           <div class="funnel__authority-content">
             <p class="funnel__authority-eyebrow">Fundadora</p>
             <h2 id="authority-heading" class="funnel__authority-name">Sandy Hüello</h2>
-            <p class="funnel__authority-role">Especialista en Remodelación Integral — Alma Remodelaciones</p>
+            <p class="funnel__authority-role">
+              Especialista en Remodelación Integral — Alma Remodelaciones
+            </p>
             <p class="funnel__authority-bio">
-              "A lo largo de mi experiencia he visto de todo. El verdadero problema no es la falta de ideas creativas, es la falta de un sistema técnico unificado. Por eso creé el Método de Sincronización de Espacios Smart: un sistema milimétrico donde el diseño y la construcción trabajan juntos para garantizar que tu inversión aumente el valor de tu propiedad sin dolores de cabeza."
+              "A lo largo de mi experiencia he visto de todo. El verdadero problema no es la falta
+              de ideas creativas, es la falta de un sistema técnico unificado. Por eso creé el
+              Método de Sincronización de Espacios Smart: un sistema milimétrico donde el diseño y
+              la construcción trabajan juntos para garantizar que tu inversión aumente el valor de
+              tu propiedad sin dolores de cabeza."
             </p>
           </div>
         </div>
@@ -124,14 +159,17 @@ onMounted(() => {
       <!-- FINAL CTA -->
       <section class="funnel__final-cta">
         <div class="funnel__logo-wrap funnel__logo-wrap--large">
-          <span class="funnel__logo-text">Alma <span class="funnel__logo-accent">Remodelaciones</span>.</span>
+          <span class="funnel__logo-text"
+            >Alma <span class="funnel__logo-accent">Remodelaciones</span>.</span
+          >
         </div>
         <h2 class="funnel__final-title">
-          ¿Listo para dejar de lidiar con<br>
+          ¿Listo para dejar de lidiar con<br />
           <span class="funnel__final-accent">contratistas informales?</span>
         </h2>
         <p class="funnel__final-sub">
-          Accede a nuestra presentación privada y descubre cómo profesionales se encargan de absolutamente todo, de principio a fin.<br><br>
+          Accede a nuestra presentación privada y descubre cómo profesionales se encargan de
+          absolutamente todo, de principio a fin.<br /><br />
         </p>
         <button class="funnel__cta funnel__cta--pulse" @click="openModal">
           <i class="fa-solid fa-play"></i>
@@ -141,24 +179,24 @@ onMounted(() => {
           <i class="fa-solid fa-lock"></i> 100% gratuito · Sin compromiso
         </p>
       </section>
-
     </div>
 
     <!-- Registration Modal -->
-    <RegistrationModal 
-      :open="isModalOpen" 
-      @close="closeModal" 
-    />
+    <RegistrationModal :open="isModalOpen" @close="closeModal" />
 
     <footer class="funnel__footer">
       <nav class="funnel__footer-links" aria-label="Legal">
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="funnel__footer-copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
-      <p class="funnel__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
+      <p class="funnel__footer-copy">
+        © {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.
+      </p>
+      <p class="funnel__footer-dev">
+        Hecho por
+        <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a>
+      </p>
     </footer>
-
   </main>
 </template>
 
@@ -169,8 +207,9 @@ onMounted(() => {
 .funnel {
   min-height: 100vh;
   background-color: colors.$BG-BASE;
-  background-image: radial-gradient(circle at top right, rgba(224, 106, 65, 0.05) 0%, transparent 40%),
-                    radial-gradient(circle at bottom left, rgba(23, 23, 23, 0.8) 0%, transparent 40%);
+  background-image:
+    radial-gradient(circle at top right, rgba(224, 106, 65, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at bottom left, rgba(23, 23, 23, 0.8) 0%, transparent 40%);
   color: #ffffff;
   font-family: fonts.$font-secondary;
   display: flex;
@@ -257,9 +296,11 @@ onMounted(() => {
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   border: 1px solid colors.$BG-BORDER;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-4px);
@@ -294,7 +335,7 @@ onMounted(() => {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
   border: 2px solid colors.$DIS-GOLD;
   color: colors.$DIS-GOLD;
@@ -314,7 +355,7 @@ onMounted(() => {
   color: #fff;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   padding: 4px 12px;
   border-radius: 20px;
 }
@@ -337,17 +378,20 @@ onMounted(() => {
   justify-content: center;
   gap: 12px;
   box-shadow: 0 10px 20px rgba(colors.$DIS-GOLD, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
 
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 15px 30px rgba(colors.$DIS-GOLD, 0.4);
-    background-color: #FB923C;
+    background-color: #fb923c;
   }
 }
 
 .funnel__cta--pulse {
-  background: linear-gradient(90deg, #C2410C 0%, #FB923C 100%);
+  background: linear-gradient(90deg, #c2410c 0%, #fb923c 100%);
   margin-top: 2.5rem;
   max-width: 450px;
   margin-left: auto;
@@ -358,14 +402,23 @@ onMounted(() => {
   &:hover {
     animation: none;
     box-shadow: 0 0 35px rgba(colors.$DIS-GOLD, 0.6);
-    background: linear-gradient(90deg, #FB923C 0%, #FDBA74 100%);
+    background: linear-gradient(90deg, #fb923c 0%, #fdba74 100%);
   }
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 15px rgba(colors.$DIS-GOLD, 0.3); }
-  50% { transform: scale(1.02); box-shadow: 0 0 35px rgba(colors.$DIS-GOLD, 0.5); }
-  100% { transform: scale(1); box-shadow: 0 0 15px rgba(colors.$DIS-GOLD, 0.3); }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(colors.$DIS-GOLD, 0.3);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 35px rgba(colors.$DIS-GOLD, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(colors.$DIS-GOLD, 0.3);
+  }
 }
 
 .funnel__guarantee {
@@ -377,7 +430,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  
+
   i {
     color: colors.$DIS-GOLD;
   }
@@ -390,7 +443,7 @@ onMounted(() => {
   border-radius: 16px;
   padding: 2.5rem;
   height: 100%;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
   @media (max-width: 768px) {
     padding: 1.5rem;
@@ -435,8 +488,8 @@ onMounted(() => {
 .funnel__stats {
   margin-top: 6rem;
   padding: 4rem 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(23, 23, 23, 0.4);
 
   @media (max-width: 768px) {
@@ -524,7 +577,7 @@ onMounted(() => {
   backdrop-filter: blur(12px);
   border: 1px solid colors.$BG-BORDER;
   border-radius: 20px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 
   @media (max-width: 768px) {
     padding: 2rem 1.5rem;
@@ -578,7 +631,7 @@ onMounted(() => {
 
 .funnel__authority-role {
   font-size: 0.9rem;
-  color: #CCCCCC;
+  color: #cccccc;
   margin: 0 0 1rem;
 }
 
@@ -641,7 +694,7 @@ onMounted(() => {
 .funnel__footer {
   width: 100%;
   padding: 2.5rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -674,12 +727,12 @@ onMounted(() => {
   font-size: 0.75rem;
   color: #4a5568;
   margin: 0;
-  
+
   a {
     color: #718096;
     text-decoration: none;
     font-weight: bold;
-    
+
     &:hover {
       color: colors.$DIS-GOLD;
     }

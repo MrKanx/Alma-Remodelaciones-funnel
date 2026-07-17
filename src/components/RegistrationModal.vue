@@ -1,45 +1,98 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import { parsePhoneNumberFromString, getCountries, getCountryCallingCode, AsYouType } from 'libphonenumber-js'
+import {
+  parsePhoneNumberFromString,
+  getCountries,
+  getCountryCallingCode,
+  AsYouType,
+} from 'libphonenumber-js'
 import { useRouter } from 'vue-router'
 import { getStoredFbParams } from '@/utils/fbclid'
+import { sendWebhookWithFallback } from '@/utils/ghl'
 const router = useRouter()
 
 const props = defineProps<{ open: boolean }>()
 const emit = defineEmits<{ (e: 'close'): void }>()
 
 // ── Países ─────────────────────────────────────────────────────────────────────
-interface Country { code: string; name: string; dial: string; flag: string }
-
-const flagEmoji = (code: string) =>
-  [...code.toUpperCase()].map(c => String.fromCodePoint(0x1f1e6 - 65 + c.charCodeAt(0))).join('')
-
-const PRIORITY = ['EC', 'CO', 'PE', 'MX', 'AR', 'CL', 'VE', 'BO', 'PY', 'UY', 'GT', 'HN', 'SV', 'CR', 'PA', 'DO', 'CU', 'US', 'ES']
-
-const nameMap: Record<string, string> = {
-  EC: 'Ecuador', CO: 'Colombia', PE: 'Perú', MX: 'México', AR: 'Argentina',
-  CL: 'Chile', VE: 'Venezuela', BO: 'Bolivia', PY: 'Paraguay', UY: 'Uruguay',
-  GT: 'Guatemala', HN: 'Honduras', SV: 'El Salvador', CR: 'Costa Rica',
-  PA: 'Panamá', DO: 'Rep. Dominicana', CU: 'Cuba', US: 'Estados Unidos',
-  ES: 'España', BR: 'Brasil', PT: 'Portugal', FR: 'Francia', DE: 'Alemania',
-  IT: 'Italia', GB: 'Reino Unido', CA: 'Canadá', AU: 'Australia', JP: 'Japón',
-  CN: 'China', IN: 'India',
+interface Country {
+  code: string
+  name: string
+  dial: string
+  flag: string
 }
 
-const allCountries: Country[] = getCountries()
-  .map(code => ({
-    code,
-    name: nameMap[code] ?? code,
-    dial: '+' + getCountryCallingCode(code),
-    flag: flagEmoji(code),
-  }))
+const flagEmoji = (code: string) =>
+  [...code.toUpperCase()].map((c) => String.fromCodePoint(0x1f1e6 - 65 + c.charCodeAt(0))).join('')
 
-const priorityList = PRIORITY
-  .map(code => allCountries.find(c => c.code === code))
-  .filter(Boolean) as Country[]
+const PRIORITY = [
+  'EC',
+  'CO',
+  'PE',
+  'MX',
+  'AR',
+  'CL',
+  'VE',
+  'BO',
+  'PY',
+  'UY',
+  'GT',
+  'HN',
+  'SV',
+  'CR',
+  'PA',
+  'DO',
+  'CU',
+  'US',
+  'ES',
+]
+
+const nameMap: Record<string, string> = {
+  EC: 'Ecuador',
+  CO: 'Colombia',
+  PE: 'Perú',
+  MX: 'México',
+  AR: 'Argentina',
+  CL: 'Chile',
+  VE: 'Venezuela',
+  BO: 'Bolivia',
+  PY: 'Paraguay',
+  UY: 'Uruguay',
+  GT: 'Guatemala',
+  HN: 'Honduras',
+  SV: 'El Salvador',
+  CR: 'Costa Rica',
+  PA: 'Panamá',
+  DO: 'Rep. Dominicana',
+  CU: 'Cuba',
+  US: 'Estados Unidos',
+  ES: 'España',
+  BR: 'Brasil',
+  PT: 'Portugal',
+  FR: 'Francia',
+  DE: 'Alemania',
+  IT: 'Italia',
+  GB: 'Reino Unido',
+  CA: 'Canadá',
+  AU: 'Australia',
+  JP: 'Japón',
+  CN: 'China',
+  IN: 'India',
+}
+
+const allCountries: Country[] = getCountries().map((code) => ({
+  code,
+  name: nameMap[code] ?? code,
+  dial: '+' + getCountryCallingCode(code),
+  flag: flagEmoji(code),
+}))
+
+const priorityList = PRIORITY.map((code) => allCountries.find((c) => c.code === code)).filter(
+  Boolean,
+) as Country[]
 
 const otherList = allCountries
-  .filter(c => !PRIORITY.includes(c.code))
+  .filter((c) => !PRIORITY.includes(c.code))
   .sort((a, b) => a.name.localeCompare(b.name))
 
 const countries = [...priorityList, { code: '---', name: '', dial: '', flag: '' }, ...otherList]
@@ -69,18 +122,23 @@ const URGENCY_LABEL: Record<Exclude<Urgency, ''>, string> = {
 }
 
 const urgencyOpts: { value: Exclude<Urgency, ''>; label: string; sub: string; hot?: boolean }[] = [
-  { value: 'inmediato',   label: 'En construcción / Remodelación actual', sub: 'Urgencia alta — obra en curso', hot: true },
-  { value: 'proximos',    label: 'Planos listos, por iniciar',      sub: 'Planificación cercana' },
-  { value: 'planificando',label: 'En etapa de diseño arquitectónico',                   sub: 'Sin prisa' },
-  { value: 'explorando',  label: 'Solo estoy explorando ideas',          sub: 'Sin urgencia particular' },
+  {
+    value: 'inmediato',
+    label: 'En construcción / Remodelación actual',
+    sub: 'Urgencia alta — obra en curso',
+    hot: true,
+  },
+  { value: 'proximos', label: 'Planos listos, por iniciar', sub: 'Planificación cercana' },
+  { value: 'planificando', label: 'En etapa de diseño arquitectónico', sub: 'Sin prisa' },
+  { value: 'explorando', label: 'Solo estoy explorando ideas', sub: 'Sin urgencia particular' },
 ]
 
 function calcTags(urgency: Urgency): string[] {
   const base = ['Alma Remodelaciones', 'funnel-registro']
-  if (urgency === 'inmediato')    return [...base, 'urgente', 'contrato-inmediato']
-  if (urgency === 'proximos')     return [...base, 'urgencia-media']
+  if (urgency === 'inmediato') return [...base, 'urgente', 'contrato-inmediato']
+  if (urgency === 'proximos') return [...base, 'urgencia-media']
   if (urgency === 'planificando') return [...base, 'planificando']
-  if (urgency === 'explorando')   return [...base, 'no-urgente', 'explorando']
+  if (urgency === 'explorando') return [...base, 'no-urgente', 'explorando']
   return base
 }
 
@@ -143,12 +201,12 @@ const getPageDuration = (): number => {
 
 // ── Validaciones ──────────────────────────────────────────────────────────────
 const validators: Record<string, (v: string) => string | null> = {
-  nombre: v => v.trim().length < 2 ? 'Ingresa tu nombre' : null,
-  apellido: v => v.trim().length < 2 ? 'Ingresa tu apellido' : null,
-  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Email inválido',
-  phone: () => phoneValid.value ? null : 'Número inválido para el país seleccionado',
-  empresa: v => v.trim().length < 2 ? 'Ingresa tu tipo de proyecto' : null,
-  urgencia: v => !v ? 'Selecciona en qué etapa está tu obra' : null,
+  nombre: (v) => (v.trim().length < 2 ? 'Ingresa tu nombre' : null),
+  apellido: (v) => (v.trim().length < 2 ? 'Ingresa tu apellido' : null),
+  email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Email inválido'),
+  phone: () => (phoneValid.value ? null : 'Número inválido para el país seleccionado'),
+  empresa: (v) => (v.trim().length < 2 ? 'Ingresa tu tipo de proyecto' : null),
+  urgencia: (v) => (!v ? 'Selecciona en qué etapa está tu obra' : null),
 }
 
 const validate = () => {
@@ -177,8 +235,10 @@ const onPhoneInput = (e: Event) => {
 const filteredCountries = computed(() => {
   const q = countrySearch.value.toLowerCase()
   if (!q) return countries
-  return countries.filter(c =>
-    c.code !== '---' && (c.name.toLowerCase().includes(q) || c.dial.includes(q) || c.code.toLowerCase().includes(q))
+  return countries.filter(
+    (c) =>
+      c.code !== '---' &&
+      (c.name.toLowerCase().includes(q) || c.dial.includes(q) || c.code.toLowerCase().includes(q)),
   )
 })
 
@@ -197,7 +257,14 @@ const handleClickOutside = (e: MouseEvent) => {
 
 // ── Submit ────────────────────────────────────────────────────────────────────
 const handleSubmit = async () => {
-  touched.value = { nombre: true, apellido: true, email: true, phone: true, empresa: true, urgencia: true }
+  touched.value = {
+    nombre: true,
+    apellido: true,
+    email: true,
+    phone: true,
+    empresa: true,
+    urgencia: true,
+  }
   if (!validate()) return
 
   submitting.value = true
@@ -231,26 +298,25 @@ const handleSubmit = async () => {
 
   console.info('[Alma Remodelaciones Registro]', payload)
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_REGISTRO ?? 'https://services.leadconnectorhq.com/hooks/4XqSfm1KK7VoNl7vvnml/webhook-trigger/aYewbjwRqsC0Bnzm4s3Z'
-  await fetch(webhookUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  }).catch(() => {})
-
-  ;(window as any).fbq?.('track', 'Lead',
+  await sendWebhookWithFallback(payload).catch(() => {})
+  ;(window as any).fbq?.(
+    'track',
+    'Lead',
     { content_name: 'registro-inicial' },
-    { eventID: leadEventId }
+    { eventID: leadEventId },
   )
 
-  localStorage.setItem('os_contact', JSON.stringify({
-    nombre: form.value.nombre.trim(),
-    apellido: form.value.apellido.trim(),
-    negocio: form.value.empresa.trim(),
-    email: form.value.email.trim().toLowerCase(),
-    telefono: parsedPhoneE164.value,
-    timestamp: Date.now(),
-  }))
+  localStorage.setItem(
+    'os_contact',
+    JSON.stringify({
+      nombre: form.value.nombre.trim(),
+      apellido: form.value.apellido.trim(),
+      negocio: form.value.empresa.trim(),
+      email: form.value.email.trim().toLowerCase(),
+      telefono: parsedPhoneE164.value,
+      timestamp: Date.now(),
+    }),
+  )
   ;(window as any).fbq?.('track', 'CompleteRegistration', {
     content_name: 'registro-inicial',
     value: 1,
@@ -268,12 +334,15 @@ const onKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Escape') emit('close')
 }
 
-watch(() => props.open, (val) => {
-  document.body.style.overflow = val ? 'hidden' : ''
-  if (val) {
-    startPageTimer()
-  }
-})
+watch(
+  () => props.open,
+  (val) => {
+    document.body.style.overflow = val ? 'hidden' : ''
+    if (val) {
+      startPageTimer()
+    }
+  },
+)
 
 onMounted(() => {
   document.addEventListener('mousedown', handleClickOutside)
@@ -287,9 +356,12 @@ onUnmounted(() => {
   clearInterval(timerInterval)
 })
 
-watch(dropdownOpen, open => {
+watch(dropdownOpen, (open) => {
   if (open) {
-    setTimeout(() => document.querySelector<HTMLInputElement>('.rmodal__country-search')?.focus(), 50)
+    setTimeout(
+      () => document.querySelector<HTMLInputElement>('.rmodal__country-search')?.focus(),
+      50,
+    )
   }
 })
 </script>
@@ -297,25 +369,41 @@ watch(dropdownOpen, open => {
 <template>
   <Teleport to="body">
     <Transition name="rmodal-fade">
-      <div v-if="props.open" class="rmodal-overlay" @click.self="$emit('close')" role="dialog" aria-modal="true" aria-labelledby="rmodal-title">
-
+      <div
+        v-if="props.open"
+        class="rmodal-overlay"
+        @click.self="$emit('close')"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="rmodal-title"
+      >
         <div class="rmodal">
-
           <!-- Close -->
           <button class="rmodal__close" @click="$emit('close')" aria-label="Cerrar">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
 
           <div class="rmodal__header">
             <p class="rmodal__eyebrow">ALMA REMODELACIONES</p>
-            <h2 id="rmodal-title" class="rmodal__title">Accede a la presentación<br><span class="rmodal__title-accent">privada</span></h2>
-            <p class="rmodal__subtitle">Descubre el método exacto para una remodelación integral sin dolores de cabeza.</p>
+            <h2 id="rmodal-title" class="rmodal__title">
+              Accede a la presentación<br /><span class="rmodal__title-accent">privada</span>
+            </h2>
+            <p class="rmodal__subtitle">
+              Descubre el método exacto para una remodelación integral sin dolores de cabeza.
+            </p>
           </div>
 
           <form class="rmodal__form" @submit.prevent="handleSubmit" novalidate>
-
             <!-- Nombre + Apellido -->
             <div class="rmodal__row">
               <div class="rmodal__field" :class="{ 'has-error': touched.nombre && errors.nombre }">
@@ -328,10 +416,15 @@ watch(dropdownOpen, open => {
                   autocomplete="given-name"
                   @blur="onBlur('nombre')"
                 />
-                <span v-if="touched.nombre && errors.nombre" class="rmodal__error">{{ errors.nombre }}</span>
+                <span v-if="touched.nombre && errors.nombre" class="rmodal__error">{{
+                  errors.nombre
+                }}</span>
               </div>
 
-              <div class="rmodal__field" :class="{ 'has-error': touched.apellido && errors.apellido }">
+              <div
+                class="rmodal__field"
+                :class="{ 'has-error': touched.apellido && errors.apellido }"
+              >
                 <label for="r-apellido">Apellido</label>
                 <input
                   id="r-apellido"
@@ -341,7 +434,9 @@ watch(dropdownOpen, open => {
                   autocomplete="family-name"
                   @blur="onBlur('apellido')"
                 />
-                <span v-if="touched.apellido && errors.apellido" class="rmodal__error">{{ errors.apellido }}</span>
+                <span v-if="touched.apellido && errors.apellido" class="rmodal__error">{{
+                  errors.apellido
+                }}</span>
               </div>
             </div>
 
@@ -356,7 +451,9 @@ watch(dropdownOpen, open => {
                 autocomplete="email"
                 @blur="onBlur('email')"
               />
-              <span v-if="touched.email && errors.email" class="rmodal__error">{{ errors.email }}</span>
+              <span v-if="touched.email && errors.email" class="rmodal__error">{{
+                errors.email
+              }}</span>
             </div>
 
             <!-- Teléfono -->
@@ -372,16 +469,41 @@ watch(dropdownOpen, open => {
                 >
                   <span class="rmodal__flag">{{ selectedCountry.flag }}</span>
                   <span class="rmodal__dial">{{ selectedCountry.dial }}</span>
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="rmodal__chevron" :class="{ open: dropdownOpen }">
-                    <polyline points="6 9 12 15 18 9"/>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    class="rmodal__chevron"
+                    :class="{ open: dropdownOpen }"
+                  >
+                    <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </button>
 
                 <Transition name="dropdown">
                   <div v-if="dropdownOpen" class="rmodal__country-dropdown" role="listbox">
-                    <input type="text" class="rmodal__country-search" v-model="countrySearch" placeholder="Buscar país..." aria-label="Buscar país" />
+                    <input
+                      type="text"
+                      class="rmodal__country-search"
+                      v-model="countrySearch"
+                      placeholder="Buscar país..."
+                      aria-label="Buscar país"
+                    />
                     <ul>
-                      <li v-for="c in filteredCountries" :key="c.code" :class="['rmodal__country-item', { separator: c.code === '---', active: c.code === selectedCountry.code }]" role="option" :aria-selected="c.code === selectedCountry.code" @click="selectCountry(c)">
+                      <li
+                        v-for="c in filteredCountries"
+                        :key="c.code"
+                        :class="[
+                          'rmodal__country-item',
+                          { separator: c.code === '---', active: c.code === selectedCountry.code },
+                        ]"
+                        role="option"
+                        :aria-selected="c.code === selectedCountry.code"
+                        @click="selectCountry(c)"
+                      >
                         <template v-if="c.code !== '---'">
                           <span class="rmodal__flag">{{ c.flag }}</span>
                           <span class="rmodal__country-name">{{ c.name }}</span>
@@ -395,16 +517,56 @@ watch(dropdownOpen, open => {
                   </div>
                 </Transition>
 
-                <input class="rmodal__phone-input" type="tel" :value="form.phone" placeholder="98 493 4039" autocomplete="tel-national" inputmode="tel" @input="onPhoneInput" @blur="onBlur('phone')" />
+                <input
+                  class="rmodal__phone-input"
+                  type="tel"
+                  :value="form.phone"
+                  placeholder="98 493 4039"
+                  autocomplete="tel-national"
+                  inputmode="tel"
+                  @input="onPhoneInput"
+                  @blur="onBlur('phone')"
+                />
 
-                <span class="rmodal__phone-status" :class="{ valid: phoneValid, invalid: touched.phone && !phoneValid && form.phone }" aria-hidden="true">
-                  <svg v-if="phoneValid" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <svg v-else-if="touched.phone && !phoneValid && form.phone" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <span
+                  class="rmodal__phone-status"
+                  :class="{
+                    valid: phoneValid,
+                    invalid: touched.phone && !phoneValid && form.phone,
+                  }"
+                  aria-hidden="true"
+                >
+                  <svg
+                    v-if="phoneValid"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <svg
+                    v-else-if="touched.phone && !phoneValid && form.phone"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
                 </span>
               </div>
-              <span v-if="touched.phone && errors.phone" class="rmodal__error">{{ errors.phone }}</span>
+              <span v-if="touched.phone && errors.phone" class="rmodal__error">{{
+                errors.phone
+              }}</span>
               <span v-if="phoneValid && parsedPhoneE164" class="rmodal__phone-preview">
-                {{ selectedCountry.flag }} {{ selectedCountry.dial }} {{ formattedPhone }} · E.164: {{ parsedPhoneE164 }}
+                {{ selectedCountry.flag }} {{ selectedCountry.dial }} {{ formattedPhone }} · E.164:
+                {{ parsedPhoneE164 }}
               </span>
             </div>
 
@@ -419,11 +581,16 @@ watch(dropdownOpen, open => {
                 autocomplete="organization"
                 @blur="onBlur('empresa')"
               />
-              <span v-if="touched.empresa && errors.empresa" class="rmodal__error">{{ errors.empresa }}</span>
+              <span v-if="touched.empresa && errors.empresa" class="rmodal__error">{{
+                errors.empresa
+              }}</span>
             </div>
 
             <!-- Urgencia -->
-            <div class="rmodal__field rmodal__field--urgency" :class="{ 'has-error': touched.urgencia && errors.urgencia }">
+            <div
+              class="rmodal__field rmodal__field--urgency"
+              :class="{ 'has-error': touched.urgencia && errors.urgencia }"
+            >
               <label class="rmodal__urgency-label">
                 <i class="fa-solid fa-hammer" aria-hidden="true"></i>
                 ¿En qué etapa está tu obra?
@@ -439,36 +606,79 @@ watch(dropdownOpen, open => {
                     'rmodal__urgency-opt--hot-sel': opt.hot && form.urgencia === opt.value,
                   }"
                 >
-                  <input type="radio" v-model="form.urgencia" :value="opt.value" class="rmodal__urgency-radio sr-only" @change="onBlur('urgencia')" />
+                  <input
+                    type="radio"
+                    v-model="form.urgencia"
+                    :value="opt.value"
+                    class="rmodal__urgency-radio sr-only"
+                    @change="onBlur('urgencia')"
+                  />
                   <span class="rmodal__urgency-opt-dot" aria-hidden="true"></span>
                   <span class="rmodal__urgency-opt-text">
                     <strong>{{ opt.label }}</strong>
                     <small>{{ opt.sub }}</small>
                   </span>
-                  <i v-if="opt.hot" class="fa-solid fa-fire rmodal__urgency-opt-flame" aria-hidden="true"></i>
+                  <i
+                    v-if="opt.hot"
+                    class="fa-solid fa-fire rmodal__urgency-opt-flame"
+                    aria-hidden="true"
+                  ></i>
                 </label>
               </div>
-              <span v-if="touched.urgencia && errors.urgencia" class="rmodal__error">{{ errors.urgencia }}</span>
+              <span v-if="touched.urgencia && errors.urgencia" class="rmodal__error">{{
+                errors.urgencia
+              }}</span>
             </div>
 
             <!-- Submit -->
-            <button class="rmodal__submit" :class="{ 'rmodal__submit--urgent': form.urgencia === 'inmediato' }" type="submit" :disabled="submitting">
-              <svg v-if="submitting" class="rmodal__spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+            <button
+              class="rmodal__submit"
+              :class="{ 'rmodal__submit--urgent': form.urgencia === 'inmediato' }"
+              type="submit"
+              :disabled="submitting"
+            >
+              <svg
+                v-if="submitting"
+                class="rmodal__spinner"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
               <template v-else>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </template>
               {{ submitting ? 'Enviando...' : 'ACCEDER AL VIDEO' }}
             </button>
 
             <p class="rmodal__legal">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
               100% gratuito · Sin compromiso · Tus datos están seguros
             </p>
-
           </form>
-
         </div>
       </div>
     </Transition>
@@ -508,7 +718,9 @@ $accent: colors.$QS-GOLD;
   border: 1px solid $border;
   border-radius: 24px;
   padding: 48px 40px 40px;
-  box-shadow: 0 10px 40px rgba(colors.$OS-NAVY, 0.08), 0 40px 100px rgba(colors.$OS-NAVY, 0.12);
+  box-shadow:
+    0 10px 40px rgba(colors.$OS-NAVY, 0.08),
+    0 40px 100px rgba(colors.$OS-NAVY, 0.12);
   max-height: 92vh;
   overflow-y: auto;
 
@@ -526,17 +738,26 @@ $accent: colors.$QS-GOLD;
   height: 36px;
   border-radius: 50%;
   border: 1px solid $border;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   color: $text-muted;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-  &:hover { border-color: rgba($accent, 0.4); color: $accent; background: rgba($accent, 0.06); }
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+  &:hover {
+    border-color: rgba($accent, 0.4);
+    color: $accent;
+    background: rgba($accent, 0.06);
+  }
 }
 
-.rmodal__header { margin-bottom: 1rem; }
+.rmodal__header {
+  margin-bottom: 1rem;
+}
 
 .rmodal__eyebrow {
   font-family: fonts.$font-accent;
@@ -558,7 +779,9 @@ $accent: colors.$QS-GOLD;
   margin: 0 0 8px;
 }
 
-.rmodal__title-accent { color: $accent; }
+.rmodal__title-accent {
+  color: $accent;
+}
 
 .rmodal__subtitle {
   font-family: fonts.$font-secondary;
@@ -577,7 +800,9 @@ $accent: colors.$QS-GOLD;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  @media (max-width: 400px) { grid-template-columns: 1fr; }
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .rmodal__field {
@@ -589,7 +814,7 @@ $accent: colors.$QS-GOLD;
     font-family: fonts.$font-interface;
     font-size: 0.74rem;
     font-weight: 600;
-    color: #FFFFFF;
+    color: #ffffff;
     letter-spacing: 0.5px;
   }
 
@@ -604,12 +829,23 @@ $accent: colors.$QS-GOLD;
     font-size: 0.92rem;
     color: colors.$OS-DARK;
     outline: none;
-    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-    &::placeholder { color: rgba(255, 255, 255, 0.35); }
-    &:focus { border-color: rgba($accent, 0.5); background: rgba($accent, 0.04); box-shadow: 0 0 0 3px rgba($accent, 0.08); }
+    transition:
+      border-color 0.2s,
+      background 0.2s,
+      box-shadow 0.2s;
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+    &:focus {
+      border-color: rgba($accent, 0.5);
+      background: rgba($accent, 0.04);
+      box-shadow: 0 0 0 3px rgba($accent, 0.08);
+    }
   }
 
-  &.has-error input { border-color: rgba(255, 80, 100, 0.5); }
+  &.has-error input {
+    border-color: rgba(255, 80, 100, 0.5);
+  }
 }
 
 .rmodal__error {
@@ -627,9 +863,16 @@ $accent: colors.$QS-GOLD;
   border: 1px solid $border;
   border-radius: 10px;
   overflow: visible;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  &:focus-within { border-color: rgba($accent, 0.5); box-shadow: 0 0 0 3px rgba($accent, 0.08); }
-  .has-error & { border-color: rgba(255, 80, 100, 0.5); }
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  &:focus-within {
+    border-color: rgba($accent, 0.5);
+    box-shadow: 0 0 0 3px rgba($accent, 0.08);
+  }
+  .has-error & {
+    border-color: rgba(255, 80, 100, 0.5);
+  }
 }
 
 .rmodal__country-trigger {
@@ -646,14 +889,31 @@ $accent: colors.$QS-GOLD;
   flex-shrink: 0;
   transition: background 0.15s;
   border-radius: 10px 0 0 10px;
-  &:hover { background: rgba(255,255,255,0.04); }
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
 }
 
-.rmodal__flag { font-size: 1.1rem; line-height: 1; }
+.rmodal__flag {
+  font-size: 1.1rem;
+  line-height: 1;
+}
 
-.rmodal__dial { font-family: fonts.$font-accent; font-size: 0.82rem; font-weight: 600; color: #FFFFFF; }
+.rmodal__dial {
+  font-family: fonts.$font-accent;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+}
 
-.rmodal__chevron { opacity: 0.4; transition: transform 0.2s ease; &.open { transform: rotate(180deg); opacity: 0.7; } }
+.rmodal__chevron {
+  opacity: 0.4;
+  transition: transform 0.2s ease;
+  &.open {
+    transform: rotate(180deg);
+    opacity: 0.7;
+  }
+}
 
 .rmodal__country-dropdown {
   position: absolute;
@@ -664,27 +924,31 @@ $accent: colors.$QS-GOLD;
   max-height: 240px;
   overflow: hidden;
   background: #000000;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  @media (max-width: 560px) { width: 240px; }
+  @media (max-width: 560px) {
+    width: 240px;
+  }
 }
 
 .rmodal__country-search {
   width: 100%;
   box-sizing: border-box;
   padding: 10px 14px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   color: colors.$OS-DARK;
   font-family: fonts.$font-secondary;
   font-size: 0.84rem;
   outline: none;
   border-radius: 12px 12px 0 0;
-  &::placeholder { color: rgba(255, 255, 255, 0.35); }
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
 }
 
 .rmodal__country-dropdown ul {
@@ -693,9 +957,16 @@ $accent: colors.$QS-GOLD;
   margin: 0;
   overflow-y: auto;
   max-height: 190px;
-  &::-webkit-scrollbar { width: 4px; }
-  &::-webkit-scrollbar-track { background: transparent; }
-  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+  }
 }
 
 .rmodal__country-item {
@@ -706,24 +977,41 @@ $accent: colors.$QS-GOLD;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.15s;
-  &:hover:not(.separator) { background: rgba($accent, 0.08); }
-  &.active { background: rgba($accent, 0.12); }
-  &.separator { padding: 4px 10px; cursor: default; }
+  &:hover:not(.separator) {
+    background: rgba($accent, 0.08);
+  }
+  &.active {
+    background: rgba($accent, 0.12);
+  }
+  &.separator {
+    padding: 4px 10px;
+    cursor: default;
+  }
 }
 
-.rmodal__sep-line { display: block; height: 1px; width: 100%; background: rgba(255,255,255,0.07); }
+.rmodal__sep-line {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.07);
+}
 
 .rmodal__country-name {
   font-family: fonts.$font-secondary;
   font-size: 0.82rem;
-  color: #FFFFFF;
+  color: #ffffff;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.rmodal__country-dial { font-family: fonts.$font-accent; font-size: 0.75rem; color: #EEEEEE; flex-shrink: 0; }
+.rmodal__country-dial {
+  font-family: fonts.$font-accent;
+  font-size: 0.75rem;
+  color: #eeeeee;
+  flex-shrink: 0;
+}
 
 .rmodal__phone-input {
   flex: 1;
@@ -737,7 +1025,9 @@ $accent: colors.$QS-GOLD;
   color: colors.$OS-DARK;
   outline: none !important;
   box-shadow: none !important;
-  &::placeholder { color: rgba(255, 255, 255, 0.35); }
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
 }
 
 .rmodal__phone-status {
@@ -752,8 +1042,14 @@ $accent: colors.$QS-GOLD;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  &.valid { background: rgba(16, 185, 129, 0.1); color: #10b981; }
-  &.invalid { background: rgba(255, 80, 100, 0.1); color: #ff6680; }
+  &.valid {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+  }
+  &.invalid {
+    background: rgba(255, 80, 100, 0.1);
+    color: #ff6680;
+  }
 }
 
 .rmodal__phone-preview {
@@ -775,8 +1071,14 @@ $accent: colors.$QS-GOLD;
   font-family: fonts.$font-interface;
   font-size: 0.76rem;
   color: colors.$OS-NAVY;
-  i { color: colors.$OS-BLUE; font-size: 0.75rem; flex-shrink: 0; }
-  strong { font-weight: 700; }
+  i {
+    color: colors.$OS-BLUE;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+  strong {
+    font-weight: 700;
+  }
 }
 
 // ── Submit ─────────────────────────────────────────────────────────────────────
@@ -799,27 +1101,51 @@ $accent: colors.$QS-GOLD;
   border-radius: 12px;
   cursor: pointer;
   box-shadow: 0 8px 28px rgba($accent, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.2s;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    opacity 0.2s;
 
-  &:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 40px rgba($accent, 0.5); }
-  &:active:not(:disabled) { transform: translateY(0); }
-  &:disabled { opacity: 0.7; cursor: not-allowed; }
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba($accent, 0.5);
+  }
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 }
 
 .rmodal__submit--urgent {
   background: colors.$ALU-URGENT;
   box-shadow: 0 8px 28px rgba(colors.$ALU-URGENT, 0.45);
   animation: urgent-pulse 2s ease-in-out infinite;
-  &:hover:not(:disabled) { box-shadow: 0 14px 40px rgba(colors.$ALU-URGENT, 0.6); }
+  &:hover:not(:disabled) {
+    box-shadow: 0 14px 40px rgba(colors.$ALU-URGENT, 0.6);
+  }
 }
 
 @keyframes urgent-pulse {
-  0%, 100% { box-shadow: 0 8px 28px rgba(colors.$ALU-URGENT, 0.45); }
-  50%      { box-shadow: 0 8px 44px rgba(colors.$ALU-URGENT, 0.7); }
+  0%,
+  100% {
+    box-shadow: 0 8px 28px rgba(colors.$ALU-URGENT, 0.45);
+  }
+  50% {
+    box-shadow: 0 8px 44px rgba(colors.$ALU-URGENT, 0.7);
+  }
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
-.rmodal__spinner { animation: spin 0.8s linear infinite; }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rmodal__spinner {
+  animation: spin 0.8s linear infinite;
+}
 
 .rmodal__legal {
   display: flex;
@@ -830,7 +1156,10 @@ $accent: colors.$QS-GOLD;
   font-size: 0.7rem;
   color: $text-muted;
   margin: 4px 0 0;
-  svg { opacity: 0.5; flex-shrink: 0; }
+  svg {
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
 }
 
 // ── Urgency field ─────────────────────────────────────────────────────────────
@@ -846,13 +1175,18 @@ $accent: colors.$QS-GOLD;
   border: 0;
 }
 
-.rmodal__field--urgency { gap: 8px; }
+.rmodal__field--urgency {
+  gap: 8px;
+}
 
 .rmodal__urgency-label {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  i { color: $accent; font-size: 0.78rem; }
+  i {
+    color: $accent;
+    font-size: 0.78rem;
+  }
 }
 
 .rmodal__urgency-opts {
@@ -870,10 +1204,17 @@ $accent: colors.$QS-GOLD;
   border: 1px solid $border;
   border-radius: 10px;
   cursor: pointer;
-  transition: border-color 0.18s, background 0.18s, transform 0.15s, box-shadow 0.2s;
+  transition:
+    border-color 0.18s,
+    background 0.18s,
+    transform 0.15s,
+    box-shadow 0.2s;
   position: relative;
 
-  &:hover { border-color: rgba($accent, 0.4); background: rgba($accent, 0.04); }
+  &:hover {
+    border-color: rgba($accent, 0.4);
+    background: rgba($accent, 0.04);
+  }
 
   &--sel {
     border-color: $accent;
@@ -885,7 +1226,10 @@ $accent: colors.$QS-GOLD;
     border-color: rgba(colors.$ALU-URGENT, 0.35);
     background: colors.$ALU-URGENT-BG;
 
-    &:hover { border-color: colors.$ALU-URGENT; background: rgba(colors.$ALU-URGENT, 0.08); }
+    &:hover {
+      border-color: colors.$ALU-URGENT;
+      background: rgba(colors.$ALU-URGENT, 0.08);
+    }
   }
 
   &--hot-sel {
@@ -899,60 +1243,121 @@ $accent: colors.$QS-GOLD;
       box-shadow: inset 0 0 0 3px #ffffff;
     }
 
-    .rmodal__urgency-opt-text strong { color: #FFFFFF; }
+    .rmodal__urgency-opt-text strong {
+      color: #ffffff;
+    }
   }
 }
 
 .rmodal__urgency-opt-dot {
-  width: 18px; height: 18px; border-radius: 50%;
-  border: 2px solid #c5d3e3; background: #000000; flex-shrink: 0;
-  transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #c5d3e3;
+  background: #000000;
+  flex-shrink: 0;
+  transition:
+    border-color 0.18s,
+    background 0.18s,
+    box-shadow 0.18s;
 
   .rmodal__urgency-opt--sel & {
-    border-color: $accent; background: $accent; box-shadow: inset 0 0 0 3px #ffffff;
+    border-color: $accent;
+    background: $accent;
+    box-shadow: inset 0 0 0 3px #ffffff;
   }
 }
 
 .rmodal__urgency-opt-text {
-  display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
 
   strong {
-    font-family: fonts.$font-interface; font-size: 0.88rem; font-weight: 700;
-    color: colors.$OS-DARK; line-height: 1.25;
+    font-family: fonts.$font-interface;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: colors.$OS-DARK;
+    line-height: 1.25;
   }
 
-  small { font-family: fonts.$font-secondary; font-size: 0.74rem; color: $text-muted; }
+  small {
+    font-family: fonts.$font-secondary;
+    font-size: 0.74rem;
+    color: $text-muted;
+  }
 }
 
 .rmodal__urgency-opt-flame {
-  color: colors.$ALU-URGENT; font-size: 0.95rem; flex-shrink: 0;
+  color: colors.$ALU-URGENT;
+  font-size: 0.95rem;
+  flex-shrink: 0;
   animation: flame-flicker 1.6s infinite;
 }
 
 @keyframes flame-flicker {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(0.92); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(0.92);
+  }
 }
 
 .rmodal-fade-enter-active {
-  transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
-  .rmodal { transition: opacity 0.3s ease, transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1); }
+  transition:
+    opacity 0.3s ease,
+    backdrop-filter 0.3s ease;
+  .rmodal {
+    transition:
+      opacity 0.3s ease,
+      transform 0.38s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
 }
 .rmodal-fade-leave-active {
   transition: opacity 0.22s ease;
-  .rmodal { transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.55, 0, 1, 0.45); }
+  .rmodal {
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s cubic-bezier(0.55, 0, 1, 0.45);
+  }
 }
 .rmodal-fade-enter-from {
   opacity: 0;
-  .rmodal { opacity: 0; transform: scale(0.92) translateY(24px); }
+  .rmodal {
+    opacity: 0;
+    transform: scale(0.92) translateY(24px);
+  }
 }
 .rmodal-fade-leave-to {
   opacity: 0;
-  .rmodal { opacity: 0; transform: scale(0.95) translateY(10px); }
+  .rmodal {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
 }
 
-.dropdown-enter-active { transition: opacity 0.18s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.dropdown-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
-.dropdown-enter-from { opacity: 0; transform: translateY(-8px) scale(0.97); }
-.dropdown-leave-to { opacity: 0; transform: translateY(-4px) scale(0.98); }
+.dropdown-enter-active {
+  transition:
+    opacity 0.18s ease,
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dropdown-leave-active {
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+.dropdown-enter-from {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+}
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-4px) scale(0.98);
+}
 </style>

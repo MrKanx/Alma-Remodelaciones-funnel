@@ -46,14 +46,15 @@ const submitCapture = async () => {
     event_id: leadEventId,
   })
   ;(window as any).fbq?.('track', 'Lead', { content_name: 'video-gate' }, { eventID: leadEventId })
-  
-  await new Promise(r => setTimeout(r, 600))
+
+  await new Promise((r) => setTimeout(r, 600))
   captureSubmitting.value = false
   captureOpen.value = false
   startTimer()
 }
 
-const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+const isLocalhost =
+  window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
 const COUNTDOWN_SECONDS = isLocalhost ? 3 : 120
 const secondsLeft = ref(COUNTDOWN_SECONDS)
 const ctaUnlocked = ref(false)
@@ -98,7 +99,7 @@ onMounted(() => {
     script1.src = 'https://fast.wistia.com/player.js'
     script1.async = true
     document.head.appendChild(script1)
-    
+
     const script2 = document.createElement('script')
     script2.src = 'https://fast.wistia.com/embed/nl8brnqhfz.js'
     script2.type = 'module'
@@ -107,18 +108,20 @@ onMounted(() => {
   }
 })
 
-onUnmounted(() => { if (timer) clearInterval(timer) })
+onUnmounted(() => {
+  if (timer) clearInterval(timer)
+})
 </script>
 
 <template>
   <div class="vv-page">
-
     <header class="vv-topbar">
-      <span class="vv-topbar__logo-text">Alma <span class="vv-topbar__logo-accent">Remodelaciones</span></span>
+      <span class="vv-topbar__logo-text"
+        >Alma <span class="vv-topbar__logo-accent">Remodelaciones</span></span
+      >
     </header>
 
     <main class="vv-main">
-
       <div class="vv-stepper" aria-label="Paso 1 de 2">
         <span class="vv-stepper__pill">
           <span class="vv-stepper__dot vv-stepper__dot--active" aria-current="step"></span>
@@ -133,8 +136,8 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
           <span class="vv-accent">eligen a Alma Remodelaciones</span>
         </h1>
         <p class="vv-subtitle">
-          Accede a la presentación completa y descubre cómo asegurar el éxito de tu obra,
-          ahorrar meses de retrasos y disfrutar de tus espacios con total tranquilidad.
+          Accede a la presentación completa y descubre cómo asegurar el éxito de tu obra, ahorrar
+          meses de retrasos y disfrutar de tus espacios con total tranquilidad.
         </p>
       </section>
 
@@ -149,24 +152,23 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
           <div class="vv-cta-locked__message">
             <i class="fa-solid fa-lock vv-cta-locked__icon" aria-hidden="true"></i>
             <p class="vv-cta-locked__text">
-              El botón se habilita en <strong>{{ formattedTime() }}</strong> — la presentación tiene la clave para tu proceso
+              El botón se habilita en <strong>{{ formattedTime() }}</strong> — la presentación tiene
+              la clave para tu proceso
             </p>
           </div>
-          <button 
-            class="vv-cta-btn vv-cta-btn--disabled" 
+          <button
+            class="vv-cta-btn vv-cta-btn--disabled"
             disabled
-            :style="{ '--fill': ((COUNTDOWN_SECONDS - secondsLeft) / COUNTDOWN_SECONDS * 100) + '%' }"
+            :style="{
+              '--fill': ((COUNTDOWN_SECONDS - secondsLeft) / COUNTDOWN_SECONDS) * 100 + '%',
+            }"
           >
             <i class="fa-solid fa-lock" aria-hidden="true"></i>
             QUIERO AGENDAR MI CITA
           </button>
         </div>
 
-        <button
-          v-else
-          class="vv-cta-btn"
-          @click="calendarOpen = true"
-        >
+        <button v-else class="vv-cta-btn" @click="calendarOpen = true">
           <i class="fa-solid fa-calendar-check" aria-hidden="true"></i>
           QUIERO AGENDAR MI CITA
         </button>
@@ -176,7 +178,6 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
           100% gratuito &nbsp;·&nbsp; Sin compromiso &nbsp;·&nbsp; Cupos limitados
         </p>
       </div>
-
     </main>
 
     <footer class="vv-footer">
@@ -184,10 +185,14 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="vv-footer__copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
-      <p class="vv-footer__dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
+      <p class="vv-footer__copy">
+        © {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.
+      </p>
+      <p class="vv-footer__dev">
+        Hecho por
+        <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a>
+      </p>
     </footer>
-
   </div>
 
   <!-- The Qualification Modal used before routing to Booking -->
@@ -195,7 +200,13 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
   <Teleport to="body">
     <Transition name="capture-fade">
-      <div v-if="captureOpen" class="capture-overlay" role="dialog" aria-modal="true" aria-labelledby="capture-title">
+      <div
+        v-if="captureOpen"
+        class="capture-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="capture-title"
+      >
         <div class="capture-modal">
           <div class="capture-modal__header">
             <h2 id="capture-title" class="capture-modal__title">
@@ -205,26 +216,74 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
           </div>
           <form class="capture-modal__form" @submit.prevent="submitCapture" novalidate>
             <div class="capture-row">
-              <div class="capture-field" :class="{ error: captureTouched.nombre && captureErrors.nombre }">
+              <div
+                class="capture-field"
+                :class="{ error: captureTouched.nombre && captureErrors.nombre }"
+              >
                 <label>Nombre</label>
-                <input v-model="captureForm.nombre" type="text" placeholder="Ej: Juan" @blur="captureTouched.nombre = true" />
-                <span v-if="captureTouched.nombre && captureErrors.nombre" class="capture-field__error">{{ captureErrors.nombre }}</span>
+                <input
+                  v-model="captureForm.nombre"
+                  type="text"
+                  placeholder="Ej: Juan"
+                  @blur="captureTouched.nombre = true"
+                />
+                <span
+                  v-if="captureTouched.nombre && captureErrors.nombre"
+                  class="capture-field__error"
+                  >{{ captureErrors.nombre }}</span
+                >
               </div>
-              <div class="capture-field" :class="{ error: captureTouched.apellido && captureErrors.apellido }">
+              <div
+                class="capture-field"
+                :class="{ error: captureTouched.apellido && captureErrors.apellido }"
+              >
                 <label>Apellido</label>
-                <input v-model="captureForm.apellido" type="text" placeholder="Ej: Pérez" @blur="captureTouched.apellido = true" />
-                <span v-if="captureTouched.apellido && captureErrors.apellido" class="capture-field__error">{{ captureErrors.apellido }}</span>
+                <input
+                  v-model="captureForm.apellido"
+                  type="text"
+                  placeholder="Ej: Pérez"
+                  @blur="captureTouched.apellido = true"
+                />
+                <span
+                  v-if="captureTouched.apellido && captureErrors.apellido"
+                  class="capture-field__error"
+                  >{{ captureErrors.apellido }}</span
+                >
               </div>
             </div>
-            <div class="capture-field" :class="{ error: captureTouched.email && captureErrors.email }">
+            <div
+              class="capture-field"
+              :class="{ error: captureTouched.email && captureErrors.email }"
+            >
               <label>Email</label>
-              <input v-model="captureForm.email" type="email" placeholder="tu@correo.com" @blur="captureTouched.email = true" />
-              <span v-if="captureTouched.email && captureErrors.email" class="capture-field__error">{{ captureErrors.email }}</span>
+              <input
+                v-model="captureForm.email"
+                type="email"
+                placeholder="tu@correo.com"
+                @blur="captureTouched.email = true"
+              />
+              <span
+                v-if="captureTouched.email && captureErrors.email"
+                class="capture-field__error"
+                >{{ captureErrors.email }}</span
+              >
             </div>
-            <div class="capture-field" :class="{ error: captureTouched.telefono && captureErrors.telefono }">
+            <div
+              class="capture-field"
+              :class="{ error: captureTouched.telefono && captureErrors.telefono }"
+            >
               <label>Teléfono</label>
-              <input v-model="captureForm.telefono" type="tel" placeholder="+593 98 000 0000" @blur="captureTouched.telefono = true" />
-              <span v-if="captureTouched.telefono && captureErrors.telefono" class="capture-field__error">{{ captureErrors.telefono }}</span>
+              <input
+                v-model="captureForm.telefono"
+                type="tel"
+                placeholder="+593 98 000 0000"
+                @blur="captureTouched.telefono = true"
+              />
+              <span
+                v-if="captureTouched.telefono && captureErrors.telefono"
+                class="capture-field__error"
+                >{{ captureErrors.telefono }}</span
+              >
             </div>
             <button type="submit" class="capture-submit" :disabled="captureSubmitting">
               <span v-if="!captureSubmitting">
@@ -250,8 +309,9 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 .vv-page {
   min-height: 100vh;
   background-color: colors.$BG-BASE;
-  background-image: radial-gradient(circle at top right, rgba(224, 106, 65, 0.05) 0%, transparent 40%),
-                    radial-gradient(circle at bottom left, rgba(23, 23, 23, 0.8) 0%, transparent 40%);
+  background-image:
+    radial-gradient(circle at top right, rgba(224, 106, 65, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at bottom left, rgba(23, 23, 23, 0.8) 0%, transparent 40%);
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -260,7 +320,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 .vv-topbar {
   background: rgba(10, 15, 29, 0.85);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   padding: 0.9rem 1.5rem;
   display: flex;
   justify-content: center;
@@ -323,7 +383,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     font-family: fonts.$font-interface;
     font-size: 0.8rem;
     font-weight: 600;
-    color: #CCCCCC;
+    color: #cccccc;
     letter-spacing: 0.03em;
   }
 }
@@ -375,7 +435,8 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     height: 100%;
 
     &:not(:defined) {
-      background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/nl8brnqhfz/swatch');
+      background: center / contain no-repeat
+        url('https://fast.wistia.com/embed/medias/nl8brnqhfz/swatch');
       display: block;
       filter: blur(5px);
       padding-top: 56.25%;
@@ -418,7 +479,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
   &__text {
     font-size: 0.95rem;
-    color: #CCCCCC;
+    color: #cccccc;
     margin: 0;
     font-family: fonts.$font-secondary;
 
@@ -448,11 +509,14 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   cursor: pointer;
   width: 100%;
   max-width: 500px;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
   box-shadow: 0 4px 20px rgba(colors.$DIS-GOLD, 0.3);
 
   &:hover {
-    background: #FB923C;
+    background: #fb923c;
     transform: translateY(-2px);
     box-shadow: 0 8px 28px rgba(colors.$DIS-GOLD, 0.45);
   }
@@ -462,7 +526,11 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   }
 
   &--disabled {
-    background: linear-gradient(to right, rgba(224, 106, 65, 0.3) var(--fill, 0%), colors.$BG-SURFACE var(--fill, 0%)) !important;
+    background: linear-gradient(
+      to right,
+      rgba(224, 106, 65, 0.3) var(--fill, 0%),
+      colors.$BG-SURFACE var(--fill, 0%)
+    ) !important;
     color: #888888 !important;
     border: 1px solid colors.$BG-BORDER !important;
     box-shadow: none !important;
@@ -473,7 +541,11 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     backdrop-filter: blur(8px);
 
     &:hover {
-      background: linear-gradient(to right, rgba(224, 106, 65, 0.3) var(--fill, 0%), colors.$BG-SURFACE var(--fill, 0%)) !important;
+      background: linear-gradient(
+        to right,
+        rgba(224, 106, 65, 0.3) var(--fill, 0%),
+        colors.$BG-SURFACE var(--fill, 0%)
+      ) !important;
       transform: none !important;
       box-shadow: none !important;
     }
@@ -500,7 +572,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
 
 .vv-footer {
   padding: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -532,12 +604,12 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     font-size: 0.75rem;
     color: #4a5568;
     margin: 0;
-    
+
     a {
       color: #718096;
       text-decoration: none;
       font-weight: bold;
-      
+
       &:hover {
         color: colors.$DIS-GOLD;
       }
@@ -580,7 +652,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   &__header {
     padding: 2rem 2rem 1.25rem;
     text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     background: colors.$BG-SURFACE;
     backdrop-filter: blur(8px);
   }
@@ -631,7 +703,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     font-family: fonts.$font-interface;
     font-size: 0.8rem;
     font-weight: 700;
-    color: #FFFFFF;
+    color: #ffffff;
     letter-spacing: 0.02em;
   }
 
@@ -641,7 +713,7 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
     padding: 0.8rem 1rem;
     font-family: fonts.$font-secondary;
     font-size: 0.9rem;
-    color: #FFFFFF;
+    color: #ffffff;
     background: colors.$BG-SURFACE;
     outline: none;
     transition: all 0.2s ease;
@@ -683,11 +755,13 @@ onUnmounted(() => { if (timer) clearInterval(timer) })
   cursor: pointer;
   width: 100%;
   margin-top: 0.5rem;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background 0.2s,
+    transform 0.15s;
   box-shadow: 0 4px 16px rgba(colors.$DIS-GOLD, 0.3);
 
   &:hover:not(:disabled) {
-    background: #FB923C;
+    background: #fb923c;
     transform: translateY(-2px);
   }
 

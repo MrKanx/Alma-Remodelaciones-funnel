@@ -13,7 +13,9 @@ const contactName = computed(() => {
       .split(/\s+/)
       .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ')
-  } catch { return '' }
+  } catch {
+    return ''
+  }
 })
 
 const RETURNING_THRESHOLD_MS = 10 * 60 * 1000
@@ -26,7 +28,7 @@ const isReturningVisitor = computed(() => {
 onMounted(() => {
   const alreadyFired = sessionStorage.getItem('os_complete_fired')
   if (!alreadyFired) {
-    ; (window as any).fbq?.('track', 'CompleteRegistration', {
+    ;(window as any).fbq?.('track', 'CompleteRegistration', {
       content_name: 'diagnostico-agendado',
       value: 1,
       currency: 'USD',
@@ -56,13 +58,13 @@ const nextSteps = [
 
 <template>
   <div class="booked">
-
     <header class="booked__topbar">
-      <span class="booked__logo-text">DISFA<span class="booked__logo-accent">MOSA</span></span>
+      <span class="booked__logo-text"
+        >Alma <span class="booked__logo-accent">Remodelaciones</span></span
+      >
     </header>
 
     <main class="booked__main">
-
       <section class="booked__hero">
         <div class="booked__hero-icon" aria-hidden="true">
           <i class="fa-solid fa-circle-check"></i>
@@ -77,28 +79,22 @@ const nextSteps = [
             <template v-if="contactName">
               {{ contactName }}, ya tenemos tu asesoría agendada
             </template>
-            <template v-else>
-              Ya tenemos tu asesoría agendada
-            </template>
+            <template v-else> Ya tenemos tu asesoría agendada </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión de asesoría con Alma Remodelaciones está confirmada. Revisa tu correo
-            o WhatsApp para todos los detalles. Si necesitas reagendar, escríbenos.
+            Tu sesión de asesoría con Alma Remodelaciones está confirmada. Revisa tu correo o
+            WhatsApp para todos los detalles. Si necesitas reagendar, escríbenos.
           </p>
         </template>
 
         <template v-else>
           <h1 class="booked__hero-title">
-            <template v-if="contactName">
-              ¡Listo, {{ contactName }}!
-            </template>
-            <template v-else>
-              ¡Tu asesoría está confirmada!
-            </template>
+            <template v-if="contactName"> ¡Listo, {{ contactName }}! </template>
+            <template v-else> ¡Tu asesoría está confirmada! </template>
           </h1>
           <p class="booked__hero-subtitle">
-            Tu sesión con el equipo de Alma Remodelaciones ha sido agendada correctamente.
-            En breve recibirás todos los detalles para conectarte.
+            Tu sesión con el equipo de Alma Remodelaciones ha sido agendada correctamente. En breve
+            recibirás todos los detalles para conectarte.
           </p>
         </template>
       </section>
@@ -107,7 +103,9 @@ const nextSteps = [
         <p id="steps-heading" class="booked__steps-label">Próximos pasos</p>
         <div class="booked__steps-grid">
           <div v-for="(step, i) in nextSteps" :key="i" class="booked__step">
-            <div class="booked__step-num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="booked__step-num" aria-hidden="true">
+              {{ String(i + 1).padStart(2, '0') }}
+            </div>
             <div class="booked__step-icon" aria-hidden="true">
               <i :class="step.icon"></i>
             </div>
@@ -116,7 +114,6 @@ const nextSteps = [
           </div>
         </div>
       </section>
-
     </main>
 
     <footer class="booked__footer">
@@ -124,10 +121,14 @@ const nextSteps = [
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booked__footer-copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
-      <p class="booked__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
+      <p class="booked__footer-copy">
+        © {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.
+      </p>
+      <p class="booked__footer-dev">
+        Hecho por
+        <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a>
+      </p>
     </footer>
-
   </div>
 </template>
 
@@ -331,17 +332,17 @@ const nextSteps = [
     color: #718096;
     margin: 0;
   }
-  
+
   &-dev {
     font-size: 0.72rem;
     color: #4a5568;
     margin: 0;
-    
+
     a {
       color: #718096;
       text-decoration: none;
       font-weight: bold;
-      
+
       &:hover {
         color: colors.$DIS-GOLD;
       }

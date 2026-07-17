@@ -5,9 +5,10 @@ import { useContactModal } from '@/composables/useContactModal'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import TheScrollOverlay from '@/components/TheScrollOverlay.vue' // Added this import
-const heroVideo = 'https://res.cloudinary.com/dpimsaaa4/video/upload/v1772741967/IMG_8601_y5tgbu.mov'
-const bgFoto1   = 'https://res.cloudinary.com/dpimsaaa4/image/upload/v1772741965/IMG_7973_fm7dfc.jpg'
-const bgFoto2   = 'https://res.com/dpimsaaa4/image/upload/v1772741964/IMG_8099_h9zifs.jpg'
+const heroVideo =
+  'https://res.cloudinary.com/dpimsaaa4/video/upload/v1772741967/IMG_8601_y5tgbu.mov'
+const bgFoto1 = 'https://res.cloudinary.com/dpimsaaa4/image/upload/v1772741965/IMG_7973_fm7dfc.jpg'
+const bgFoto2 = 'https://res.com/dpimsaaa4/image/upload/v1772741964/IMG_8099_h9zifs.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -23,16 +24,16 @@ const bgSlide2 = ref<HTMLElement | null>(null)
 const currentStat = ref(0)
 
 // ── Indicadores de scroll ───────────────────────────────────────────────────
-const showScrollDown   = ref(true)   // flecha inicial "scroll"
-const showHorizontal   = ref(false)  // barra + hint horizontal
-const hProgress        = ref(0)      // 0–1 progreso del track horizontal
+const showScrollDown = ref(true) // flecha inicial "scroll"
+const showHorizontal = ref(false) // barra + hint horizontal
+const hProgress = ref(0) // 0–1 progreso del track horizontal
 
 // Estadísticas que rotan
 const stats = [
   { number: '15+', label: 'Años de Experiencia' },
   { number: '500+', label: 'Proyectos Entregados' },
   { number: '100%', label: 'Madera Certificada' },
-  { number: '24/7', label: 'Asesoría Técnica' }
+  { number: '24/7', label: 'Asesoría Técnica' },
 ]
 
 // Beneficios clave
@@ -40,23 +41,24 @@ const benefits = [
   {
     icon: 'fa-solid fa-tree',
     title: 'Madera de Calidad',
-    description: 'Seleccionamos las mejores piezas para garantizar durabilidad y estética superior.'
+    description:
+      'Seleccionamos las mejores piezas para garantizar durabilidad y estética superior.',
   },
   {
     icon: 'fa-solid fa-couch',
     title: 'Diseño a Medida',
-    description: 'Creamos espacios únicos que reflejan tu estilo, desde casas hasta oficinas.'
+    description: 'Creamos espacios únicos que reflejan tu estilo, desde casas hasta oficinas.',
   },
   {
     icon: 'fa-solid fa-hammer',
     title: 'Mano de Obra Experta',
-    description: 'Artesanos especializados con años de trayectoria en el manejo de la madera.'
+    description: 'Artesanos especializados con años de trayectoria en el manejo de la madera.',
   },
   {
     icon: 'fa-solid fa-shield-halved',
     title: 'Garantía Total',
-    description: 'Respaldamos cada proyecto con una garantía de calidad inigualable.'
-  }
+    description: 'Respaldamos cada proyecto con una garantía de calidad inigualable.',
+  },
 ]
 
 let ctx: gsap.Context
@@ -68,7 +70,8 @@ onMounted(() => {
   }, 3000)
 
   // GSAP Scroll Animations
-  if (!heroContainer.value || !revealShape.value || !revealContent.value || !horizontalTrack.value) return
+  if (!heroContainer.value || !revealShape.value || !revealContent.value || !horizontalTrack.value)
+    return
 
   ctx = gsap.context(() => {
     const tl = gsap.timeline({
@@ -84,66 +87,92 @@ onMounted(() => {
           // "SCROLL ↓" solo visible antes de empezar
           showScrollDown.value = p < 0.03
           // Indicador horizontal: aparece cuando el track empieza a moverse (~44%)
-          showHorizontal.value  = p >= 0.44 && p < 0.99
+          showHorizontal.value = p >= 0.44 && p < 0.99
           // Progreso dentro del rango horizontal (0 → 1)
           hProgress.value = Math.max(0, Math.min(1, (p - 0.44) / 0.52))
-        }
-      }
+        },
+      },
     })
 
     // Fase 1: Rotar y Escalar Masivamente el Cubo (Efecto Portal)
-    tl.to(revealShape.value, {
-      scale: 30, // Escalar masivamente para que cubra la pantalla y la sobrepase
-      rotationY: 180, // Rotación 3D en el recorrido
-      rotationZ: 90,
-      duration: 2,
-      ease: 'power2.inOut'
-    }, 0)
+    tl.to(
+      revealShape.value,
+      {
+        scale: 30, // Escalar masivamente para que cubra la pantalla y la sobrepase
+        rotationY: 180, // Rotación 3D en el recorrido
+        rotationZ: 90,
+        duration: 2,
+        ease: 'power2.inOut',
+      },
+      0,
+    )
 
     // Forzar la opacidad del video a 1 cuando empieza el scroll aunque no tengan hover
-    tl.to(hiddenVideo.value, {
-      opacity: 1,
-      duration: 0.1
-    }, 0)
+    tl.to(
+      hiddenVideo.value,
+      {
+        opacity: 1,
+        duration: 0.1,
+      },
+      0,
+    )
 
     // Desvanecer el texto/logo interno rápidamente para evitar pixelación al hacer zoom masivo
-    tl.to('.cube-logo', {
-      opacity: 0,
-      scale: 0.8,
-      duration: 0.3, // Se desvanece de inmediato al empezar
-      ease: 'power1.inOut'
-    }, 0)
+    tl.to(
+      '.cube-logo',
+      {
+        opacity: 0,
+        scale: 0.8,
+        duration: 0.3, // Se desvanece de inmediato al empezar
+        ease: 'power1.inOut',
+      },
+      0,
+    )
 
     // Fase 2: El fondo del héroe debe volverse oscuro gradualmente (o ya lo era)
 
     // Fase 3: Aparición del contenido desde dentro del portal
-    tl.fromTo(revealContent.value, {
-      opacity: 0,
-      scale: 0.9
-    }, {
-      opacity: 1,
-      scale: 1,
-      duration: 1.5,
-      ease: 'power2.out'
-    }, 1) // Inicia justo cuando el cubo es lo suficientemente grande
+    tl.fromTo(
+      revealContent.value,
+      {
+        opacity: 0,
+        scale: 0.9,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 1.5,
+        ease: 'power2.out',
+      },
+      1,
+    ) // Inicia justo cuando el cubo es lo suficientemente grande
 
     // Fase 4: Scroll horizontal del track de beneficios
-    const getTrackWidth = () => horizontalTrack.value!.scrollWidth - window.innerWidth + (window.innerWidth * 0.2); // Padding extra compesation
+    const getTrackWidth = () =>
+      horizontalTrack.value!.scrollWidth - window.innerWidth + window.innerWidth * 0.2 // Padding extra compesation
 
-    tl.to(horizontalTrack.value, {
-      x: () => -getTrackWidth(),
-      ease: 'none',
-      duration: 2.5
-    }, 2)
+    tl.to(
+      horizontalTrack.value,
+      {
+        x: () => -getTrackWidth(),
+        ease: 'none',
+        duration: 2.5,
+      },
+      2,
+    )
 
     // Fase 5: Transición de Fondos Fotográficos
     // El primer fondo aparece justo cuando revelamos el contenido (después del portal)
-    tl.fromTo(bgSlide1.value, { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' }, 1.5)
+    tl.fromTo(
+      bgSlide1.value,
+      { opacity: 0, scale: 1.1 },
+      { opacity: 1, scale: 1, duration: 1, ease: 'power2.out' },
+      1.5,
+    )
 
     // A la mitad del scroll horizontal, se cruzan las opacidades hacia la foto 2
     tl.to(bgSlide1.value, { opacity: 0, duration: 0.8 }, 3)
     tl.fromTo(bgSlide2.value, { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 1 }, 3)
-
   }, heroContainer.value)
 })
 
@@ -159,23 +188,36 @@ const { open: openContactModal } = useContactModal()
     <!-- Capa 1: Contenedor 3D del Portal -->
     <div class="hero-huge__cube-container">
       <div class="hero-huge__cube" ref="revealShape">
-        
         <!-- Cara Frontal (Negra + Video) -->
         <div class="cube-face cube-front">
           <!-- Wistia Player -->
-          <wistia-player media-id="5ql8l131me" aspect="1.7777777777777777" class="cube-abstract-video"></wistia-player>
-          
+          <wistia-player
+            media-id="5ql8l131me"
+            aspect="1.7777777777777777"
+            class="cube-abstract-video"
+          ></wistia-player>
+
           <!-- Logo Textual Sutil (Se oculta al hacer zoom) -->
           <div class="cube-logo">
             <svg viewBox="0 0 350 100" class="cube-logo__svg">
-              <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-size="42" font-weight="900" letter-spacing="2">ALE BARRETO</text>
+              <text
+                x="50%"
+                y="50%"
+                dominant-baseline="middle"
+                text-anchor="middle"
+                fill="#ffffff"
+                font-size="42"
+                font-weight="900"
+                letter-spacing="2"
+              >
+                ALE BARRETO
+              </text>
             </svg>
           </div>
         </div>
 
         <!-- Cara Trasera (Rosa Estático) -->
         <div class="cube-face cube-back"></div>
-
       </div>
     </div>
 
@@ -189,16 +231,15 @@ const { open: openContactModal } = useContactModal()
       </div>
 
       <div class="hero-huge__track" ref="horizontalTrack">
-        
         <!-- Panel 1: Texto Masivo -->
         <div class="track-panel panel-intro">
           <div class="panel-intro__content">
             <h1 class="hero-huge__subtitle">
-              Transformamos tus espacios con la calidez y<br/>
+              Transformamos tus espacios con la calidez y<br />
               <strong>Elegancia de la Madera de Alta Gama</strong>
             </h1>
             <p class="hero-huge__desc">
-              Diseño y construcción experta para hogares y oficinas.<br/>
+              Diseño y construcción experta para hogares y oficinas.<br />
               Calidad artesanal con visión contemporánea.
             </p>
 
@@ -226,7 +267,6 @@ const { open: openContactModal } = useContactModal()
             <p class="benefit-desc">{{ benefit.description }}</p>
           </div>
         </div>
-
       </div>
     </div>
     <!-- ══════════════════════════════════════════
@@ -245,12 +285,26 @@ const { open: openContactModal } = useContactModal()
       <div v-if="showHorizontal" class="scroll-hint scroll-hint--h" aria-hidden="true">
         <!-- Label + flecha -->
         <div class="scroll-hint__h-label">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
           <span>DESLIZA</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </div>
         <!-- Barra de progreso -->
@@ -259,7 +313,6 @@ const { open: openContactModal } = useContactModal()
         </div>
       </div>
     </Transition>
-
   </section>
 </template>
 
@@ -315,7 +368,9 @@ const { open: openContactModal } = useContactModal()
   min-height: 250px;
   transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
 
   // Efecto Hover
   &:hover {
@@ -482,7 +537,10 @@ const { open: openContactModal } = useContactModal()
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-4px);
@@ -544,7 +602,9 @@ const { open: openContactModal } = useContactModal()
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: background 0.4s ease, border-color 0.4s ease;
+    transition:
+      background 0.4s ease,
+      border-color 0.4s ease;
 
     &:hover {
       background: rgba(colors.$white, 0.05);
@@ -614,7 +674,9 @@ const { open: openContactModal } = useContactModal()
     opacity: 0.5;
     animation: arrow-pulse 1.4s ease-in-out infinite;
 
-    &:last-child { animation-delay: 0.2s; }
+    &:last-child {
+      animation-delay: 0.2s;
+    }
   }
 }
 
@@ -635,8 +697,15 @@ const { open: openContactModal } = useContactModal()
 }
 
 @keyframes arrow-pulse {
-  0%, 100% { opacity: 0.3; transform: translateX(0); }
-  50%       { opacity: 0.8; transform: translateX(3px); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateX(3px);
+  }
 }
 
 // ── Transición de entrada/salida de los hints ─────────────────────────────────

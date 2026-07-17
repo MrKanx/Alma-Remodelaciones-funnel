@@ -35,7 +35,8 @@ const testimonials = [
   {
     id: 2,
     name: 'Johanna Quezada',
-    quote: 'Teníamos una desorganización total en nuestros cuatros restaurantes, al momento que llegó Bakano, todo cambió',
+    quote:
+      'Teníamos una desorganización total en nuestros cuatros restaurantes, al momento que llegó Bakano, todo cambió',
     image: imgJohanna,
     videoUrl: 'https://www.instagram.com/p/DMtdBuMup4k',
   },
@@ -65,7 +66,6 @@ onMounted(() => {
     if (!header) return
 
     ctx = gsap.context(() => {
-
       if (window.innerWidth <= 768) {
         // ── MOBILE: scroll vertical → tarjetas se deslizan horizontalmente ──
         // La sección tiene 350 vh. El sticky queda fijo mientras el usuario
@@ -85,7 +85,6 @@ onMounted(() => {
             invalidateOnRefresh: true,
           },
         })
-
       } else {
         // ── DESKTOP: comportamiento original ─────────────────────────────
         const videoProxy = { currentTime: 0 }
@@ -107,18 +106,15 @@ onMounted(() => {
             currentTime: video.duration,
             ease: 'none',
             duration: 1,
-            onUpdate() { video.currentTime = videoProxy.currentTime },
+            onUpdate() {
+              video.currentTime = videoProxy.currentTime
+            },
           },
           0,
         )
 
         // 2 ─ Título sube desde el centro al top
-        tl.fromTo(
-          header,
-          { y: '20vh' },
-          { y: 0, ease: 'power2.out', duration: 0.4 },
-          0,
-        )
+        tl.fromTo(header, { y: '20vh' }, { y: 0, ease: 'power2.out', duration: 0.4 }, 0)
 
         // 3 ─ Tarjetas con stagger
         tl.fromTo(
@@ -128,7 +124,6 @@ onMounted(() => {
           0.38,
         )
       }
-
     }, section)
   }
 
@@ -156,7 +151,6 @@ const openVideo = (url: string) => window.open(url, '_blank')
   -->
   <section class="testimonials" ref="sectionRef">
     <div class="testimonials__sticky">
-
       <!-- Video de fondo — currentTime controlado por GSAP + scroll -->
       <video ref="videoRef" class="testimonials__video" muted playsinline preload="auto">
         <source :src="bgVideo" type="video/mp4" />
@@ -167,15 +161,12 @@ const openVideo = (url: string) => window.open(url, '_blank')
 
       <!-- Capa de contenido -->
       <div class="testimonials__ui">
-
         <!-- ── Título ──────────────────────────────────────────
              Empieza centrado en pantalla (y: 40vh vía GSAP)
              y sube al top durante el primer 40 % del scroll.    -->
         <header class="testimonials__header" ref="headerRef">
           <p class="testimonials__label">Testimonios</p>
-          <h2 class="testimonials__title">
-            Lo que dicen <br>nuestros clientes
-          </h2>
+          <h2 class="testimonials__title">Lo que dicen <br />nuestros clientes</h2>
         </header>
 
         <!-- ── Grid de tarjetas ───────────────────────────────
@@ -191,7 +182,6 @@ const openVideo = (url: string) => window.open(url, '_blank')
             <TestimonialCard :testimonial="testimonial" @open-video="openVideo" />
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -237,9 +227,7 @@ const openVideo = (url: string) => window.open(url, '_blank')
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(175deg,
-        rgba(colors.$BAKANO-DARK, 0.15) 0%,
-        rgba(#000, 0.78) 100%);
+    background: linear-gradient(175deg, rgba(colors.$BAKANO-DARK, 0.15) 0%, rgba(#000, 0.78) 100%);
   }
 
   // ── Capa de UI (título + cards) ────────────────────────────────

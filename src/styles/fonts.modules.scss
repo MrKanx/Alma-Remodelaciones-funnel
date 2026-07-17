@@ -21,11 +21,11 @@
 }
 
 // Variables SCSS para uso en componentes
-$font-principal: 'Outfit', sans-serif;           // Para títulos principales y headings
+$font-principal: 'Outfit', sans-serif; // Para títulos principales y headings
 $font-secondary: 'Plus Jakarta Sans', sans-serif; // Para texto de cuerpo y párrafos
-$font-accent: 'Space Grotesk', sans-serif;       // Para elementos destacados y CTAs
-$font-interface: 'Manrope', sans-serif;          // Para elementos de UI y navegación
-$font-fallback: 'Inter', sans-serif;             // Fuente de respaldo confiable
+$font-accent: 'Space Grotesk', sans-serif; // Para elementos destacados y CTAs
+$font-interface: 'Manrope', sans-serif; // Para elementos de UI y navegación
+$font-fallback: 'Inter', sans-serif; // Fuente de respaldo confiable
 
 // Mixins para facilitar el uso
 @mixin heading-font($weight: 600) {

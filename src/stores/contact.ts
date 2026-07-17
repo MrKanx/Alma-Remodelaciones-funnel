@@ -26,7 +26,9 @@ export const useContactStore = defineStore('contact', () => {
   if (stored) {
     try {
       Object.assign(contact.value, JSON.parse(stored))
-    } catch { /* ignorar */ }
+    } catch {
+      /* ignorar */
+    }
   }
 
   function save(data: Partial<BkContact>) {

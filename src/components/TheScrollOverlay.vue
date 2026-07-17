@@ -13,7 +13,7 @@
           <div class="scroll-overlay__wheel"></div>
         </div>
       </div>
-      
+
       <div class="scroll-overlay__text">
         <h2 class="scroll-overlay__title">Para empezar la experiencia</h2>
         <p class="scroll-overlay__description">
@@ -23,8 +23,20 @@
 
       <div class="scroll-overlay__arrows">
         <svg class="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 13L12 18L17 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M7 6L12 11L17 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path
+            d="M7 13L12 18L17 13"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M7 6L12 11L17 6"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </div>
     </div>
@@ -42,7 +54,11 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
-  background: radial-gradient(circle at center, rgba(colors.$BAKANO-DARK, 0.4) 0%, rgba(colors.$BAKANO-DARK, 0.9) 100%);
+  background: radial-gradient(
+    circle at center,
+    rgba(colors.$BAKANO-DARK, 0.4) 0%,
+    rgba(colors.$BAKANO-DARK, 0.9) 100%
+  );
   backdrop-filter: blur(8px);
   pointer-events: none;
   text-align: center;
@@ -107,24 +123,37 @@
 }
 
 @keyframes scroll-wheel {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(15px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
 }
 
 @keyframes arrow-bounce {
-  0%, 100% { transform: translateY(0); opacity: 0.5; }
-  50% { transform: translateY(10px); opacity: 1; }
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
 }
 
 // Mobile specific refinements
 @media (max-width: 768px) {
   .scroll-overlay {
     backdrop-filter: blur(4px);
-    
+
     &__content {
       gap: 1.5rem;
     }
-    
+
     &__mouse {
       width: 26px;
       height: 42px;

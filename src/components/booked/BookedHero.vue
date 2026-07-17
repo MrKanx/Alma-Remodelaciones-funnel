@@ -5,7 +5,7 @@ const props = defineProps({
     required: false,
     default: '',
   },
-});
+})
 </script>
 
 <template>
@@ -20,8 +20,8 @@ const props = defineProps({
     </h1>
 
     <p class="booked-hero__subtitle">
-      Tu sesión de diagnóstico estructural con Aluvicopp ha sido agendada correctamente.
-      En breve recibirás todos los detalles.
+      Tu sesión de diagnóstico estructural con Aluvicopp ha sido agendada correctamente. En breve
+      recibirás todos los detalles.
     </p>
   </section>
 </template>
@@ -56,14 +56,20 @@ const props = defineProps({
     box-shadow: 0 0 30px rgba(colors.$OS-BLUE, 0.1);
     margin-bottom: 0.5rem;
 
-    @media (min-width: 768px) { width: 90px; height: 90px; margin-bottom: 0.75rem; }
+    @media (min-width: 768px) {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 0.75rem;
+    }
   }
 
   &__check-icon {
     font-size: 2.25rem;
     color: colors.$OS-BLUE;
     filter: drop-shadow(0 0 12px rgba(colors.$OS-BLUE, 0.5));
-    @media (min-width: 768px) { font-size: 3.25rem; }
+    @media (min-width: 768px) {
+      font-size: 3.25rem;
+    }
   }
 
   &__title {
@@ -77,11 +83,14 @@ const props = defineProps({
   &__subtitle {
     @include fonts.body-font(400);
     font-size: 0.95rem;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
     line-height: 1.6;
     max-width: 540px;
-    @media (min-width: 768px) { font-size: 1.15rem; line-height: 1.7; }
+    @media (min-width: 768px) {
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
   }
 }
 </style>

@@ -4,7 +4,7 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
-});
+})
 </script>
 
 <template>
@@ -12,7 +12,7 @@ const props = defineProps({
     <p class="testimonials-header__label">TESTIMONIOS</p>
     <h2 class="testimonials-header__title">
       Algunos Testimonios de Nuestros
-      <br>
+      <br />
       Clientes
     </h2>
   </div>

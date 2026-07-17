@@ -34,11 +34,11 @@ const router = createRouter({
         title: 'Alma Remodelaciones | Arquitectura Modular de Alta Fidelidad',
         description:
           'Descubre cómo desterrar la improvisación de tu obra para siempre con precisión milimétrica y ejecución impecable.',
-        canonical: 'https://Alma Remodelaciones.com/',
+        canonical: 'https://almaremodelaciones.com/',
         ogTitle: 'Alma Remodelaciones | Arquitectura Modular de Alta Fidelidad',
         ogDescription:
           'Transforma la dinámica en la que vives y disfrutas tu hogar con muebles diseñados y fabricados con responsabilidad.',
-        ogUrl: 'https://Alma Remodelaciones.com/',
+        ogUrl: 'https://almaremodelaciones.com/',
       } satisfies RouteMeta,
     },
     {
@@ -47,11 +47,12 @@ const router = createRouter({
       component: VideoView,
       meta: {
         title: 'Mira el video | Alma Remodelaciones — Paso 1 de 2',
-        description: 'Descubre cómo una infraestructura modular de alto valor aumenta tu calidad de vida.',
-        canonical: 'https://Alma Remodelaciones.com/ver-video',
+        description:
+          'Descubre cómo una infraestructura modular de alto valor aumenta tu calidad de vida.',
+        canonical: 'https://almaremodelaciones.com/ver-video',
         ogTitle: 'Mira el video | Alma Remodelaciones',
         ogDescription: 'Ve el video y agenda tu diagnóstico de espacios gratuito.',
-        ogUrl: 'https://Alma Remodelaciones.com/ver-video',
+        ogUrl: 'https://almaremodelaciones.com/ver-video',
       } satisfies RouteMeta,
     },
     {
@@ -60,11 +61,12 @@ const router = createRouter({
       component: BookingView,
       meta: {
         title: 'Agenda tu Diagnóstico | Alma Remodelaciones — Paso 2 de 2',
-        description: 'Selecciona el día y hora para tu Diagnóstico de Planificación de Espacios gratuito.',
-        canonical: 'https://Alma Remodelaciones.com/agendar',
+        description:
+          'Selecciona el día y hora para tu Diagnóstico de Planificación de Espacios gratuito.',
+        canonical: 'https://almaremodelaciones.com/agendar',
         ogTitle: 'Agenda tu Diagnóstico | Alma Remodelaciones',
         ogDescription: 'Elige tu horario y reserva tu Diagnóstico de Espacios.',
-        ogUrl: 'https://Alma Remodelaciones.com/agendar',
+        ogUrl: 'https://almaremodelaciones.com/agendar',
       } satisfies RouteMeta,
     },
     {
@@ -73,11 +75,12 @@ const router = createRouter({
       component: BookedView,
       meta: {
         title: 'Diagnóstico Confirmado | Alma Remodelaciones',
-        description: 'Tu diagnóstico de espacios con Alma Remodelaciones está confirmado. Revisa tu correo.',
-        canonical: 'https://Alma Remodelaciones.com/cita-confirmada',
+        description:
+          'Tu diagnóstico de espacios con Alma Remodelaciones está confirmado. Revisa tu correo.',
+        canonical: 'https://almaremodelaciones.com/cita-confirmada',
         ogTitle: 'Diagnóstico Confirmado | Alma Remodelaciones',
         ogDescription: 'Tu diagnóstico está reservado. Te contactaremos pronto.',
-        ogUrl: 'https://Alma Remodelaciones.com/cita-confirmada',
+        ogUrl: 'https://almaremodelaciones.com/cita-confirmada',
       } satisfies RouteMeta,
     },
     {
@@ -86,11 +89,13 @@ const router = createRouter({
       component: NoSpaceView,
       meta: {
         title: 'Sin Cupos Disponibles | Alma Remodelaciones',
-        description: 'En este momento los cupos para diagnóstico de Alma Remodelaciones están completos.',
-        canonical: 'https://Alma Remodelaciones.com/sin-espacio',
+        description:
+          'En este momento los cupos para diagnóstico de Alma Remodelaciones están completos.',
+        canonical: 'https://almaremodelaciones.com/sin-espacio',
         ogTitle: 'Sin Cupos Disponibles | Alma Remodelaciones',
-        ogDescription: 'Los cupos de diagnóstico están completos. Te avisaremos cuando haya disponibilidad.',
-        ogUrl: 'https://Alma Remodelaciones.com/sin-espacio',
+        ogDescription:
+          'Los cupos de diagnóstico están completos. Te avisaremos cuando haya disponibilidad.',
+        ogUrl: 'https://almaremodelaciones.com/sin-espacio',
       } satisfies RouteMeta,
     },
     {
@@ -99,11 +104,12 @@ const router = createRouter({
       component: PrivacyPolicyView,
       meta: {
         title: 'Política de Privacidad | Alma Remodelaciones',
-        description: 'Política de privacidad de Alma Remodelaciones. Información sobre el tratamiento de datos personales.',
-        canonical: 'https://Alma Remodelaciones.com/politicas-privacidad',
+        description:
+          'Política de privacidad de Alma Remodelaciones. Información sobre el tratamiento de datos personales.',
+        canonical: 'https://almaremodelaciones.com/politicas-privacidad',
         ogTitle: 'Política de Privacidad | Alma Remodelaciones',
         ogDescription: 'Política de privacidad de Alma Remodelaciones.',
-        ogUrl: 'https://Alma Remodelaciones.com/politicas-privacidad',
+        ogUrl: 'https://almaremodelaciones.com/politicas-privacidad',
       } satisfies RouteMeta,
     },
     {
@@ -112,11 +118,12 @@ const router = createRouter({
       component: LegalNoticeView,
       meta: {
         title: 'Aviso Legal | Alma Remodelaciones',
-        description: 'Aviso legal de Alma Remodelaciones. Términos y condiciones de uso del sitio web.',
-        canonical: 'https://Alma Remodelaciones.com/aviso-legal',
+        description:
+          'Aviso legal de Alma Remodelaciones. Términos y condiciones de uso del sitio web.',
+        canonical: 'https://almaremodelaciones.com/aviso-legal',
         ogTitle: 'Aviso Legal | Alma Remodelaciones',
         ogDescription: 'Aviso legal de Alma Remodelaciones.',
-        ogUrl: 'https://Alma Remodelaciones.com/aviso-legal',
+        ogUrl: 'https://almaremodelaciones.com/aviso-legal',
       } satisfies RouteMeta,
     },
   ],
@@ -125,19 +132,31 @@ const router = createRouter({
 // ── SEO dinámico por ruta ──────────────────────────────────────────────────────
 const setMeta = (name: string, content: string) => {
   let el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`)
-  if (!el) { el = document.createElement('meta'); el.name = name; document.head.appendChild(el) }
+  if (!el) {
+    el = document.createElement('meta')
+    el.name = name
+    document.head.appendChild(el)
+  }
   el.content = content
 }
 
 const setOgMeta = (property: string, content: string) => {
   let el = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`)
-  if (!el) { el = document.createElement('meta'); el.setAttribute('property', property); document.head.appendChild(el) }
+  if (!el) {
+    el = document.createElement('meta')
+    el.setAttribute('property', property)
+    document.head.appendChild(el)
+  }
   el.content = content
 }
 
 const setCanonical = (href: string) => {
   let el = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
-  if (!el) { el = document.createElement('link'); el.rel = 'canonical'; document.head.appendChild(el) }
+  if (!el) {
+    el = document.createElement('link')
+    el.rel = 'canonical'
+    document.head.appendChild(el)
+  }
   el.href = href
 }
 
@@ -155,7 +174,7 @@ router.afterEach((to) => {
 
 // ── Router Guards ──────────────────────────────────────────────────────────────
 const BOOKED_TTL_MS = 3 * 24 * 60 * 60 * 1000
-const DISQ_TTL_MS   = 48 * 60 * 60 * 1000
+const DISQ_TTL_MS = 48 * 60 * 60 * 1000
 
 const readTimestamp = (key: string): number | null => {
   const raw = localStorage.getItem(key)
@@ -176,11 +195,12 @@ const PUBLIC_ROUTES = ['privacy-policy', 'legal-notice']
 
 router.beforeEach((to, from, next) => {
   const routeName = to.name as string
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return next()
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    return next()
   if (PUBLIC_ROUTES.includes(routeName)) return next()
 
   const bookedFresh = isFresh('os_booked_at', BOOKED_TTL_MS)
-  const disqFresh   = isFresh('os_disq_at',   DISQ_TTL_MS)
+  const disqFresh = isFresh('os_disq_at', DISQ_TTL_MS)
 
   if (routeName === 'booked') {
     if (!bookedFresh) return next({ name: 'funnel' })

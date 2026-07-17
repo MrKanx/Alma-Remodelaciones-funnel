@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-const scrollY      = ref(0)
-const docHeight    = ref(1)
+const scrollY = ref(0)
+const docHeight = ref(1)
 const activeSection = ref(0)
 
 const sections = [
-  { id: 'inicio',      label: 'Inicio' },
-  { id: 'servicios',   label: 'Servicios' },
+  { id: 'inicio', label: 'Inicio' },
+  { id: 'servicios', label: 'Servicios' },
   { id: 'testimonios', label: 'Testimonios' },
-  { id: 'nosotros',    label: 'Equipo' },
-  { id: 'contacto',    label: 'Contacto' },
+  { id: 'nosotros', label: 'Equipo' },
+  { id: 'contacto', label: 'Contacto' },
 ]
 
 // Flecha: oculta en el primer tramo (el hero ya tiene la suya)
@@ -23,11 +23,8 @@ const showArrow = computed(() => {
 let ticking = false
 
 const update = () => {
-  scrollY.value  = window.scrollY
-  docHeight.value = Math.max(
-    1,
-    document.documentElement.scrollHeight - window.innerHeight,
-  )
+  scrollY.value = window.scrollY
+  docHeight.value = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
 
   // Sección activa: la última cuyo top ya pasó el centro de la pantalla
   const mid = window.innerHeight * 0.5
@@ -67,11 +64,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   <!-- ── Dots de navegación lateral (desktop) ──────────────────────── -->
   <nav class="scroll-guide" aria-label="Navegación de secciones">
     <ul class="scroll-guide__list">
-      <li
-        v-for="(section, i) in sections"
-        :key="section.id"
-        class="scroll-guide__item"
-      >
+      <li v-for="(section, i) in sections" :key="section.id" class="scroll-guide__item">
         <button
           class="scroll-guide__dot"
           :class="{ 'is-active': activeSection === i }"
@@ -91,9 +84,16 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
       @click="scrollDown"
       aria-label="Desplazarse hacia abajo"
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-        <polyline points="6 9 12 15 18 9"/>
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        aria-hidden="true"
+      >
+        <polyline points="6 9 12 15 18 9" />
       </svg>
     </button>
   </Transition>
@@ -113,7 +113,9 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   pointer-events: auto;
 
   // Ocultar en pantallas pequeñas (no hay espacio)
-  @media (max-width: 768px) { display: none; }
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .scroll-guide__list {
@@ -153,21 +155,21 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.30);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
   background: transparent;
   cursor: pointer;
   padding: 0;
   transition:
-    background    0.3s ease,
-    border-color  0.3s ease,
-    box-shadow    0.3s ease,
-    transform     0.3s ease;
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 
   &.is-active {
     background: colors.$BAKANO-PINK;
     border-color: colors.$BAKANO-PINK;
     box-shadow:
-      0 0 8px  rgba(colors.$BAKANO-PINK, 0.55),
+      0 0 8px rgba(colors.$BAKANO-PINK, 0.55),
       0 0 22px rgba(colors.$BAKANO-PINK, 0.22);
     transform: scale(1.4);
   }
@@ -191,7 +193,9 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   color: rgba(255, 255, 255, 0.5);
   opacity: 0;
   transform: translateX(8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
   pointer-events: none;
 }
 
@@ -222,8 +226,8 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   animation: chevron-bounce 2s ease-in-out infinite;
   transition:
     border-color 0.3s ease,
-    color        0.3s ease,
-    background   0.3s ease;
+    color 0.3s ease,
+    background 0.3s ease;
 
   &:hover {
     border-color: rgba(colors.$BAKANO-PINK, 0.5);
@@ -241,14 +245,21 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 }
 
 @keyframes chevron-bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(6px); }
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
+  }
 }
 
 // ── Transición de la flecha ───────────────────────────────────────────────
 .arrow-fade-enter-active,
 .arrow-fade-leave-active {
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
 .arrow-fade-enter-from,

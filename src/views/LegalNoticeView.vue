@@ -18,10 +18,15 @@ onMounted(() => {
 
       <main class="legal-card__content">
         <p class="legal-card__text">
-          Este sitio web es operado por <strong>Alma Remodelaciones</strong>. Toda la información, contenidos y servicios disponibles en esta plataforma tienen un carácter estrictas y exclusivamente informativo y comercial.
+          Este sitio web es operado por <strong>Alma Remodelaciones</strong>. Toda la información,
+          contenidos y servicios disponibles en esta plataforma tienen un carácter estrictas y
+          exclusivamente informativo y comercial.
         </p>
         <p class="legal-card__text">
-          El agendamiento o solicitud de un diagnóstico gratuito de infraestructura comercial no constituye ni garantiza el inicio de una relación de contratación de obra o servicios formal, la cual requerirá en todo caso la firma de un contrato físico o de un acuerdo de servicios explícito por ambas partes.
+          El agendamiento o solicitud de un diagnóstico gratuito de infraestructura comercial no
+          constituye ni garantiza el inicio de una relación de contratación de obra o servicios
+          formal, la cual requerirá en todo caso la firma de un contrato físico o de un acuerdo de
+          servicios explícito por ambas partes.
         </p>
       </main>
 
@@ -98,7 +103,7 @@ onMounted(() => {
     transition: color 0.2s;
 
     &:hover {
-      color: #F0B429;
+      color: #f0b429;
       text-decoration: underline;
     }
   }
@@ -123,7 +128,9 @@ onMounted(() => {
     font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
 
     &:hover {
       background: #222222;

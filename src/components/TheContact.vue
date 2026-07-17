@@ -4,61 +4,82 @@ import ContactWizard from './ContactWizard.vue'
 
 <template>
   <section class="contact" id="contacto">
-
     <!-- Radial glow de fondo -->
     <div class="contact__glow" aria-hidden="true" />
 
     <div class="contact__inner">
-
       <!-- ── Columna izquierda: copy ──────────────────────────────────── -->
       <div class="contact__copy">
         <p class="contact__label">Hablemos</p>
 
         <h2 class="contact__title">
-          Tu negocio merece<br>
+          Tu negocio merece<br />
           <span class="contact__title-grad">resultados reales</span>
         </h2>
 
         <p class="contact__desc">
-          Cuéntanos sobre tu empresa. En menos de 24 horas
-          uno de nuestros estrategas te contactará con un
-          diagnóstico inicial sin costo.
+          Cuéntanos sobre tu empresa. En menos de 24 horas uno de nuestros estrategas te contactará
+          con un diagnóstico inicial sin costo.
         </p>
 
         <!-- Trust bullets -->
         <ul class="contact__trust" aria-label="Beneficios">
           <li class="contact__trust-item">
             <span class="contact__trust-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"/>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
             Diagnóstico inicial gratuito
           </li>
           <li class="contact__trust-item">
             <span class="contact__trust-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"/>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
             Sin compromisos ni contratos forzados
           </li>
           <li class="contact__trust-item">
             <span class="contact__trust-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"/>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
             Respuesta en menos de 24 horas
           </li>
           <li class="contact__trust-item">
             <span class="contact__trust-icon" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                   stroke="currentColor" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"/>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12" />
               </svg>
             </span>
             +150 negocios transformados en Ecuador
@@ -69,7 +90,7 @@ import ContactWizard from './ContactWizard.vue'
         <div class="contact__stat">
           <span class="contact__stat-num">20%</span>
           <span class="contact__stat-text">
-            promedio de aumento en facturación<br>
+            promedio de aumento en facturación<br />
             en los primeros 90 días
           </span>
         </div>
@@ -81,7 +102,6 @@ import ContactWizard from './ContactWizard.vue'
           <ContactWizard />
         </div>
       </div>
-
     </div>
   </section>
 </template>
@@ -167,7 +187,9 @@ import ContactWizard from './ContactWizard.vue'
 
   @media (max-width: 600px) {
     font-size: clamp(2rem, 8vw, 2.8rem);
-    br { display: none; }
+    br {
+      display: none;
+    }
   }
 }
 

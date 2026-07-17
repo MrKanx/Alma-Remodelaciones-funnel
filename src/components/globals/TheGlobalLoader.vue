@@ -80,7 +80,6 @@ onUnmounted(() => {
 <template>
   <Transition name="loader-fade">
     <div v-if="!isComplete" class="global-loader" aria-live="polite" aria-label="Cargando">
-
       <!-- Número grande decorativo -->
       <div class="global-loader__bg-num" aria-hidden="true">{{ progress }}%</div>
 
@@ -91,7 +90,6 @@ onUnmounted(() => {
 
       <!-- Texto central -->
       <p class="global-loader__text">{{ currentText }}</p>
-
     </div>
   </Transition>
 </template>

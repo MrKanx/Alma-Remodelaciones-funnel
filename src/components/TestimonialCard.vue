@@ -24,8 +24,13 @@ const handleOpen = () => emit('openVideo', props.testimonial.videoUrl)
 </script>
 
 <template>
-  <article class="t-card" @click="handleOpen" role="button" tabindex="0" @keydown.enter="handleOpen">
-
+  <article
+    class="t-card"
+    @click="handleOpen"
+    role="button"
+    tabindex="0"
+    @keydown.enter="handleOpen"
+  >
     <!-- ── Cuerpo: comilla decorativa + cita ── -->
     <div class="t-card__body">
       <span class="t-card__quote-mark" aria-hidden="true">&ldquo;</span>
@@ -53,7 +58,7 @@ const handleOpen = () => emit('openVideo', props.testimonial.videoUrl)
 
       <button class="t-card__play" aria-label="Ver video testimonio">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M8 5v14l11-7z"/>
+          <path d="M8 5v14l11-7z" />
         </svg>
       </button>
     </footer>
@@ -68,9 +73,9 @@ const handleOpen = () => emit('openVideo', props.testimonial.videoUrl)
 @use '../styles/colorVariables.module.scss' as colors;
 
 // ── Mixins internos ──────────────────────────────────────────────
-$glass-bg:     rgba(12, 7, 22, 0.58);
+$glass-bg: rgba(12, 7, 22, 0.58);
 $glass-border: rgba(255, 255, 255, 0.07);
-$quote-color:  rgba(255, 255, 255, 0.80);
+$quote-color: rgba(255, 255, 255, 0.8);
 
 // ── Tarjeta ──────────────────────────────────────────────────────
 .t-card {
@@ -92,7 +97,7 @@ $quote-color:  rgba(255, 255, 255, 0.80);
   // que los controla GSAP desde el wrapper padre)
   transition:
     border-color 0.35s ease,
-    box-shadow   0.35s ease;
+    box-shadow 0.35s ease;
 
   @media (max-width: 768px) {
     padding: 28px 22px 22px;
@@ -106,12 +111,20 @@ $quote-color:  rgba(255, 255, 255, 0.80);
     box-shadow:
       0 0 0 1px rgba(colors.$BAKANO-PINK, 0.15),
       0 28px 56px rgba(0, 0, 0, 0.5),
-      0  8px 24px rgba(colors.$BAKANO-PINK, 0.10);
+      0 8px 24px rgba(colors.$BAKANO-PINK, 0.1);
 
-    .t-card__top-glow  { opacity: 1; }
-    .t-card__play      { transform: scale(1.08); }
-    .t-card__avatar    { transform: scale(1.06); }
-    .t-card__quote-mark { opacity: 1; }
+    .t-card__top-glow {
+      opacity: 1;
+    }
+    .t-card__play {
+      transform: scale(1.08);
+    }
+    .t-card__avatar {
+      transform: scale(1.06);
+    }
+    .t-card__quote-mark {
+      opacity: 1;
+    }
   }
 
   // ── Comilla decorativa ────────────────────────────────────────
@@ -156,8 +169,8 @@ $quote-color:  rgba(255, 255, 255, 0.80);
     background: linear-gradient(
       90deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.10) 30%,
-      rgba(255, 255, 255, 0.10) 70%,
+      rgba(255, 255, 255, 0.1) 30%,
+      rgba(255, 255, 255, 0.1) 70%,
       transparent 100%
     );
     margin-bottom: 20px;
@@ -228,7 +241,9 @@ $quote-color:  rgba(255, 255, 255, 0.80);
     color: colors.$white;
     transition: transform 0.25s ease;
 
-    svg { margin-left: 2px; }
+    svg {
+      margin-left: 2px;
+    }
   }
 
   // ── Borde superior gradiente (reveal en hover) ────────────────

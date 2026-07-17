@@ -55,13 +55,13 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
 
 <template>
   <div class="booking">
-
     <header class="booking__topbar">
-      <span class="booking__logo-text">Alma <span class="booking__logo-accent">Remodelaciones</span></span>
+      <span class="booking__logo-text"
+        >Alma <span class="booking__logo-accent">Remodelaciones</span></span
+      >
     </header>
 
     <main class="booking__main">
-
       <div class="stepper" aria-label="Paso 2 de 2">
         <div class="stepper__track">
           <div class="stepper__step stepper__step--done">
@@ -88,7 +88,9 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           <span class="booking__title-accent">asesoría premium</span>
         </h1>
         <p class="booking__subtitle">
-          Una sesión de 30 minutos con el equipo de Alma Remodelaciones para evaluar tu proyecto. Analizaremos tus espacios y crearemos un plan arquitectónico milimétrico y sin improvisaciones.
+          Una sesión de 30 minutos con el equipo de Alma Remodelaciones para evaluar tu proyecto.
+          Analizaremos tus espacios y crearemos un plan arquitectónico milimétrico y sin
+          improvisaciones.
         </p>
       </section>
 
@@ -103,7 +105,6 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
           id="53o1B7O5eRvJcZ8pFXQh_1784238532806"
         ></iframe>
       </div>
-
     </main>
 
     <footer class="booking__footer">
@@ -111,10 +112,14 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="booking__footer-copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
-      <p class="booking__footer-dev">Hecho por <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a></p>
+      <p class="booking__footer-copy">
+        © {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.
+      </p>
+      <p class="booking__footer-dev">
+        Hecho por
+        <a href="https://github.com/MrKanx" target="_blank" rel="noopener noreferrer">Kankox</a>
+      </p>
     </footer>
-
   </div>
 </template>
 
@@ -168,29 +173,68 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   justify-content: center;
   margin-bottom: 2rem;
 
-  &__track { display: flex; align-items: center; gap: 0; }
-  &__step { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
+  &__track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  &__step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
 
   &__circle {
-    width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; font-family: fonts.$font-interface; font-size: 0.85rem;
-    font-weight: 800; border: 2px solid #333; color: #EEEEEE; transition: all 0.3s ease;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: fonts.$font-interface;
+    font-size: 0.85rem;
+    font-weight: 800;
+    border: 2px solid #333;
+    color: #eeeeee;
+    transition: all 0.3s ease;
 
-    .stepper__step--done & { background: colors.$DIS-GOLD; border-color: colors.$DIS-GOLD; color: #000000; }
-    .stepper__step--active & { background: colors.$DIS-DARK-BLUE; border-color: colors.$DIS-DARK-BLUE; color: #ffffff; }
+    .stepper__step--done & {
+      background: colors.$DIS-GOLD;
+      border-color: colors.$DIS-GOLD;
+      color: #000000;
+    }
+    .stepper__step--active & {
+      background: colors.$DIS-DARK-BLUE;
+      border-color: colors.$DIS-DARK-BLUE;
+      color: #ffffff;
+    }
   }
 
   &__label {
-    font-family: fonts.$font-interface; font-size: 0.72rem; font-weight: 600;
-    letter-spacing: 0.04em; color: #EEEEEE;
-    .stepper__step--done & { color: colors.$DIS-GOLD; }
-    .stepper__step--active & { color: colors.$DIS-DARK-BLUE; }
+    font-family: fonts.$font-interface;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #eeeeee;
+    .stepper__step--done & {
+      color: colors.$DIS-GOLD;
+    }
+    .stepper__step--active & {
+      color: colors.$DIS-DARK-BLUE;
+    }
   }
 
   &__line {
-    width: 60px; height: 2px; background: #333; border-radius: 2px;
-    margin: 0 0.5rem; margin-bottom: 1.1rem;
-    &--done { background: colors.$DIS-GOLD; }
+    width: 60px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    margin: 0 0.5rem;
+    margin-bottom: 1.1rem;
+    &--done {
+      background: colors.$DIS-GOLD;
+    }
   }
 }
 
@@ -216,43 +260,81 @@ onUnmounted(() => window.removeEventListener('message', onMessage))
   }
 }
 
-.booking__heading { margin-bottom: 1.75rem; text-align: center; }
+.booking__heading {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
 
 .booking__title {
   @include fonts.heading-font(800);
   font-size: clamp(1.7rem, 4vw, 2.4rem);
-  color: #ffffff; margin: 0 0 0.6rem; letter-spacing: -0.025em; line-height: 1.2;
-  &-accent { color: colors.$DIS-GOLD; }
+  color: #ffffff;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  &-accent {
+    color: colors.$DIS-GOLD;
+  }
 }
 
 .booking__subtitle {
-  font-size: 1rem; color: #a0aec0; line-height: 1.6; margin: 0 auto; max-width: 650px;
+  font-size: 1rem;
+  color: #a0aec0;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 650px;
 }
 
 .calendar__wrap {
-  border-radius: 16px; overflow: hidden; border: 1px solid #333;
-  box-shadow: 0 10px 40px rgba(0,0,0, 0.4);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #333;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
-.calendar__iframe { width: 100%; display: block; min-height: 600px; }
+.calendar__iframe {
+  width: 100%;
+  display: block;
+  min-height: 600px;
+}
 
 .booking__footer {
-  padding: 1.5rem; border-top: 1px solid #222222;
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center;
+  padding: 1.5rem;
+  border-top: 1px solid #222222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
 
-  &-links { display: flex; gap: 1.5rem; a { font-size: 0.76rem; color: #a0aec0; text-decoration: none; &:hover { color: colors.$DIS-GOLD; } } }
-  &-copy { font-size: 0.72rem; color: #a0aec0; margin: 0; }
-  
+  &-links {
+    display: flex;
+    gap: 1.5rem;
+    a {
+      font-size: 0.76rem;
+      color: #a0aec0;
+      text-decoration: none;
+      &:hover {
+        color: colors.$DIS-GOLD;
+      }
+    }
+  }
+  &-copy {
+    font-size: 0.72rem;
+    color: #a0aec0;
+    margin: 0;
+  }
+
   &-dev {
     font-size: 0.72rem;
     color: #4a5568;
     margin: 0;
-    
+
     a {
       color: #718096;
       text-decoration: none;
       font-weight: bold;
-      
+
       &:hover {
         color: colors.$DIS-GOLD;
       }

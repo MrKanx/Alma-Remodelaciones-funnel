@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { trackStage, generateEventId } from '@/utils/ghl'
+import { trackStage, generateEventId, sendQualifyWebhookWithFallback } from '@/utils/ghl'
 import { useContactStore } from '@/stores/contact'
 import { getStoredFbParams } from '@/utils/fbclid'
 
@@ -118,21 +118,17 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Busca barato/gangas'}
 
   trackStage('cualificacion_completada', payload)
 
-  const webhookUrl = import.meta.env.VITE_WEBHOOK_CALIFICACION ?? 'https://services.leadconnectorhq.com/hooks/4XqSfm1KK7VoNl7vvnml/webhook-trigger/0mcuSsqfhNdeEuc6tH89'
-  await fetch(webhookUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  }).catch(() => {})
-
-  ;(window as any).fbq?.('track', 'CompleteRegistration',
+  await sendQualifyWebhookWithFallback(payload).catch(() => {})
+  ;(window as any).fbq?.(
+    'track',
+    'CompleteRegistration',
     {
       content_name: 'cualificacion-step2',
       status: califica ? 'califica' : 'no-califica',
       value: 1,
       currency: 'USD',
     },
-    { eventID: scheduleEventId }
+    { eventID: scheduleEventId },
   )
 
   submitting.value = false
@@ -147,27 +143,37 @@ ${califica ? '✅ CALIFICA' : '❌ NO CALIFICA — Busca barato/gangas'}
   }
 }
 
-const onKeydown = (e: KeyboardEvent) => { if (e.key === 'Escape') emit('close') }
+const onKeydown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') emit('close')
+}
 
 onMounted(() => document.addEventListener('keydown', onKeydown))
 onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 
-watch(() => props.open, (v) => {
-  if (v) {
-    touched.value = false
-    form.value = { perfil: '', etapa: '', presupuesto: '', reto: '', consent: false }
-  }
-  document.body.style.overflow = v ? 'hidden' : ''
-})
+watch(
+  () => props.open,
+  (v) => {
+    if (v) {
+      touched.value = false
+      form.value = { perfil: '', etapa: '', presupuesto: '', reto: '', consent: false }
+    }
+    document.body.style.overflow = v ? 'hidden' : ''
+  },
+)
 </script>
 
 <template>
   <Teleport to="body">
     <Transition name="cal-fade">
-      <div v-if="open" class="cal-backdrop" @click.self="emit('close')" role="dialog" aria-modal="true" aria-labelledby="cal-title">
-
+      <div
+        v-if="open"
+        class="cal-backdrop"
+        @click.self="emit('close')"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cal-title"
+      >
         <div class="cal-modal">
-
           <button class="cal-close" @click="emit('close')" aria-label="Cerrar">
             <i class="fa-solid fa-xmark"></i>
           </button>
@@ -184,7 +190,6 @@ watch(() => props.open, (v) => {
           </div>
 
           <form class="cal-form" @submit.prevent="handleSubmit" novalidate>
-
             <!-- Q1 — Perfil -->
             <fieldset class="cal-fieldset" :class="{ 'has-error': touched && !form.perfil }">
               <legend class="cal-legend">
@@ -192,12 +197,20 @@ watch(() => props.open, (v) => {
                 ¿Qué tipo de propiedad deseas remodelar?
               </legend>
               <div class="cal-options">
-                <label v-for="opt in [
-                  { value: 'propietario', label: 'Propiedad Residencial (Casa / Departamento)' },
-                  { value: 'arquitecto', label: 'Espacio Comercial (Oficina / Local / Restaurante)' },
-                  { value: 'constructor', label: 'Soy arquitecto o diseñador buscando aliado' },
-                  { value: 'curioso', label: 'Solo busco información / remodelación pequeña' },
-                ]" :key="opt.value" class="cal-option" :class="{ selected: form.perfil === opt.value }">
+                <label
+                  v-for="opt in [
+                    { value: 'propietario', label: 'Propiedad Residencial (Casa / Departamento)' },
+                    {
+                      value: 'arquitecto',
+                      label: 'Espacio Comercial (Oficina / Local / Restaurante)',
+                    },
+                    { value: 'constructor', label: 'Soy arquitecto o diseñador buscando aliado' },
+                    { value: 'curioso', label: 'Solo busco información / remodelación pequeña' },
+                  ]"
+                  :key="opt.value"
+                  class="cal-option"
+                  :class="{ selected: form.perfil === opt.value }"
+                >
                   <input type="radio" :value="opt.value" v-model="form.perfil" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
                   <span class="cal-option__label">{{ opt.label }}</span>
@@ -213,12 +226,20 @@ watch(() => props.open, (v) => {
                 ¿En qué estado actual se encuentra tu propiedad?
               </legend>
               <div class="cal-options">
-                <label v-for="opt in [
-                  { value: 'planos', label: 'Apenas tengo planos o la idea inicial' },
-                  { value: 'construccion', label: 'En construcción u obra gris' },
-                  { value: 'acabados', label: 'Listo para entrar en etapa de acabados' },
-                  { value: 'remodelacion', label: 'Espacio construido que necesita remodelación' },
-                ]" :key="opt.value" class="cal-option" :class="{ selected: form.etapa === opt.value }">
+                <label
+                  v-for="opt in [
+                    { value: 'planos', label: 'Apenas tengo planos o la idea inicial' },
+                    { value: 'construccion', label: 'En construcción u obra gris' },
+                    { value: 'acabados', label: 'Listo para entrar en etapa de acabados' },
+                    {
+                      value: 'remodelacion',
+                      label: 'Espacio construido que necesita remodelación',
+                    },
+                  ]"
+                  :key="opt.value"
+                  class="cal-option"
+                  :class="{ selected: form.etapa === opt.value }"
+                >
                   <input type="radio" :value="opt.value" v-model="form.etapa" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
                   <span class="cal-option__label">{{ opt.label }}</span>
@@ -228,26 +249,56 @@ watch(() => props.open, (v) => {
             </fieldset>
 
             <!-- Q3 — Presupuesto -->
-            <fieldset class="cal-fieldset cal-fieldset--budget" :class="{ 'has-error': touched && !form.presupuesto, 'has-investment': form.presupuesto && form.presupuesto !== 'precio' }">
+            <fieldset
+              class="cal-fieldset cal-fieldset--budget"
+              :class="{
+                'has-error': touched && !form.presupuesto,
+                'has-investment': form.presupuesto && form.presupuesto !== 'precio',
+              }"
+            >
               <legend class="cal-legend cal-legend--budget">
                 <span class="cal-q-num cal-q-num--budget">03</span>
-                <span>¿Cuál es tu rango de inversión? (Nuestros proyectos integrales van desde los 10K-15K)</span>
+                <span
+                  >¿Cuál es tu rango de inversión? (Nuestros proyectos integrales van desde los
+                  10K-15K)</span
+                >
                 <i class="fa-solid fa-gem cal-legend-chart" aria-hidden="true"></i>
               </legend>
               <div class="cal-options">
-                <label v-for="opt in [
-                  { value: 'calidad', label: 'Más de $15,000 (Renovación integral premium)', premium: true },
-                  { value: 'intermedio', label: 'Entre $10,000 y $15,000 (Renovación estándar)', premium: false },
-                  { value: 'precio', label: 'Menos de $10,000 / Busco opciones muy económicas', premium: false },
-                ]" :key="opt.value" class="cal-option" :class="{
-                  selected: form.presupuesto === opt.value,
-                  'cal-option--premium': opt.premium && form.presupuesto === opt.value,
-                  'cal-option--low': opt.value === 'precio' && form.presupuesto === 'precio',
-                  'cal-option--premium-hover': opt.premium && form.presupuesto !== opt.value,
-                }">
+                <label
+                  v-for="opt in [
+                    {
+                      value: 'calidad',
+                      label: 'Más de $15,000 (Renovación integral premium)',
+                      premium: true,
+                    },
+                    {
+                      value: 'intermedio',
+                      label: 'Entre $10,000 y $15,000 (Renovación estándar)',
+                      premium: false,
+                    },
+                    {
+                      value: 'precio',
+                      label: 'Menos de $10,000 / Busco opciones muy económicas',
+                      premium: false,
+                    },
+                  ]"
+                  :key="opt.value"
+                  class="cal-option"
+                  :class="{
+                    selected: form.presupuesto === opt.value,
+                    'cal-option--premium': opt.premium && form.presupuesto === opt.value,
+                    'cal-option--low': opt.value === 'precio' && form.presupuesto === 'precio',
+                    'cal-option--premium-hover': opt.premium && form.presupuesto !== opt.value,
+                  }"
+                >
                   <input type="radio" :value="opt.value" v-model="form.presupuesto" hidden />
                   <span class="cal-option__radio" aria-hidden="true" />
-                  <i v-if="opt.premium" class="fa-solid fa-gem cal-option__gem" aria-hidden="true"></i>
+                  <i
+                    v-if="opt.premium"
+                    class="fa-solid fa-gem cal-option__gem"
+                    aria-hidden="true"
+                  ></i>
                   <span class="cal-option__label">{{ opt.label }}</span>
                 </label>
               </div>
@@ -255,7 +306,10 @@ watch(() => props.open, (v) => {
             </fieldset>
 
             <!-- Q4 — Reto -->
-            <fieldset class="cal-fieldset" :class="{ 'has-error': touched && wordCount(form.reto) < 5 }">
+            <fieldset
+              class="cal-fieldset"
+              :class="{ 'has-error': touched && wordCount(form.reto) < 5 }"
+            >
               <legend class="cal-legend">
                 <span class="cal-q-num">04</span>
                 ¿Cuál es tu principal temor o mala experiencia previa con otros proveedores?
@@ -280,10 +334,13 @@ watch(() => props.open, (v) => {
               <input type="checkbox" v-model="form.consent" />
               <span class="cal-consent__box" aria-hidden="true" />
               <span class="cal-consent__text">
-                Acepto que Alma Remodelaciones evalúe mis respuestas para agendar un Diagnóstico Técnico.
+                Acepto que Alma Remodelaciones evalúe mis respuestas para agendar un Diagnóstico
+                Técnico.
               </span>
             </label>
-            <span v-if="touched && !form.consent" class="cal-error">Debes aceptar para continuar</span>
+            <span v-if="touched && !form.consent" class="cal-error"
+              >Debes aceptar para continuar</span
+            >
 
             <button type="submit" class="cal-submit" :disabled="submitting">
               <span v-if="!submitting">
@@ -295,9 +352,7 @@ watch(() => props.open, (v) => {
                 Procesando...
               </span>
             </button>
-
           </form>
-
         </div>
       </div>
     </Transition>
@@ -309,9 +364,13 @@ watch(() => props.open, (v) => {
 @use '@/styles/colorVariables.module.scss' as colors;
 
 .cal-fade-enter-active,
-.cal-fade-leave-active { transition: opacity 0.25s ease; }
+.cal-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
 .cal-fade-enter-from,
-.cal-fade-leave-to { opacity: 0; }
+.cal-fade-leave-to {
+  opacity: 0;
+}
 
 .cal-backdrop {
   position: fixed;
@@ -347,15 +406,20 @@ watch(() => props.open, (v) => {
   border-radius: 50%;
   border: none;
   background: #111111;
-  color: #CCCCCC;
+  color: #cccccc;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
   z-index: 1;
-  &:hover { background: #222222; color: colors.$DIS-GOLD; }
+  &:hover {
+    background: #222222;
+    color: colors.$DIS-GOLD;
+  }
 }
 
 .cal-header {
@@ -377,7 +441,10 @@ watch(() => props.open, (v) => {
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem;
-  i { color: colors.$DIS-GOLD; font-size: 1.4rem; }
+  i {
+    color: colors.$DIS-GOLD;
+    font-size: 1.4rem;
+  }
 }
 
 .cal-title {
@@ -389,11 +456,13 @@ watch(() => props.open, (v) => {
   letter-spacing: -0.02em;
 }
 
-.cal-accent { color: colors.$DIS-GOLD; }
+.cal-accent {
+  color: colors.$DIS-GOLD;
+}
 
 .cal-subtitle {
   font-size: 0.86rem;
-  color: #CCCCCC;
+  color: #cccccc;
   margin: 0;
 }
 
@@ -413,7 +482,10 @@ watch(() => props.open, (v) => {
   padding: 0;
   margin: 0;
 
-  &.has-error .cal-options { border-color: colors.$DIS-GOLD; border-radius: 10px; }
+  &.has-error .cal-options {
+    border-color: colors.$DIS-GOLD;
+    border-radius: 10px;
+  }
 
   &--budget {
     border: 1.5px solid transparent;
@@ -460,8 +532,15 @@ watch(() => props.open, (v) => {
 }
 
 @keyframes chart-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.85); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+  }
 }
 
 .cal-q-num {
@@ -500,9 +579,9 @@ watch(() => props.open, (v) => {
   transition: all 0.2s ease;
   background: #151515;
 
-  &:hover { 
-    border-color: #555555; 
-    background: #1e1e1e; 
+  &:hover {
+    border-color: #555555;
+    background: #1e1e1e;
     transform: translateY(-1px);
   }
 
@@ -541,10 +620,14 @@ watch(() => props.open, (v) => {
 
   &__label {
     font-size: 0.92rem;
-    color: #DDDDDD;
+    color: #dddddd;
     font-weight: 500;
     transition: color 0.2s ease;
-    .cal-option.selected & { color: #FFFFFF; font-weight: 600; text-shadow: 0 0 1px rgba(255,255,255,0.3); }
+    .cal-option.selected & {
+      color: #ffffff;
+      font-weight: 600;
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+    }
   }
 }
 
@@ -555,24 +638,26 @@ watch(() => props.open, (v) => {
   padding: 1rem 1.15rem;
   font-family: fonts.$font-secondary;
   font-size: 0.92rem;
-  color: #FFFFFF;
+  color: #ffffff;
   background: #151515;
   resize: vertical;
   outline: none;
   transition: all 0.2s ease;
   line-height: 1.55;
   box-sizing: border-box;
-  &::placeholder { color: rgba(255, 255, 255, 0.35); }
-  &:focus { 
-    border-color: colors.$DIS-GOLD; 
-    background: #1a1a1a; 
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+  &:focus {
+    border-color: colors.$DIS-GOLD;
+    background: #1a1a1a;
   }
 }
 
 .cal-hint {
   display: block;
   font-size: 0.76rem;
-  color: #EEEEEE;
+  color: #eeeeee;
   margin-top: 0.35rem;
 }
 
@@ -590,7 +675,9 @@ watch(() => props.open, (v) => {
   cursor: pointer;
   padding: 0.5rem 0;
 
-  input { display: none; }
+  input {
+    display: none;
+  }
 
   &__box {
     width: 20px;
@@ -607,13 +694,18 @@ watch(() => props.open, (v) => {
     input:checked ~ & {
       background: colors.$DIS-GOLD;
       border-color: colors.$DIS-GOLD;
-      &::after { content: '✓'; color: #000; font-size: 0.8rem; font-weight: 900; }
+      &::after {
+        content: '✓';
+        color: #000;
+        font-size: 0.8rem;
+        font-weight: 900;
+      }
     }
   }
 
   &__text {
     font-size: 0.82rem;
-    color: #DDDDDD;
+    color: #dddddd;
     line-height: 1.5;
   }
 }
@@ -634,9 +726,17 @@ watch(() => props.open, (v) => {
   letter-spacing: 0.04em;
   cursor: pointer;
   width: 100%;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
   box-shadow: 0 4px 16px rgba(colors.$DIS-GOLD, 0.3);
-  &:hover:not(:disabled) { background: #FB923C; transform: translateY(-1px); }
-  &:disabled { opacity: 0.65; cursor: not-allowed; }
+  &:hover:not(:disabled) {
+    background: #fb923c;
+    transform: translateY(-1px);
+  }
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
 }
 </style>

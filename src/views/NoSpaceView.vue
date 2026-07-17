@@ -10,7 +10,9 @@ const contactName = computed(() => {
     const stored = localStorage.getItem('os_contact')
     if (!stored) return ''
     return JSON.parse(stored).nombre ?? ''
-  } catch { return '' }
+  } catch {
+    return ''
+  }
 })
 
 onMounted(() => {
@@ -27,13 +29,11 @@ onMounted(() => {
 
 <template>
   <div class="nospace">
-
     <header class="nospace__topbar">
       <img src="@/assets/logos/logo.png" class="nospace__logo-img" alt="Alma Remodelaciones Logo" />
     </header>
 
     <main class="nospace__main">
-
       <div v-if="hoursLeft > 0" class="nospace__cooldown" role="alert">
         <i class="fa-solid fa-clock" aria-hidden="true"></i>
         <span>
@@ -66,18 +66,17 @@ onMounted(() => {
 
         <h2 class="nospace__subtitle">Mientras tanto</h2>
         <p class="nospace__body">
-          Mientras esperas, te recomendamos preparar tus planos estructurales,
-          fotografías de tus fachadas actuales y cualquier duda técnica que
-          quieras resolver en tu sesión con Raúl.
+          Mientras esperas, te recomendamos preparar tus planos estructurales, fotografías de tus
+          fachadas actuales y cualquier duda técnica que quieras resolver en tu sesión con Raúl.
         </p>
       </div>
 
       <p class="nospace__footer-note">
         <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
         Alma Remodelaciones trabaja exclusivamente con corporaciones multinacionales e industrias
-        consolidadas. No atendemos proyectos residenciales ni solicitudes enfocadas en competir por precio.
+        consolidadas. No atendemos proyectos residenciales ni solicitudes enfocadas en competir por
+        precio.
       </p>
-
     </main>
 
     <footer class="nospace__footer">
@@ -85,9 +84,10 @@ onMounted(() => {
         <RouterLink to="/politicas-privacidad">Política de Privacidad</RouterLink>
         <RouterLink to="/aviso-legal">Aviso Legal</RouterLink>
       </nav>
-      <p class="nospace__footer-copy">© {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.</p>
+      <p class="nospace__footer-copy">
+        © {{ new Date().getFullYear() }} Alma Remodelaciones. Todos los derechos reservados.
+      </p>
     </footer>
-
   </div>
 </template>
 
@@ -143,15 +143,20 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: #F0F6FF;
+  background: #f0f6ff;
   border: 1px solid rgba(colors.$OS-BLUE, 0.2);
   border-radius: 999px;
   padding: 0.6rem 1.25rem;
   font-family: fonts.$font-interface;
   font-size: 0.82rem;
   color: colors.$OS-NAVY;
-  i { color: colors.$OS-BLUE; flex-shrink: 0; }
-  strong { font-weight: 800; }
+  i {
+    color: colors.$OS-BLUE;
+    flex-shrink: 0;
+  }
+  strong {
+    font-weight: 800;
+  }
 }
 
 .nospace__card {
@@ -189,12 +194,17 @@ onMounted(() => {
 
 .nospace__body {
   font-size: 0.92rem;
-  color: #FFFFFF;
+  color: #ffffff;
   line-height: 1.65;
   margin: 0 0 1rem;
 
-  &:last-of-type { margin-bottom: 0; }
-  strong { color: colors.$OS-DARK; font-weight: 700; }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  strong {
+    color: colors.$OS-DARK;
+    font-weight: 700;
+  }
 }
 
 .nospace__subtitle {
@@ -217,12 +227,17 @@ onMounted(() => {
   gap: 0.5rem;
   align-items: flex-start;
   font-size: 0.76rem;
-  color: #EEEEEE;
+  color: #eeeeee;
   line-height: 1.55;
   margin: 0;
   max-width: 420px;
   text-align: left;
-  i { font-size: 0.8rem; flex-shrink: 0; margin-top: 1px; color: #EEEEEE; }
+  i {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: #eeeeee;
+  }
 }
 
 .nospace__footer {
@@ -234,7 +249,22 @@ onMounted(() => {
   gap: 0.5rem;
   text-align: center;
 
-  &-links { display: flex; gap: 1.5rem; a { font-size: 0.76rem; color: #EEEEEE; text-decoration: none; &:hover { color: colors.$OS-NAVY; } } }
-  &-copy { font-size: 0.72rem; color: #EEEEEE; margin: 0; }
+  &-links {
+    display: flex;
+    gap: 1.5rem;
+    a {
+      font-size: 0.76rem;
+      color: #eeeeee;
+      text-decoration: none;
+      &:hover {
+        color: colors.$OS-NAVY;
+      }
+    }
+  }
+  &-copy {
+    font-size: 0.72rem;
+    color: #eeeeee;
+    margin: 0;
+  }
 }
 </style>
