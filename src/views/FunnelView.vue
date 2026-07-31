@@ -206,6 +206,9 @@ onMounted(() => {
 
 .funnel {
   min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   background-color: colors.$BG-BASE;
   background-image:
     radial-gradient(circle at top right, rgba(224, 106, 65, 0.05) 0%, transparent 40%),
@@ -221,7 +224,12 @@ onMounted(() => {
   width: 100%;
   max-width: 1200px;
   padding: 0 20px;
+  box-sizing: border-box;
   flex: 1;
+
+  @media (max-width: 560px) {
+    padding: 0 16px;
+  }
 }
 
 .funnel__header {
@@ -363,25 +371,34 @@ onMounted(() => {
 .funnel__cta {
   margin-top: 2rem;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   background: colors.$DIS-GOLD;
   color: #000000;
   font-family: fonts.$font-accent;
-  font-size: 1.1rem;
+  font-size: clamp(0.88rem, 3.8vw, 1.1rem);
   font-weight: 800;
   text-transform: uppercase;
-  padding: 18px 30px;
+  padding: 16px 20px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  text-align: center;
+  gap: 10px;
   box-shadow: 0 10px 20px rgba(colors.$DIS-GOLD, 0.2);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
     background-color 0.3s ease;
+
+  @media (max-width: 560px) {
+    padding: 14px 12px;
+    font-size: 0.92rem;
+    gap: 8px;
+  }
 
   &:hover {
     transform: translateY(-2px);
@@ -393,7 +410,9 @@ onMounted(() => {
 .funnel__cta--pulse {
   background: linear-gradient(90deg, #c2410c 0%, #fb923c 100%);
   margin-top: 2.5rem;
+  width: 100%;
   max-width: 450px;
+  box-sizing: border-box;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 0 25px rgba(colors.$DIS-GOLD, 0.4);

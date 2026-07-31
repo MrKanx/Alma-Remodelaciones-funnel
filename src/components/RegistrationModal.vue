@@ -708,12 +708,17 @@ $accent: colors.$QS-GOLD;
   justify-content: center;
   padding: 20px;
   overflow-y: auto;
+
+  @media (max-width: 560px) {
+    padding: 10px;
+  }
 }
 
 .rmodal {
   position: relative;
   width: 100%;
   max-width: 520px;
+  box-sizing: border-box;
   background: $bg;
   border: 1px solid $border;
   border-radius: 24px;
@@ -725,8 +730,9 @@ $accent: colors.$QS-GOLD;
   overflow-y: auto;
 
   @media (max-width: 560px) {
-    padding: 44px 20px 32px;
-    border-radius: 20px;
+    padding: 36px 16px 24px;
+    border-radius: 18px;
+    max-height: 90vh;
   }
 }
 
@@ -920,18 +926,7 @@ $accent: colors.$QS-GOLD;
   top: calc(100% + 6px);
   left: 0;
   z-index: 200;
-  width: 280px;
-  max-height: 240px;
-  overflow: hidden;
-  background: #000000;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 560px) {
-    width: 240px;
-  }
+  width: min(280px, 80vw);
 }
 
 .rmodal__country-search {
