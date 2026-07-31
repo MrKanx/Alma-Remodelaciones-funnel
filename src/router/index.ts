@@ -193,7 +193,10 @@ const isFresh = (key: string, ttl: number): boolean => {
 
 const PUBLIC_ROUTES = ['privacy-policy', 'legal-notice']
 
+import { captureFbParams } from '@/utils/fbclid'
+
 router.beforeEach((to, from, next) => {
+  captureFbParams()
   const routeName = to.name as string
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
     return next()

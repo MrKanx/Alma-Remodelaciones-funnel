@@ -689,7 +689,7 @@ onUnmounted(() => {
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
 
-  @media (max-width: 400px) {
+  @media (max-width: 560px) {
     grid-template-columns: 1fr;
   }
 }

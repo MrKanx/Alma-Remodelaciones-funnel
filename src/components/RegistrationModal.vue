@@ -800,7 +800,7 @@ $accent: colors.$QS-GOLD;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  @media (max-width: 400px) {
+  @media (max-width: 560px) {
     grid-template-columns: 1fr;
   }
 }

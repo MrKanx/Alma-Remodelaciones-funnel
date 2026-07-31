@@ -1,6 +1,5 @@
 const PRIMARY_GHL_WEBHOOK =
   import.meta.env.VITE_WEBHOOK_REGISTRO ??
-  import.meta.env.VITE_WEBHOOK_TRACKING ??
   'https://services.leadconnectorhq.com/hooks/sZSqcOsIlHto63OiBVvI/webhook-trigger/mAhbHooYUtamnROiXEjy'
 const FALLBACK_GHL_WEBHOOK =
   'https://services.leadconnectorhq.com/hooks/sZSqcOsIlHto63OiBVvI/webhook-trigger/mAhbHooYUtamnROiXEjy'

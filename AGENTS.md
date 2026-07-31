@@ -40,7 +40,7 @@
 - `alu_page_entry` and `os_complete_fired` are sessionStorage markers.
 - Booking confirmation arrives via `postMessage(['msgsndr-booking-complete', ...])`.
 - Booking iframe height uses `postMessage({ type: 'booking-app', height })`.
-- `src/utils/ghl.ts` posts to `VITE_WEBHOOK_TRACKING` when set, otherwise it uses the hardcoded LeadConnector webhook.
+- `src/utils/ghl.ts` posts to `VITE_WEBHOOK_REGISTRO` when set, otherwise it uses the hardcoded LeadConnector webhook.
 
 ## Content Notes
 

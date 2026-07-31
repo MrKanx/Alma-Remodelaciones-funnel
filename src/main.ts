@@ -5,6 +5,9 @@ import '@/styles/global.scss'
 
 import App from './App.vue'
 import router from './router'
+import { captureFbParams } from './utils/fbclid'
+
+captureFbParams()
 
 const app = createApp(App)
 
